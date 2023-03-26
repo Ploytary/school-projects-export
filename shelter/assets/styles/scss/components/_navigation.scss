@@ -1,0 +1,49 @@
+/*navigation component*/
+.page-header {
+  position: absolute;
+  width: 100%;
+}
+
+.page-header .page__wrapper {
+  padding: 30px $section-horizontal-padding 0;
+}
+
+.main-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navitation-links {
+  display: flex;
+  gap: 35px;
+  @include normallized-list();
+}
+
+.logo {
+  &__title {
+    width: max-content;
+    font: normal 32px/1.1 Georgia, serif;
+    letter-spacing: 0.06em;
+    color: var(--accent-font-color-1st);
+  }
+  &__description {
+    width: max-content;
+    font: normal 13px Arial, sans-serif;
+    letter-spacing: 0.1em;
+    color: var(--main-font-color-5th);
+  }
+}
+
+.navitation-links__item--active {
+  position: relative;
+  &::after {
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    right: 0;
+    content: "";
+    height: 3px;
+    background-color: var(--accent-color-1st);
+  }
+}

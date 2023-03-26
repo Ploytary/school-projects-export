@@ -1,0 +1,19 @@
+.link {
+  @include unstyled-link();
+}
+
+.link--navigation {
+  @include body-font-style-desktop();
+  color: var(--main-font-color-7th);
+  .navitation-links__item--active & {
+    color: var(--main-font-color-8th);
+  }
+}
+
+.link--button-format {
+  display: inline-block;
+  padding: 15px 45px;
+  border-radius: 27px;
+  background-color: var(--accent-color-1st);
+  @include button-font-style-desktop();
+}
