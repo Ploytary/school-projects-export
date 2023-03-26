@@ -1,0 +1,54 @@
+:root {
+  --accent-font-color-1st: #F1CDB3;
+  --main-font-color-1st: #000000;
+  --main-font-color-2nd: #292929;
+  --main-font-color-3rd: #545454;
+  --main-font-color-4th: #B2B2B2;
+  --main-font-color-5th: #FFFFFF;
+  --main-font-color-6th: #4C4C4C;
+  --accent-color-1st: #F1CDB3;
+  --accent-color-2nd: #FDDCC4;
+  --main-color-1st: #FFFFFF;
+  --main-color-2nd: #F6F6F6;
+  --main-color-3rd: #FAFAFA;
+}
+
+@font-face {
+  font-family: "Georgia";
+  src: url("../../../fonts/Georgia.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Georgia";
+  src: url("../../../fonts/Georgia-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex-grow: 1;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+}
+
+/*# sourceMappingURL=style.css.map */
