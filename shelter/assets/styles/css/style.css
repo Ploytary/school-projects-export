@@ -202,12 +202,24 @@ h1, h2, h3, h4, h5, h6, p {
   color: var(--main-font-color-5th);
   user-select: none;
 }
+.logo--monochrome .logo__title {
+  color: var(--main-font-color-3rd);
+}
+.logo--monochrome .logo__description {
+  color: var(--main-font-color-2nd);
+}
 
 /*navigation component*/
 .page-header {
   position: absolute;
   width: 100%;
   padding: 32px 0;
+}
+.page-header--flow {
+  position: static;
+}
+.page-header--light {
+  color: var(--main-color-1st);
 }
 
 .page-header .page__wrapper {

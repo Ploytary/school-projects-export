@@ -17,4 +17,14 @@
     color: var(--main-font-color-5th);
     user-select: none;
   }
+
+  &--monochrome {
+    .logo__title {
+      color: var(--main-font-color-3rd);
+    }
+
+    .logo__description {
+      color: var(--main-font-color-2nd);
+    }
+  }
 }
