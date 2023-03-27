@@ -17,6 +17,7 @@
   --main-color-1st: #FFFFFF;
   --main-color-2nd: #F6F6F6;
   --main-color-3rd: #FAFAFA;
+  --main-color-4th: #CDCDCD;
 }
 
 //font-sizes
@@ -81,7 +82,7 @@ $font-family-arial: Arial, sans-serif;
   @include font-set(
     normal,
     $body-compact-font-size-desktop,
-    $font-family-arial,
+    $font-family-georgia,
     var(--main-font-color-1st),
     0.06em
   )
@@ -91,7 +92,7 @@ $font-family-arial: Arial, sans-serif;
   @include font-set(
     bold,
     $body-compact-font-size-desktop,
-    $font-family-arial,
+    $font-family-georgia,
     var(--main-font-color-1st)
   )
 }

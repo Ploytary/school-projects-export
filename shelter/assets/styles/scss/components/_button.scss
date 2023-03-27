@@ -1,0 +1,39 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--accent-color-1st);
+  }
+
+  &:active {
+    background-color: var(--accent-color-1st);
+  }
+
+  &:disabled {
+    border-color: var(--main-color-4th);
+    color: var(--main-color-4th);
+    pointer-events: none;
+    svg {
+      fill: currentColor;
+    }
+  }
+
+  &--circle {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 2px solid var(--accent-color-1st);
+  }
+
+  &--prev svg{
+    transform: rotate(0);
+  }
+
+  &--next svg{
+    transform: rotate(180deg);
+  }
+}
