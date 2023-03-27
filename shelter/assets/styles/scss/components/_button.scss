@@ -43,4 +43,8 @@
   &--next svg{
     transform: rotate(180deg);
   }
+
+  &--active {
+    background-color: var(--accent-color-1st);
+  }
 }

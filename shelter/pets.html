@@ -10,9 +10,9 @@
   <title>Shelter - Cozy House</title>
 </head>
 <body class="page">
-  <svg style="display: none;">
+   <svg style="display: none;">
     <symbol id="lgt" width="10" height="11">
-      <path d="M9.041 6.088.008 10.785V9.447l7.51-3.916-7.51-3.906V.287L9.04 4.984v1.104Z"/>
+      <path d="M9.98 10.79.95 6.09v-1.1L9.98.28v1.33l-7.5 3.91 7.5 3.92v1.34Z"/>
     </symbol>
     <symbol id="arrow" width="14" height="6"> 
         <path d="M14 2v2H3v2L0 3l3-3v2h11Z"/> 
@@ -98,11 +98,11 @@
     </div>
   </header>
   <main class="page__content">
-    <section class="our-friends-details" id="our-friends">
+    <section class="our-friends our-friends-details" id="our-friends">
       <div class="page__wrapper">
         <h2 class="our-friends__title">Our friends who<br>are looking for a house</h2>
         <ul class="our-friends__pet-list pet-list pet-list--long">
-          <li class="pet-list__item" tabindex="0">
+          <li class="pet-list__item pet-list__item--square" tabindex="0">
             <h3 class="pet-list__pet-name">Katrine</h3>
             <p class="pet-list__pet-species">Cat - British Shorthair</p>
             <img class="pet-list__pet-photo" src="./assets/images/pets-katrine.jpg" alt="">
@@ -132,7 +132,7 @@
             </dl>
             <a class="pet-list__link link link--button-format" tabindex="0">Learn more</a>
           </li>
-          <li class="pet-list__item" tabindex="0">
+          <li class="pet-list__item pet-list__item--square" tabindex="0">
             <h3 class="pet-list__pet-name">Jennifer</h3>
             <p class="pet-list__pet-species">Dog - Labrador</p>
             <img class="pet-list__pet-photo" src="./assets/images/pets-jennifer.jpg" alt="">
@@ -153,7 +153,7 @@
             </dl>
             <a class="pet-list__link link link--button-format" tabindex="0">Learn more</a>
           </li>
-          <li class="pet-list__item" tabindex="0">
+          <li class="pet-list__item pet-list__item--square" tabindex="0">
             <h3 class="pet-list__pet-name">Woody</h3>
             <p class="pet-list__pet-species">Dog - Golden Retriever</p>
             <img class="pet-list__pet-photo" src="./assets/images/pets-woody.jpg" alt="">
@@ -174,7 +174,7 @@
             </dl>
             <a class="pet-list__link link link--button-format" tabindex="0">Learn more</a>
           </li>
-          <li class="pet-list__item" tabindex="0">
+          <li class="pet-list__item pet-list__item--square" tabindex="0">
             <h3 class="pet-list__pet-name">Sophia</h3>
             <p class="pet-list__pet-species">Dog - Shih tzu</p>
             <img class="pet-list__pet-photo" src="./assets/images/pets-sophia.jpg" alt="">
@@ -195,7 +195,7 @@
             </dl>
             <a class="pet-list__link link link--button-format" tabindex="0">Learn more</a>
           </li>
-          <li class="pet-list__item" tabindex="0">
+          <li class="pet-list__item pet-list__item--square" tabindex="0">
             <h3 class="pet-list__pet-name">Timmy</h3>
             <p class="pet-list__pet-species">Cat - British Shorthair</p>
             <img class="pet-list__pet-photo" src="./assets/images/pets-timmy.jpg" alt="">
@@ -217,7 +217,7 @@
             </dl>
             <a class="pet-list__link link link--button-format" tabindex="0">Learn more</a>
           </li>
-          <li class="pet-list__item" tabindex="0">
+          <li class="pet-list__item pet-list__item--square" tabindex="0">
             <h3 class="pet-list__pet-name">Charly</h3>
             <p class="pet-list__pet-species">Dog - Jack Russell Terrier</p>
             <img class="pet-list__pet-photo" src="./assets/images/pets-charly.jpg" alt="">
@@ -239,7 +239,7 @@
             </dl>
             <a class="pet-list__link link link--button-format" tabindex="0">Learn more</a>
           </li>
-          <li class="pet-list__item" tabindex="0">
+          <li class="pet-list__item pet-list__item--square" tabindex="0">
             <h3 class="pet-list__pet-name">Scarlett</h3>
             <p class="pet-list__pet-species">Dog - Jack Russell Terrier</p>
             <img class="pet-list__pet-photo" src="./assets/images/pets-scarlet.jpg" alt="">
@@ -261,7 +261,7 @@
             </dl>
             <a class="pet-list__link link link--button-format" tabindex="0">Learn more</a>
           </li>
-          <li class="pet-list__item" tabindex="0">
+          <li class="pet-list__item pet-list__item--square" tabindex="0">
             <h3 class="pet-list__pet-name">Freddie</h3>
             <p class="pet-list__pet-species">Cat - British Shorthair</p>
             <img class="pet-list__pet-photo" src="./assets/images/pets-freddie.jpg" alt="">
@@ -286,32 +286,31 @@
         </ul>
         <div class="our-friends__pagination pagination">
           <div class="pagination__prev-button-group">
-            <button class="pagination__to-start-button button button--circle" disabled>
+            <button class="pagination__to-start-button button button--circle button--prev" disabled>
               <span class="visually-hidden">To begin</span>
               <svg width="10" height="11"><use xlink:href="#lgt"></use></svg>
               <svg width="10" height="11"><use xlink:href="#lgt"></use></svg>
             </button>
-            <button class="pagination__to-prev-button button button--circle" disabled>
+            <button class="pagination__to-prev-button button button--circle button--prev" disabled>
               <span class="visually-hidden">previous</span>
               <svg width="10" height="11"><use xlink:href="#lgt"></use></svg>
             </button>
           </div>
           <div class="pagination__page-number-group">
-            <button class="pagination__to-prev-button button button--circle"><span>1</span></button>
+            <button class="pagination__to-prev-button button button--circle button--active"><span>1</span></button>
           </div>
           <div class="pagination__next-button-group">
-            <button class="pagination__to-next-button button button--circle">
+            <button class="pagination__to-next-button button button--circle button--next">
               <svg width="10" height="11"><use xlink:href="#lgt"></use></svg>
               <span class="visually-hidden">next</span>
             </button>
-            <button class="pagination__to-end-button button button--circle">
+            <button class="pagination__to-end-button button button--circle button--next">
               <span class="visually-hidden">To end</span>
               <svg width="10" height="11"><use xlink:href="#lgt"></use></svg>
               <svg width="10" height="11"><use xlink:href="#lgt"></use></svg>
             </button>
           </div>
         </div>
-        <a class="our-friends__link link link--button-format link--button-format-accent" href="./pets.html">Get to know the rest</a>
       </div>
     </section>
   </main>

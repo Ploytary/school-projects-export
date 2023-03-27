@@ -184,6 +184,9 @@ h1, h2, h3, h4, h5, h6, p {
 .button--next svg {
   transform: rotate(180deg);
 }
+.button--active {
+  background-color: var(--accent-color-1st);
+}
 
 /*logo*/
 .logo__title {
@@ -213,7 +216,7 @@ h1, h2, h3, h4, h5, h6, p {
 .page-header {
   position: absolute;
   width: 100%;
-  padding: 32px 0;
+  padding: 32px 0 29px;
 }
 .page-header--flow {
   position: static;
@@ -340,6 +343,7 @@ h1, h2, h3, h4, h5, h6, p {
   align-items: center;
   flex: 0 0 auto;
   gap: 30px;
+  margin: 0 auto;
   width: 270px;
   height: 435px;
   padding-bottom: 30px;
@@ -347,6 +351,9 @@ h1, h2, h3, h4, h5, h6, p {
   background-color: var(--main-color-3rd);
   overflow: hidden;
   cursor: pointer;
+}
+.pet-list__item--square {
+  border-radius: 0;
 }
 .pet-list__item:hover .pet-list__link {
   background-color: var(--accent-font-color-2nd);
@@ -423,7 +430,7 @@ h1, h2, h3, h4, h5, h6, p {
 }
 .pet-list--long {
   flex-wrap: wrap;
-  gap: 40px;
+  gap: 30px 40px;
 }
 .pet-list--long .pet-list__item {
   display: flex;
@@ -615,6 +622,24 @@ h1, h2, h3, h4, h5, h6, p {
   gap: 32px;
   align-items: flex-start;
   transform: translateY(-7px);
+}
+
+.our-friends-details .page__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  align-items: flex-start;
+  align-items: center;
+  padding: 0 40px;
+}
+
+.pagination {
+  display: flex;
+  gap: 20px;
+}
+.pagination__prev-button-group, .pagination__page-number-group, .pagination__next-button-group {
+  display: flex;
+  gap: 20px;
 }
 
 /*# sourceMappingURL=style.css.map */

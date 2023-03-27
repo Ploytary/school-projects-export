@@ -12,6 +12,7 @@
     align-items: center;
     flex: 0 0 auto;
     gap: 30px;
+    margin: 0 auto;
     width: 270px;
     height: 435px;
     padding-bottom: 30px;
@@ -20,6 +21,10 @@
     overflow: hidden;
     cursor: pointer;
 
+    &--square {
+      border-radius: 0;
+    }
+
     &:hover {
       .pet-list__link {
         background-color: var(--accent-font-color-2nd);
@@ -27,6 +32,8 @@
       }
     }
   }
+
+
 
   &__pet-name {
     order: 2;
@@ -99,7 +106,7 @@ $show-item-count: 3;
   }
   &--long {
     flex-wrap: wrap;
-    gap: 40px;
+    gap: 30px 40px;
     .pet-list__item {
       display: flex;
     } 
