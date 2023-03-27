@@ -20,21 +20,6 @@
   @include normallized-list();
 }
 
-.logo {
-  &__title {
-    width: max-content;
-    font: normal 32px/1.1 Georgia, serif;
-    letter-spacing: 0.06em;
-    color: var(--accent-font-color-1st);
-  }
-  &__description {
-    width: max-content;
-    font: normal 13px Arial, sans-serif;
-    letter-spacing: 0.1em;
-    color: var(--main-font-color-5th);
-  }
-}
-
 .navitation-links__item--active {
   position: relative;
   &::after {

@@ -152,6 +152,21 @@ h1, h2, h3, h4, h5, h6, p {
   transform: rotate(180deg);
 }
 
+.logo__title {
+  width: max-content;
+  font: normal 32px/1.1 Georgia, serif;
+  letter-spacing: 0.06em;
+  color: var(--accent-font-color-1st);
+  user-select: none;
+}
+.logo__description {
+  width: max-content;
+  font: normal 13px Arial, sans-serif;
+  letter-spacing: 0.1em;
+  color: var(--main-font-color-5th);
+  user-select: none;
+}
+
 /*navigation component*/
 .page-header {
   position: absolute;
@@ -174,19 +189,6 @@ h1, h2, h3, h4, h5, h6, p {
   margin: 0;
   padding: 0;
   list-style-type: none;
-}
-
-.logo__title {
-  width: max-content;
-  font: normal 32px/1.1 Georgia, serif;
-  letter-spacing: 0.06em;
-  color: var(--accent-font-color-1st);
-}
-.logo__description {
-  width: max-content;
-  font: normal 13px Arial, sans-serif;
-  letter-spacing: 0.1em;
-  color: var(--main-font-color-5th);
 }
 
 .navitation-links__item--active {
