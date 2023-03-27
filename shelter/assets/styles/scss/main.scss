@@ -1,5 +1,7 @@
 @import "./abstracts/variables";
-@import "./base/_fonts";
+@import "./base/fonts";
 @import "./base/mixins";
 @import "./layout/page";
+@import "./components/link";
 @import "./components/navigation";
+@import "./components/hero-section";
