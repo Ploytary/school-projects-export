@@ -80,10 +80,24 @@ h1, h2, h3, h4, h5, h6, p {
   font: normal 15px / 1.6 Arial, sans-serif;
   color: var(--main-font-color-6th);
   letter-spacing: normal;
+}
+.link--negative-style {
   color: var(--main-font-color-7th);
 }
-.navitation-links__item--active .link--navigation {
+.navitation-links__item--active .link--negative-style {
   color: var(--main-font-color-8th);
+}
+.link--negative-style:hover {
+  color: var(--main-font-color-8th);
+}
+.link--positive-style {
+  color: var(--main-font-color-3rd);
+}
+.navitation-links__item--active .link--positive-style {
+  color: var(--main-font-color-3rd);
+}
+.link--positive-style:hover {
+  color: var(--main-font-color-2nd);
 }
 .link--button-format {
   display: inline-block;
