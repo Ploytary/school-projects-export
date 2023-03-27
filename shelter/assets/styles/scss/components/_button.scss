@@ -6,7 +6,8 @@
   cursor: pointer;
 
   &:hover {
-    background-color: var(--accent-color-1st);
+    background-color: var(--accent-color-2nd);
+    border-color: var(--accent-color-2nd);
   }
 
   &:active {
