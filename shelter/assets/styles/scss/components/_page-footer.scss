@@ -2,7 +2,7 @@
 
 .page-footer {
   background-image:
-  url("/shelter/assets/images/noise_transparent@2x.png"),
+  url("../../images/noise_transparent@2x.png"),
   radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%);
 
   .page__wrapper {
@@ -10,7 +10,7 @@
     padding-top: 56px;
     height: 100%;
     background: {
-      image: url("/shelter/assets/images/footer-puppy-desktop.png");
+      image: url("../../images/footer-puppy-desktop.png");
       repeat: no-repeat;
       position: right 40px bottom;
     }

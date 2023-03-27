@@ -2,7 +2,7 @@
 
 .hero-section {
   background-image: 
-  url("/shelter/assets/images/noise_transparent@2x.png"),
+  url("../../images/noise_transparent@2x.png"),
   radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%);
 }
 
@@ -11,7 +11,7 @@
   @include flex-vertical(42px);
   padding: 344px $section-horizontal-padding 242px;
   background-image: 
-  url("/shelter/assets/images/start-screen-puppy-desktop.png");
+  url("../../images/start-screen-puppy-desktop.png");
   background-repeat: no-repeat;
   background-position: right 40px bottom;
 }
