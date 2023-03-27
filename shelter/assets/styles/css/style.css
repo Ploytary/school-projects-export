@@ -94,6 +94,7 @@ h1, h2, h3, h4, h5, h6, p {
 }
 .link--button-format:hover {
   background-color: var(--accent-color-2nd);
+  border-color: var(--accent-color-2nd);
 }
 .link--button-format-accent {
   background-color: var(--accent-color-1st);
