@@ -311,6 +311,11 @@ h1, h2, h3, h4, h5, h6, p {
   border-radius: 9px;
   background-color: var(--main-color-3rd);
   overflow: hidden;
+  cursor: pointer;
+}
+.pet-list__item:hover .pet-list__link {
+  background-color: var(--accent-font-color-2nd);
+  border-color: var(--accent-font-color-2nd);
 }
 .pet-list__pet-name {
   order: 2;

@@ -16,6 +16,14 @@
     border-radius: 9px;
     background-color: var(--main-color-3rd);
     overflow: hidden;
+    cursor: pointer;
+
+    &:hover {
+      .pet-list__link {
+        background-color: var(--accent-font-color-2nd);
+        border-color: var(--accent-font-color-2nd);
+      }
+    }
   }
 
   &__pet-name {
