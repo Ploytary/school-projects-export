@@ -12,6 +12,7 @@
     cursor: pointer;
 
     svg {
+      transition-duration: 0.3s;
       fill: var(--accent-color-1st);
     }
 

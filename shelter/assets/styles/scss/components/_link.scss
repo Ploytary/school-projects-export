@@ -1,6 +1,8 @@
 .link {
   @include unstyled-link();
   cursor: pointer;
+  transition-property: background-color, border-color, color;
+  transition-duration: 0.3s;
 
   &--navigation {
     @include body-font-style-desktop();

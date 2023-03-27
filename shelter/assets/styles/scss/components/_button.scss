@@ -4,6 +4,8 @@
   justify-content: center;
   background-color: transparent;
   cursor: pointer;
+  transition-property: background-color, border-color, color, fill;
+  transition-duration: 0.3s;
 
   &:hover {
     background-color: var(--accent-color-2nd);
@@ -12,6 +14,7 @@
 
   &:active {
     background-color: var(--accent-color-1st);
+    border-color: var(--accent-color-1st);
   }
 
   &:disabled {
