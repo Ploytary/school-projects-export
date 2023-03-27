@@ -1,0 +1,35 @@
+/*about-section*/
+
+.about {
+  padding: 80px 0 100px;
+  .page__wrapper {
+    padding: 0 $section-horizontal-padding;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.about__column-decorative-image {
+  width: calc(50% - 5px);
+  height: 408px;
+  background: {
+    image: url("/shelter/assets/images/about-pets-desktop.png");
+    repeat: no-repeat;
+    position: bottom right 120px;
+  }
+}
+
+.about__column-text {
+  @include flex-vertical(24px);
+  width: calc(50% + 5px);
+}
+
+.about__title {
+  max-width: 430px;
+  @include title-font-style-desktop();
+}
+
+.about__text {
+  max-width: 430px;
+  @include body-font-style-desktop();
+}

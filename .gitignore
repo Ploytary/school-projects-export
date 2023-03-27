@@ -1,3 +1,6 @@
+#stuned ignore list
+style.css.map
+
 # Logs
 logs
 *.log

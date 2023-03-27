@@ -1,0 +1,30 @@
+/*logo*/
+
+.logo {
+  &__title {
+    width: max-content;
+    font: normal 32px/1.1 Georgia, serif;
+    letter-spacing: 0.06em;
+    color: var(--accent-font-color-1st);
+    user-select: none;
+  }
+  &__description {
+    width: max-content;
+    margin-top: 8px;
+    margin-left: 5px;
+    font: normal 13px Arial, sans-serif;
+    letter-spacing: 0.1em;
+    color: var(--main-font-color-5th);
+    user-select: none;
+  }
+
+  &--monochrome {
+    .logo__title {
+      color: var(--main-font-color-3rd);
+    }
+
+    .logo__description {
+      color: var(--main-font-color-2nd);
+    }
+  }
+}

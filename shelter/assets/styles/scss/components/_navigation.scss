@@ -1,0 +1,45 @@
+/*navigation component*/
+
+.page-header {
+  position: absolute;
+  width: 100%;
+  padding: 32px 0 29px;
+
+  &--flow {
+    position: static;
+  }
+
+  &--light {
+    color: var(--main-color-1st);
+  }
+}
+
+.page-header .page__wrapper {
+  padding: 0 $section-horizontal-padding;
+}
+
+.main-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navitation-links {
+  display: flex;
+  gap: 35px;
+  @include normallized-list();
+}
+
+.navitation-links__item--active {
+  position: relative;
+  pointer-events: none;
+  &::after {
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    right: 0;
+    content: "";
+    height: 3px;
+    background-color: var(--accent-color-1st);
+  }
+}

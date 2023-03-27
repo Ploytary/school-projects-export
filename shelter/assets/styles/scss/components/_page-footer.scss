@@ -1,0 +1,49 @@
+/*page-footer*/
+
+.page-footer {
+  background-image:
+  url("/shelter/assets/images/noise_transparent@2x.png"),
+  radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%);
+
+  .page__wrapper {
+    padding: 0 $section-horizontal-padding;
+    padding-top: 56px;
+    height: 100%;
+    background: {
+      image: url("/shelter/assets/images/footer-puppy-desktop.png");
+      repeat: no-repeat;
+      position: right 40px bottom;
+    }
+  }
+
+  &__shelter-address {
+    display: flex;
+    gap: 116px;
+    padding-bottom: 53px;
+  }
+
+  &__address-column {
+    font-style: normal;
+  }
+
+  &__address-label {
+    @include title-font-style-desktop;
+    color: var(--main-font-color-5th);
+  }
+
+  &__address-points-list {
+    @include normallized-list;
+  }
+
+  &__column {
+    @include flex-vertical(40px);
+    flex-basis: 1px;
+    flex-grow: 1;
+    flex-shrink: 0;
+  }
+
+  &__address-points-list {
+    @include flex-vertical(32px);
+    transform: translateY(-7px);
+  }
+}

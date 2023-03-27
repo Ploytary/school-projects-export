@@ -1,0 +1,123 @@
+@use "sass:list";
+
+/*variables*/
+
+//colors
+:root {
+  --accent-font-color-1st: #F1CDB3;
+  --accent-font-color-2nd: #FDDCC4;
+  --main-font-color-1st: #000000;
+  --main-font-color-2nd: #292929;
+  --main-font-color-3rd: #545454;
+  --main-font-color-4th: #B2B2B2;
+  --main-font-color-5th: #FFFFFF;
+  --main-font-color-6th: #4C4C4C;
+  --main-font-color-7th: #CDCDCD;
+  --main-font-color-8th: #FAFAFA;
+  
+  --accent-color-1st: #F1CDB3;
+  --accent-color-2nd: #FDDCC4;
+  --main-color-1st: #FFFFFF;
+  --main-color-2nd: #F6F6F6;
+  --main-color-3rd: #FAFAFA;
+  --main-color-4th: #CDCDCD;
+}
+
+//font-sizes
+$display-font-size-desktop: list.slash(44px,1.3);
+$title-font-size-desktop: list.slash(35px,1.3);
+$label-font-size-desktop: list.slash(20px,1.15);
+$body-font-size-desktop: list.slash(15px,1.6);
+$body-compact-font-size-desktop: list.slash(15px,1.1);
+$button-font-size-desktop: list.slash(17px,1.3);
+$side-comment-font-size-desktop: list.slash(12px,18px);
+
+//font-faces
+$font-family-georgia: 'Georgia', serif;
+$font-family-arial: Arial, sans-serif;
+
+//font-styles
+@mixin font-set($font-style, $font-size, $font-family, $color, $letter-spacing: normal) {
+  font: $font-style $font-size $font-family;
+  color: $color;
+  letter-spacing: $letter-spacing;
+}
+
+@mixin display-font-style-desktop {
+  @include font-set(
+    normal,
+    $display-font-size-desktop,
+    $font-family-georgia,
+    var(--main-font-color-5th)
+  )
+}
+
+@mixin title-font-style-desktop {
+  @include font-set(
+    normal,
+    $title-font-size-desktop,
+    $font-family-georgia,
+    var(--main-font-color-3rd),
+    0.06em
+  )
+}
+
+@mixin label-font-style-desktop {
+  @include font-set(
+    normal,
+    $label-font-size-desktop,
+    $font-family-georgia,
+    var(--main-font-color-3rd),
+    0.06em
+  )
+}
+
+@mixin body-font-style-desktop {
+  @include font-set(
+    normal,
+    $body-font-size-desktop,
+    $font-family-arial,
+    var(--main-font-color-6th)
+  )
+}
+
+@mixin body-compact-font-style-desktop {
+  @include font-set(
+    normal,
+    $body-compact-font-size-desktop,
+    $font-family-georgia,
+    var(--main-font-color-1st),
+    0.06em
+  )
+}
+
+@mixin body-term-compact-font-style-desktop {
+  @include font-set(
+    bold,
+    $body-compact-font-size-desktop,
+    $font-family-georgia,
+    var(--main-font-color-1st)
+  )
+}
+
+@mixin side-comment-font-style-desktop {
+  @include font-set(
+    italic,
+    $side-comment-font-size-desktop,
+    $font-family-arial,
+    var(--main-font-color-4th)
+  )
+}
+
+@mixin button-font-style-desktop {
+  @include font-set(
+    normal,
+    $button-font-size-desktop,
+    $font-family-georgia,
+    var(--main-font-color-2nd),
+    0.06em
+  )
+}
+
+//sizes
+$section-horizontal-padding: 40px

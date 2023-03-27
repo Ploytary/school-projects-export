@@ -1,0 +1,21 @@
+/*mixins*/
+
+//lists
+@mixin normallized-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+//links
+@mixin unstyled-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+@mixin flex-vertical($gap: 0) {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+  align-items: flex-start;
+}

@@ -1,0 +1,43 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  @include flex-vertical();
+  align-items: stretch;
+}
+
+main {
+  flex-grow: 1;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+}
+
+.page__wrapper {
+  max-width: 1280px;
+  margin: auto;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  clip: rect(0 0 0 0);
+}

@@ -1,0 +1,31 @@
+/*donation-shop*/
+
+.donation-shop {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 55px 120px;
+  @include normallized-list;
+  padding: 0 85px;
+
+  &__category {
+    @include flex-vertical(30px);
+    align-items: center;
+    cursor: pointer;
+
+    svg {
+      transition-duration: 0.3s;
+      fill: var(--accent-color-1st);
+    }
+
+    &:hover {
+      svg {
+        fill: var(--accent-color-2nd);
+      }
+    }
+  }
+
+  &__category-title {
+    @include label-font-style-desktop;
+  }
+}
