@@ -1,8 +1,11 @@
+/*button*/
+
 .button {
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: transparent;
+  padding: 0;
   cursor: pointer;
   transition-property: background-color, border-color, color, fill;
   transition-duration: 0.3s;

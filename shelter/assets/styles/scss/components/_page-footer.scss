@@ -1,23 +1,25 @@
+/*page-footer*/
 
 .page-footer {
-  padding-top: 56px;
   background-image:
   url("/shelter/assets/images/noise_transparent@2x.png"),
   radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%);
 
   .page__wrapper {
     padding: 0 $section-horizontal-padding;
+    padding-top: 56px;
     height: 100%;
     background: {
       image: url("/shelter/assets/images/footer-puppy-desktop.png");
       repeat: no-repeat;
-      position: right bottom;
+      position: right 40px bottom;
     }
   }
 
   &__shelter-address {
     display: flex;
-    padding-bottom: 60px;
+    gap: 116px;
+    padding-bottom: 53px;
   }
 
   &__address-column {
@@ -35,11 +37,13 @@
 
   &__column {
     @include flex-vertical(40px);
-    width: 33.33%;
+    flex-basis: 1px;
+    flex-grow: 1;
     flex-shrink: 0;
   }
 
   &__address-points-list {
-    @include flex-vertical(40px);
+    @include flex-vertical(32px);
+    transform: translateY(-7px);
   }
 }

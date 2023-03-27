@@ -1,5 +1,7 @@
+/*about-section*/
+
 .about {
-  padding: 94px 0;
+  padding: 80px 0 100px;
   .page__wrapper {
     padding: 0 $section-horizontal-padding;
     display: flex;
@@ -8,7 +10,7 @@
 }
 
 .about__column-decorative-image {
-  flex-basis: 50%;
+  width: calc(50% - 5px);
   height: 408px;
   background: {
     image: url("/shelter/assets/images/about-pets-desktop.png");
@@ -18,8 +20,8 @@
 }
 
 .about__column-text {
-  @include flex-vertical(25px);
-  flex-basis: 50%;
+  @include flex-vertical(24px);
+  width: calc(50% + 5px);
 }
 
 .about__title {

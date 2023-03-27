@@ -1,3 +1,5 @@
+/*link*/
+
 .link {
   @include unstyled-link();
   cursor: pointer;
@@ -34,7 +36,7 @@
 
   &--button-format {
     display: inline-block;
-    padding: 15px 45px;
+    padding: 13px 43px;
     border-radius: 27px;
     border: 2px solid var(--accent-color-1st);
     @include button-font-style-desktop();

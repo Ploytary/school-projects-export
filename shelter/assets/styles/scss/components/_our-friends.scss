@@ -1,9 +1,11 @@
+/*our-friends-section*/
+
 .our-friends {
   padding: 80px 0 100px;
   background-color: var(--main-color-2nd);
   .page__wrapper {
     position: relative;
-    @include flex-vertical(60px);
+    @include flex-vertical(59px);
     align-items: center;
     padding: 0 $section-horizontal-padding;
   }
@@ -16,6 +18,7 @@
     display: flex;
     justify-content: space-between;
     padding: 0 $section-horizontal-padding;
+    transform: translateY(19px)
   }
 }
 

@@ -1,3 +1,5 @@
+/*hero-section*/
+
 .hero-section {
   background-image: 
   url("/shelter/assets/images/noise_transparent@2x.png"),
@@ -7,11 +9,11 @@
 
 .hero-section .page__wrapper {
   @include flex-vertical(42px);
-  padding: 243px $section-horizontal-padding;
+  padding: 344px $section-horizontal-padding 242px;
   background-image: 
   url("/shelter/assets/images/start-screen-puppy-desktop.png");
   background-repeat: no-repeat;
-  background-position: right bottom;
+  background-position: right 40px bottom;
 }
 
 .hero-section__slogan {

@@ -1,3 +1,5 @@
+/*pet-list*/
+
 .pet-list {
   display: flex;
   gap: 90px;
@@ -88,12 +90,18 @@ $show-item-count: 3;
 .pet-list {
   $i: 1;
   @while $i <= $show-item-count {
-    &__item {
+    &--short &__item {
       &:nth-of-type(#{$i}) {
         display: flex;
       }
     }
     $i: $i + 1;
   }
-  
+  &--long {
+    flex-wrap: wrap;
+    gap: 40px;
+    .pet-list__item {
+      display: flex;
+    } 
+  }
 }

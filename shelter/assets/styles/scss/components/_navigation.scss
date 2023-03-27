@@ -1,11 +1,13 @@
 /*navigation component*/
+
 .page-header {
   position: absolute;
   width: 100%;
+  padding: 32px 0;
 }
 
 .page-header .page__wrapper {
-  padding: 30px $section-horizontal-padding 0;
+  padding: 0 $section-horizontal-padding;
 }
 
 .main-navigation {
@@ -22,6 +24,7 @@
 
 .navitation-links__item--active {
   position: relative;
+  pointer-events: none;
   &::after {
     position: absolute;
     bottom: -3px;

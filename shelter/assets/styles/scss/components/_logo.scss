@@ -1,3 +1,5 @@
+/*logo*/
+
 .logo {
   &__title {
     width: max-content;
@@ -8,6 +10,8 @@
   }
   &__description {
     width: max-content;
+    margin-top: 8px;
+    margin-left: 5px;
     font: normal 13px Arial, sans-serif;
     letter-spacing: 0.1em;
     color: var(--main-font-color-5th);
