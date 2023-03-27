@@ -1,19 +1,32 @@
 .link {
   @include unstyled-link();
-}
 
-.link--navigation {
-  @include body-font-style-desktop();
-  color: var(--main-font-color-7th);
-  .navitation-links__item--active & {
-    color: var(--main-font-color-8th);
+  &--navigation {
+    @include body-font-style-desktop();
+    color: var(--main-font-color-7th);
+    .navitation-links__item--active & {
+      color: var(--main-font-color-8th);
+    }
+  }
+
+  &--button-format {
+    display: inline-block;
+    padding: 15px 45px;
+    border-radius: 27px;
+    border: 2px solid var(--accent-color-1st);
+    @include button-font-style-desktop();
+
+    &:hover {
+      background-color: var(--accent-color-2nd);
+    }
+  }
+
+  &--button-format-accent {
+    background-color: var(--accent-color-1st);
   }
 }
 
-.link--button-format {
-  display: inline-block;
-  padding: 15px 45px;
-  border-radius: 27px;
-  background-color: var(--accent-color-1st);
-  @include button-font-style-desktop();
-}
+
+
+
+

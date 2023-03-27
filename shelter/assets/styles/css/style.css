@@ -74,7 +74,6 @@ h1, h2, h3, h4, h5, h6, p {
   text-decoration: none;
   color: inherit;
 }
-
 .link--navigation {
   font: normal 15px / 1.6 Arial, sans-serif;
   color: var(--main-font-color-6th);
@@ -84,15 +83,20 @@ h1, h2, h3, h4, h5, h6, p {
 .navitation-links__item--active .link--navigation {
   color: var(--main-font-color-8th);
 }
-
 .link--button-format {
   display: inline-block;
   padding: 15px 45px;
   border-radius: 27px;
-  background-color: var(--accent-color-1st);
+  border: 2px solid var(--accent-color-1st);
   font: normal 17px / 1.3 "Georgia", serif;
   color: var(--main-font-color-2nd);
   letter-spacing: 0.06em;
+}
+.link--button-format:hover {
+  background-color: var(--accent-color-2nd);
+}
+.link--button-format-accent {
+  background-color: var(--accent-color-1st);
 }
 
 .button {
