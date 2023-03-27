@@ -1,0 +1,58 @@
+$column-shift: 78px;
+
+.donation {
+  padding: 80px 0 100px;
+  background-color: var(--main-color-2nd);
+
+  .page__wrapper {
+    display: flex;
+    align-items: center;
+    padding: 0 $section-horizontal-padding;
+  }
+
+  &__text-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    order: 1;
+    flex-basis: calc(50% - $column-shift);
+  }
+
+  &__text {
+    @include title-font-style-desktop;
+  }
+
+  &__bank-info {
+    @include body-compact-font-style-desktop;
+  }
+
+  &__card-number {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 15px;
+    @include label-font-style-desktop;
+    background-color: var(--accent-color-1st);
+    border-radius: 9px;
+
+    svg {
+      flex-shrink: 0;
+    }
+  }
+
+  &__legal-info {
+    @include side-comment-font-style-desktop;
+  }
+
+  &__decorative-image-container {
+    order: 0;
+    flex-basis: calc(50% + $column-shift);
+    height: 261px;
+    background: {
+      image: url("/shelter/assets/images/donation-dog-desktop.png");
+      repeat: no-repeat;
+      position: bottom right 30px;
+    }
+  }
+}
