@@ -389,25 +389,24 @@
     </section>
     <section class="donation">
       <div class="page__wrapper">
-        <h2 class="donation__title visually-hidden">Donation</h2>
-        <p class="donation__text">You can also make a donation</p>
-        <p class="donation__bank-info">Name of the bank / Type of bank account</p>
-        <p class="donation__card-number">
-          <svg width="30" height="23">
-            <use xlink:href=""></use>
-          </svg>
-          <a class="donation__link link">
+        <div class="donation__text-column">
+          <h2 class="donation__title visually-hidden">Donation</h2>
+          <p class="donation__text">You can also<br>make a donation</p>
+          <p class="donation__bank-info">Name of the bank / Type of bank account</p>
+          <p class="donation__card-number">
             <svg width="30" height="23">
               <use xlink:href="#credit-card"></use>
             </svg>
-            8380 2880 8028 8791 7435
-          </a>
-        </p>
-        <small>Legal information and lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-          Maecenas a ipsum at libero sagittis dignissim sed ac diam. Praesent ultrices 
-          maximus tortor et vulputate. Interdum et malesuada fames ac ante ipsum primis 
-          in faucibus.
-        </small>
+            <a class="donation__link link">
+              8380 2880 8028 8791 7435
+            </a>
+          </p>
+          <small class="donation__legal-info">Legal information and lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Maecenas a ipsum at libero sagittis dignissim sed ac diam. Praesent ultrices
+            maximus tortor et vulputate. Interdum et malesuada fames ac ante ipsum primis
+            in faucibus.
+          </small>
+        </div>
         <div class="donation__decorative-image-container"></div>
       </div>
     </section>
@@ -415,25 +414,25 @@
   <footer class="page__footer page-footer">
     <div class="page__wrapper">
       <address class="page-footer__shelter-address" id="shelter-address">
-        <div class="page-footer__address-column">
+        <div class="page-footer__address-column page-footer__column">
           <p class="page-footer__address-label">For questions and suggestions</p>
-          <a href="mailto:email@shelter.com" class="page-footer__address-email">
+          <a href="mailto:email@shelter.com" class="page-footer__address-email link link--footer">
             <svg width="40" height="32">
               <use xlink:href="#email"></use>
             </svg>
             email@shelter.com
           </a>
-          <a href="tel:+136745677554" class="page-footer__address-phone">
+          <a href="tel:+136745677554" class="page-footer__address-phone link link--footer">
             <svg width="40" height="32">
               <use xlink:href="#phone"></use>
             </svg>
             +13 674 567 75 54</a>
         </div>
-        <div class="page-footer__address-column">
+        <div class="page-footer__address-column page-footer__column">
           <p class="page-footer__address-label">We are waiting for your visit</p>
-          <ul class="page-footer-address-points">
+          <ul class="page-footer__address-points-list">
             <li class="page-footer__address-point">
-              <a class="link" href="https://goo.gl/maps/vcC5vvr2JMJcWstE9">
+              <a class="link link--footer" href="https://goo.gl/maps/vcC5vvr2JMJcWstE9">
               <svg width="22" height="32">
                 <use xlink:href="#marker"></use>
               </svg>
@@ -441,7 +440,7 @@
               </a>
             </li>
             <li class="page-footer__address-point">
-              <a class="link" href="https://goo.gl/maps/oxAAiCoKPcntYNjt5">
+              <a class="link link--footer" href="https://goo.gl/maps/oxAAiCoKPcntYNjt5">
               <svg width="22" height="32">
                 <use xlink:href="#marker"></use>
               </svg>
@@ -450,6 +449,7 @@
             </li>
           </ul>
         </div>
+        <div class="page-footer__column"></div>
       </address>
     </div>
   </footer>

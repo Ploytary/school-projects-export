@@ -25,6 +25,23 @@
   &--button-format-accent {
     background-color: var(--accent-color-1st);
   }
+
+  &--footer {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    @include label-font-style-desktop;
+    color: var(--accent-font-color-1st);
+  
+    &:hover {
+      color: var(--accent-font-color-2nd);
+    }
+  
+    svg {
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+  }
 }
 
 
