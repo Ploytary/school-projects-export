@@ -1,5 +1,6 @@
 .link {
   @include unstyled-link();
+  cursor: pointer;
 
   &--navigation {
     @include body-font-style-desktop();
