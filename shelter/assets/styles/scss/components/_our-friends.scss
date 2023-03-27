@@ -3,10 +3,8 @@
   background-color: var(--main-color-2nd);
   .page__wrapper {
     position: relative;
-    display: flex;
-    flex-direction: column;
+    @include flex-vertical(60px);
     align-items: center;
-    gap: 60px;
     padding: 0 $section-horizontal-padding;
   }
 

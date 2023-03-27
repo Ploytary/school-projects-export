@@ -18,9 +18,7 @@
 }
 
 .about__column-text {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
+  @include flex-vertical(25px);
   flex-basis: 50%;
 }
 

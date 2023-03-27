@@ -11,10 +11,8 @@ $column-shift: 78px;
   }
 
   &__text-column {
-    display: flex;
-    flex-direction: column;
+    @include flex-vertical(20px);
     align-items: flex-start;
-    gap: 20px;
     order: 1;
     flex-basis: calc(50% - $column-shift);
   }

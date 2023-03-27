@@ -6,10 +6,7 @@
 
 
 .hero-section .page__wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 42px;
-  align-items: flex-start;
+  @include flex-vertical(42px);
   padding: 243px $section-horizontal-padding;
   background-image: 
   url("/shelter/assets/images/start-screen-puppy-desktop.png");

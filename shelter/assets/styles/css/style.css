@@ -45,6 +45,9 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
+  gap: 0;
+  align-items: flex-start;
+  align-items: stretch;
 }
 
 main {
@@ -270,6 +273,7 @@ h1, h2, h3, h4, h5, h6, p {
   display: flex;
   flex-direction: column;
   gap: 25px;
+  align-items: flex-start;
   flex-basis: 50%;
 }
 
@@ -386,8 +390,9 @@ h1, h2, h3, h4, h5, h6, p {
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 60px;
+  align-items: flex-start;
+  align-items: center;
   padding: 0 40px;
 }
 .our-friends__button-layout {
@@ -413,8 +418,9 @@ h1, h2, h3, h4, h5, h6, p {
 .help .page__wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 60px;
+  align-items: flex-start;
+  align-items: center;
   padding: 0 40px;
 }
 .help__title {
@@ -437,8 +443,9 @@ h1, h2, h3, h4, h5, h6, p {
 .donation-shop__category {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 30px;
+  align-items: flex-start;
+  align-items: center;
   cursor: pointer;
 }
 .donation-shop__category svg {
@@ -465,8 +472,9 @@ h1, h2, h3, h4, h5, h6, p {
 .donation__text-column {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 20px;
+  align-items: flex-start;
+  align-items: flex-start;
   order: 1;
   flex-basis: calc(50% - 78px);
 }
@@ -541,6 +549,7 @@ h1, h2, h3, h4, h5, h6, p {
   display: flex;
   flex-direction: column;
   gap: 40px;
+  align-items: flex-start;
   width: 33.33%;
   flex-shrink: 0;
 }
@@ -548,6 +557,7 @@ h1, h2, h3, h4, h5, h6, p {
   display: flex;
   flex-direction: column;
   gap: 40px;
+  align-items: flex-start;
 }
 
 /*# sourceMappingURL=style.css.map */

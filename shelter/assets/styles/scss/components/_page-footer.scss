@@ -34,16 +34,12 @@
   }
 
   &__column {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
+    @include flex-vertical(40px);
     width: 33.33%;
     flex-shrink: 0;
   }
 
   &__address-points-list {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
+    @include flex-vertical(40px);
   }
 }

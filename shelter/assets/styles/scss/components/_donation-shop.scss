@@ -7,10 +7,8 @@
   padding: 0 85px;
 
   &__category {
-    display: flex;
-    flex-direction: column;
+    @include flex-vertical(30px);
     align-items: center;
-    gap: 30px;
     cursor: pointer;
 
     svg {
