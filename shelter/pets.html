@@ -9,6 +9,25 @@
   <link rel="stylesheet" href="./assets/styles/css/style.css">
   <link rel="icon" href="./assets/images/favicon.svg" sizes="64x64">
   <title>Shelter - Cozy House</title>
+  <script>
+    const message = (
+      `
+      Страница Main (60)
+      -	Проверка верстки +7
+      -	Вёрстка соответствует макету +35
+      -	Требования к css +6
+      -	Интерактивность элементов +12
+
+      Страница Pets (40)
+      -	Проверка верстки +7
+      -	Вёрстка соответствует макету +15
+      -	Требования к css +4
+      -	Интерактивность элементов +14
+
+      `
+    );
+    console.log(message);
+  </script>
 </head>
 <body class="page">
    <svg style="display: none;">
@@ -103,7 +122,7 @@
       <div class="page__wrapper">
         <h2 class="our-friends__title">Our friends who<br>are looking for a house</h2>
         <ul class="our-friends__pet-list pet-list pet-list--long">
-          <li class="pet-list__item pet-list__item--square" tabindex="0">
+          <li class="pet-list__item" tabindex="0">
             <h3 class="pet-list__pet-name">Katrine</h3>
             <p class="pet-list__pet-species">Cat - British Shorthair</p>
             <img class="pet-list__pet-photo" src="./assets/images/pets-katrine.jpg" alt="">
@@ -133,7 +152,7 @@
             </dl>
             <a class="pet-list__link link link--button-format" tabindex="0">Learn more</a>
           </li>
-          <li class="pet-list__item pet-list__item--square" tabindex="0">
+          <li class="pet-list__item" tabindex="0">
             <h3 class="pet-list__pet-name">Jennifer</h3>
             <p class="pet-list__pet-species">Dog - Labrador</p>
             <img class="pet-list__pet-photo" src="./assets/images/pets-jennifer.jpg" alt="">
@@ -154,7 +173,7 @@
             </dl>
             <a class="pet-list__link link link--button-format" tabindex="0">Learn more</a>
           </li>
-          <li class="pet-list__item pet-list__item--square" tabindex="0">
+          <li class="pet-list__item" tabindex="0">
             <h3 class="pet-list__pet-name">Woody</h3>
             <p class="pet-list__pet-species">Dog - Golden Retriever</p>
             <img class="pet-list__pet-photo" src="./assets/images/pets-woody.jpg" alt="">
@@ -175,7 +194,7 @@
             </dl>
             <a class="pet-list__link link link--button-format" tabindex="0">Learn more</a>
           </li>
-          <li class="pet-list__item pet-list__item--square" tabindex="0">
+          <li class="pet-list__item" tabindex="0">
             <h3 class="pet-list__pet-name">Sophia</h3>
             <p class="pet-list__pet-species">Dog - Shih tzu</p>
             <img class="pet-list__pet-photo" src="./assets/images/pets-sophia.jpg" alt="">
@@ -196,7 +215,7 @@
             </dl>
             <a class="pet-list__link link link--button-format" tabindex="0">Learn more</a>
           </li>
-          <li class="pet-list__item pet-list__item--square" tabindex="0">
+          <li class="pet-list__item" tabindex="0">
             <h3 class="pet-list__pet-name">Timmy</h3>
             <p class="pet-list__pet-species">Cat - British Shorthair</p>
             <img class="pet-list__pet-photo" src="./assets/images/pets-timmy.jpg" alt="">
@@ -218,7 +237,7 @@
             </dl>
             <a class="pet-list__link link link--button-format" tabindex="0">Learn more</a>
           </li>
-          <li class="pet-list__item pet-list__item--square" tabindex="0">
+          <li class="pet-list__item" tabindex="0">
             <h3 class="pet-list__pet-name">Charly</h3>
             <p class="pet-list__pet-species">Dog - Jack Russell Terrier</p>
             <img class="pet-list__pet-photo" src="./assets/images/pets-charly.jpg" alt="">
@@ -240,7 +259,7 @@
             </dl>
             <a class="pet-list__link link link--button-format" tabindex="0">Learn more</a>
           </li>
-          <li class="pet-list__item pet-list__item--square" tabindex="0">
+          <li class="pet-list__item" tabindex="0">
             <h3 class="pet-list__pet-name">Scarlett</h3>
             <p class="pet-list__pet-species">Dog - Jack Russell Terrier</p>
             <img class="pet-list__pet-photo" src="./assets/images/pets-scarlet.jpg" alt="">
@@ -262,7 +281,7 @@
             </dl>
             <a class="pet-list__link link link--button-format" tabindex="0">Learn more</a>
           </li>
-          <li class="pet-list__item pet-list__item--square" tabindex="0">
+          <li class="pet-list__item" tabindex="0">
             <h3 class="pet-list__pet-name">Freddie</h3>
             <p class="pet-list__pet-species">Cat - British Shorthair</p>
             <img class="pet-list__pet-photo" src="./assets/images/pets-freddie.jpg" alt="">
@@ -336,7 +355,7 @@
           <p class="page-footer__address-label">We are waiting<br>for your visit</p>
           <ul class="page-footer__address-points-list">
             <li class="page-footer__address-point">
-              <a class="link link--footer" href="https://goo.gl/maps/vcC5vvr2JMJcWstE9">
+              <a class="link link--footer" href="https://goo.gl/maps/vcC5vvr2JMJcWstE9" target="_blank">
               <svg width="22" height="32">
                 <use xlink:href="#marker"></use>
               </svg>
@@ -344,7 +363,7 @@
               </a>
             </li>
             <li class="page-footer__address-point">
-              <a class="link link--footer" href="https://goo.gl/maps/oxAAiCoKPcntYNjt5">
+              <a class="link link--footer" href="https://goo.gl/maps/oxAAiCoKPcntYNjt5" target="_blank">
               <svg width="22" height="32">
                 <use xlink:href="#marker"></use>
               </svg>
