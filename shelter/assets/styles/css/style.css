@@ -177,6 +177,10 @@ h1, h2, h3, h4, h5, h6, p {
   height: 52px;
   border-radius: 50%;
   border: 2px solid var(--accent-color-1st);
+  font: normal 20px / 1.15 "Georgia", serif;
+  color: var(--main-font-color-3rd);
+  letter-spacing: 0.06em;
+  color: var(--main-font-color-2nd);
 }
 .button--prev svg {
   transform: rotate(0);
@@ -189,6 +193,13 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 /*logo*/
+.logo .logo__title,
+.logo .logo__description {
+  transition: color 0.2s;
+}
+.logo--home-page {
+  pointer-events: none;
+}
 .logo__title {
   width: max-content;
   font: normal 32px/1.1 Georgia, serif;
@@ -205,11 +216,13 @@ h1, h2, h3, h4, h5, h6, p {
   color: var(--main-font-color-5th);
   user-select: none;
 }
-.logo--monochrome .logo__title {
+.logo--monochrome .logo__title,
+.logo--monochrome .logo__description {
   color: var(--main-font-color-3rd);
 }
-.logo--monochrome .logo__description {
-  color: var(--main-font-color-2nd);
+.logo:hover .logo__title,
+.logo:hover .logo__description {
+  color: var(--accent-color-1st);
 }
 
 /*navigation component*/
@@ -332,12 +345,13 @@ h1, h2, h3, h4, h5, h6, p {
 .pet-list {
   display: flex;
   gap: 90px;
-  overflow: hidden;
   margin: 0;
   padding: 0;
   list-style-type: none;
 }
 .pet-list__item {
+  position: relative;
+  z-index: 1;
   display: none;
   flex-direction: column;
   align-items: center;
@@ -351,9 +365,14 @@ h1, h2, h3, h4, h5, h6, p {
   background-color: var(--main-color-3rd);
   overflow: hidden;
   cursor: pointer;
+  transition: filter 0.3s ease;
 }
 .pet-list__item--square {
   border-radius: 0;
+}
+.pet-list__item:hover {
+  background-color: var(--main-color-1st);
+  filter: drop-shadow(0px 0px 8px var(--main-color-4th));
 }
 .pet-list__item:hover .pet-list__link {
   background-color: var(--accent-font-color-2nd);

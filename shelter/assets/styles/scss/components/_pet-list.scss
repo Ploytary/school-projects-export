@@ -3,10 +3,11 @@
 .pet-list {
   display: flex;
   gap: 90px;
-  overflow: hidden;
   @include normallized-list();
 
   &__item {
+    position: relative;
+    z-index: 1;
     display: none;
     flex-direction: column;
     align-items: center;
@@ -20,6 +21,7 @@
     background-color: var(--main-color-3rd);
     overflow: hidden;
     cursor: pointer;
+    transition: filter 0.3s ease;
 
     &--square {
       border-radius: 0;
@@ -30,6 +32,9 @@
         background-color: var(--accent-font-color-2nd);
         border-color: var(--accent-font-color-2nd);
       }
+
+      background-color: var(--main-color-1st);
+      filter: drop-shadow(0px 0px 8px var(--main-color-4th));
     }
   }
 

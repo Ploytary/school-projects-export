@@ -34,6 +34,8 @@
     height: 52px;
     border-radius: 50%;
     border: 2px solid var(--accent-color-1st);
+    @include label-font-style-desktop();
+    color: var(--main-font-color-2nd);
   }
 
   &--prev svg{
