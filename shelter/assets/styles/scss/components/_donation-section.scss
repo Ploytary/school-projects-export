@@ -1,6 +1,6 @@
 /*donation*/
 
-$column-shift: 78px;
+$column-shift: 48px;
 
 .donation {
   padding: 80px 0 99px;
@@ -8,6 +8,7 @@ $column-shift: 78px;
 
   .page__wrapper {
     display: flex;
+    gap: 30px;
   }
 
   &__text-column {
@@ -41,17 +42,80 @@ $column-shift: 78px;
 
   &__legal-info {
     @include side-comment-font-style-desktop;
-    width: 380px;
+    max-width: 380px;
   }
 
   &__decorative-image-container {
     order: 0;
     flex-basis: calc(50% + $column-shift);
     min-height: 261px;
+    min-width: 505px;
     background: {
       image: url("../../images/donation-dog-desktop.png");
       repeat: no-repeat;
-      position: bottom 11px right 30px;
+      position: bottom 11px right;
+    }
+  }
+}
+
+@include for-tablet-portrait-down {
+  .donation {
+    .page__wrapper {
+      flex-wrap: wrap-reverse;
+      justify-content: center;
+      row-gap: 60px;
+    }
+
+    &__decorative-image-container {
+      flex-basis: auto;
+      // order: 1;
+      background-position: bottom center;
+      background-size: contain;
+      min-width: auto;
+      aspect-ratio: 505 / 261;
+      width: 100%;
+      max-width: 505px;
+      min-height: auto;
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+
+    &__text-column {
+      flex-basis: auto;
+
+    }
+  }
+}
+
+@include for-phone-portrait-down {
+  .donation {
+    padding-top: 42px;
+    padding-bottom: 42px;
+    .page__wrapper {
+      row-gap: 42px;
+    }
+
+    &__text-column {
+      margin-left: 9px;
+      margin-right: 9px;
+      align-items: center;
+    }
+    &__text {
+      text-align: center;
+      @include title-font-style-mobile;
+      color: var(--main-font-color-3rd);
+    }
+
+    &__bank-info {
+      text-align: center;
+      @include body-compact-font-style-mobile;
+      color: var(--main-font-color-1st);
+    }
+
+    &__card-number {
+      @include label-font-style-mobile;
+      color: var(--main-font-color-3rd);
+      align-self: center;
     }
   }
 }
