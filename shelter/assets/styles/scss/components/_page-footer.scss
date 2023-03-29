@@ -17,12 +17,14 @@
 
   &__shelter-address {
     display: flex;
+    flex-wrap: wrap;
     gap: 116px;
     padding-bottom: 53px;
   }
 
   &__address-column {
     font-style: normal;
+    flex-shrink: 0;
   }
 
   &__address-label {
@@ -44,5 +46,60 @@
   &__address-points-list {
     @include flex-vertical(32px);
     transform: translateY(-7px);
+  }
+}
+
+@include for-tablet-portrait-down {
+  .page-footer {
+    .page__wrapper {
+      padding-top: 30px;
+      padding-bottom: 375px;
+      background-position: center bottom;
+    }
+
+    .page-footer__column:last-of-type {
+      display: none;
+    }
+
+    &__shelter-address {
+      padding-left: 34px;
+      padding-right: 34px;
+      gap: 36px;
+    }
+  }
+}
+
+@include for-phone-portrait-down {
+  .page-footer {
+    &__address-label {
+      @include title-font-style-mobile;
+      color: var(--main-font-color-5th);
+      padding-left: 15px;
+      padding-right: 15px;
+      text-align: center;
+    }
+
+    &__shelter-address {
+      padding-left: 0;
+      padding-right: 0;
+      gap: 40px;
+    }
+
+    &__column {
+      min-width: 300px;
+      align-items: center;
+      & br {
+        display: none;
+      }
+    }
+
+    .page__wrapper {
+      background: {
+        image: url("../../images/footer-puppy-mobile.png");
+        repeat: no-repeat;
+        position: center bottom;
+      }
+      padding-bottom: 310px;
+    }
   }
 }

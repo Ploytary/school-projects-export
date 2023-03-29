@@ -32,6 +32,8 @@ $body-compact-font-size-desktop: list.slash(15px,1.1);
 $button-font-size-desktop: list.slash(17px,1.3);
 $side-comment-font-size-desktop: list.slash(12px,18px);
 
+$button-font-size-mobile: list.slash(25px,1.3);
+
 //font-faces
 $font-family-georgia: 'Georgia', serif;
 $font-family-arial: Arial, sans-serif;
@@ -113,6 +115,16 @@ $font-family-arial: Arial, sans-serif;
   @include font-set(
     normal,
     $button-font-size-desktop,
+    $font-family-georgia,
+    var(--main-font-color-2nd),
+    0.06em
+  )
+}
+
+@mixin title-font-style-mobile {
+  @include font-set(
+    normal,
+    $button-font-size-mobile,
     $font-family-georgia,
     var(--main-font-color-2nd),
     0.06em
