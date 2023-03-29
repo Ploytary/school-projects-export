@@ -1,9 +1,12 @@
 /*pet-list*/
 
 .pet-list {
-  display: flex;
-  gap: 90px;
   @include normallized-list();
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fill, 270px);
+  justify-content: center;
+  gap: 90px;
 
   &__item {
     position: relative;
@@ -116,4 +119,7 @@ $show-item-count: 3;
       display: flex;
     } 
   }
+}
+
+@include for-tablet-portrait-down {
 }

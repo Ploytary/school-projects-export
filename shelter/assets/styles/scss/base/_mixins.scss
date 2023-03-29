@@ -19,3 +19,25 @@
   gap: $gap;
   align-items: flex-start;
 }
+
+//layout media-queries
+@mixin for-desktop-only {
+  @media (min-width: $size-page-box-width-display) {
+    /*desktop break-point*/
+    @content;
+  }
+}
+
+@mixin for-tablet-portrait-down {
+  @media (max-width: ($size-page-box-width-display - 1px)) {
+    /*tablet upper break-point*/
+    @content;
+  }
+}
+
+@mixin for-phone-portrait-down {
+  @media (max-width: ($size-page-box-width-tablet - 1px)) {
+    /*phone upper break-point*/
+    @content;
+  }
+}

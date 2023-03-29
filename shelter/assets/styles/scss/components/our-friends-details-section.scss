@@ -3,6 +3,5 @@
   .page__wrapper {
     @include flex-vertical(60px);
     align-items: center;
-    padding: 0 $section-horizontal-padding;
   }
 }

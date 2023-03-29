@@ -6,13 +6,12 @@
   radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%);
 
   .page__wrapper {
-    padding: 0 $section-horizontal-padding;
     padding-top: 56px;
     height: 100%;
     background: {
       image: url("../../images/footer-puppy-desktop.png");
       repeat: no-repeat;
-      position: right 40px bottom;
+      position: right var(--page-box-horizontal-padding) bottom;
     }
   }
 

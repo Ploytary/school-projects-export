@@ -120,4 +120,29 @@ $font-family-arial: Arial, sans-serif;
 }
 
 //sizes
-$section-horizontal-padding: 40px
+
+$size-page-box-width-display: 1280px;
+$size-page-box-width-tablet: 768px;
+$size-page-box-width-mobile: 320px;
+
+$horizontal-padding-desktop: 40px;
+$horizontal-padding-tablet: 30px;
+$horizontal-padding-mobile: 10px;
+
+:root {
+  @include for-desktop-only {
+    --page-box-horizontal-padding: #{$horizontal-padding-desktop};
+  }
+
+  @include for-tablet-portrait-down {
+    --page-box-horizontal-padding: #{$horizontal-padding-tablet};
+  }
+
+  @include for-phone-portrait-down {
+    --page-box-horizontal-padding: #{$horizontal-padding-mobile};
+  }
+  
+  --size-page-box-width-display: #{$size-page-box-width-display};
+  --size-page-box-width-tablet: #{$size-page-box-width-tablet};
+  --size-page-box-width-mobile: #{$size-page-box-width-mobile};
+}

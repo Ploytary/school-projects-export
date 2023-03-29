@@ -9,11 +9,12 @@
 
 .hero-section .page__wrapper {
   @include flex-vertical(42px);
-  padding: 344px $section-horizontal-padding 242px;
+  padding-top: 344px;
+  padding-bottom: 242px;
   background-image: 
   url("../../images/start-screen-puppy-desktop.png");
   background-repeat: no-repeat;
-  background-position: right 40px bottom;
+  background-position: right var(--page-box-horizontal-padding) bottom;
 }
 
 .hero-section__slogan {
