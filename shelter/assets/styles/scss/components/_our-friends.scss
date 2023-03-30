@@ -25,3 +25,29 @@
   @include title-font-style-desktop();
   text-align: center;
 }
+
+
+@include for-phone-portrait-down {
+  .our-friends {
+    padding-top: 42px;
+    padding-bottom: 42px;
+
+    .page__wrapper {
+      gap: 42px;
+    }
+  }
+
+  .our-friends__title {
+    @include title-font-style-mobile();
+    text-align: center;
+  }
+
+  .our-friends__button-layout {
+    position: static;
+    transform: none;
+    justify-content: center;
+    gap: 80px;
+  }
+  
+}
+

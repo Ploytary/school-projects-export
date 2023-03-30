@@ -1,0 +1,4 @@
+.pet-slider {
+  @include flex-vertical(20px);
+  align-items: center;
+}
