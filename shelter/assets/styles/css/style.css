@@ -65,6 +65,7 @@
 }
 
 html {
+  min-width: 320px;
   scroll-behavior: smooth;
 }
 
@@ -459,12 +460,16 @@ h1, h2, h3, h4, h5, h6, p {
     font: normal 25px / 1.3 "Georgia", serif;
     color: var(--main-font-color-2nd);
     letter-spacing: 0.06em;
+    text-align: center;
+    align-self: center;
   }
   .about__column-text {
     padding: 0 15px;
+    text-align: justify;
   }
   .about {
-    padding-bottom: 42px;
+    padding-top: 42px;
+    padding-bottom: 39px;
   }
   .about .page__wrapper {
     gap: 42px;
@@ -784,7 +789,7 @@ h1, h2, h3, h4, h5, h6, p {
   align-items: flex-start;
   align-items: flex-start;
   order: 1;
-  flex-basis: calc(50% - 48px);
+  flex-basis: calc(50% - 65px);
 }
 .donation__text {
   font: normal 35px / 1.3 "Georgia", serif;
@@ -818,7 +823,7 @@ h1, h2, h3, h4, h5, h6, p {
 }
 .donation__decorative-image-container {
   order: 0;
-  flex-basis: calc(50% + 48px);
+  flex-basis: calc(50% + 65px);
   min-height: 261px;
   min-width: 505px;
   background-image: url("../../images/donation-dog-desktop.png");
@@ -852,7 +857,7 @@ h1, h2, h3, h4, h5, h6, p {
 @media (max-width: 767px) {
   /*phone upper break-point*/
   .donation {
-    padding-top: 42px;
+    padding-top: 40px;
     padding-bottom: 42px;
   }
   .donation .page__wrapper {
@@ -875,7 +880,11 @@ h1, h2, h3, h4, h5, h6, p {
     font: normal 15px / 1.1 "Georgia", serif;
     color: var(--main-font-color-1st);
     letter-spacing: 0;
+    line-height: 1.45;
     color: var(--main-font-color-1st);
+  }
+  .donation__legal-info {
+    text-align: justify;
   }
   .donation__card-number {
     font: normal 15px / 1.1 "Georgia", serif;
@@ -938,7 +947,7 @@ h1, h2, h3, h4, h5, h6, p {
   /*tablet upper break-point*/
   .page-footer .page__wrapper {
     padding-top: 30px;
-    padding-bottom: 375px;
+    padding-bottom: 315px;
     background-position: center bottom;
   }
   .page-footer .page-footer__column:last-of-type {
@@ -977,8 +986,17 @@ h1, h2, h3, h4, h5, h6, p {
     background-image: url("../../images/footer-puppy-mobile.png");
     background-repeat: no-repeat;
     background-position: center bottom;
-    padding-bottom: 310px;
+    padding-bottom: 255px;
   }
+  .page-footer__address-points-list {
+    transform: translate(0);
+    gap: 40px;
+  }
+}
+.our-friends-details .our-friends__pet-list {
+  padding-left: 0;
+  padding-right: 0;
+  grid-template-columns: repeat(4, 270px);
 }
 .our-friends-details .page__wrapper {
   display: flex;

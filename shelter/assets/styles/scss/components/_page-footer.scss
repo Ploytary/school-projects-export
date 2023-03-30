@@ -53,7 +53,7 @@
   .page-footer {
     .page__wrapper {
       padding-top: 30px;
-      padding-bottom: 375px;
+      padding-bottom: 315px;
       background-position: center bottom;
     }
 
@@ -99,7 +99,12 @@
         repeat: no-repeat;
         position: center bottom;
       }
-      padding-bottom: 310px;
+      padding-bottom: 255px;
+    }
+
+    &__address-points-list {
+      transform: translate(0);
+      gap: 40px;
     }
   }
 }

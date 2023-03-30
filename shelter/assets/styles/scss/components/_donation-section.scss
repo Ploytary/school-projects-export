@@ -1,6 +1,6 @@
 /*donation*/
 
-$column-shift: 48px;
+$column-shift: 65px;
 
 .donation {
   padding: 80px 0 99px;
@@ -89,7 +89,7 @@ $column-shift: 48px;
 
 @include for-phone-portrait-down {
   .donation {
-    padding-top: 42px;
+    padding-top: 40px;
     padding-bottom: 42px;
     .page__wrapper {
       row-gap: 42px;
@@ -109,7 +109,12 @@ $column-shift: 48px;
     &__bank-info {
       text-align: center;
       @include body-compact-font-style-mobile;
+      line-height: 1.45;
       color: var(--main-font-color-1st);
+    }
+
+    &__legal-info {
+      text-align: justify;
     }
 
     &__card-number {
