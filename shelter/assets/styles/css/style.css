@@ -303,6 +303,31 @@ h1, h2, h3, h4, h5, h6, p {
   background-color: var(--accent-color-1st);
 }
 
+.main-navigation__burger-button {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 30px;
+}
+.main-navigation__burger-button span {
+  background-color: var(--accent-color-1st);
+  height: 2px;
+  width: 100%;
+}
+
+@media (max-width: 767px) {
+  /*phone upper break-point*/
+  .main-navigation__navitation-links {
+    display: none;
+  }
+  .main-navigation__burger-button {
+    display: flex;
+  }
+  .page-header__main-navigation {
+    padding: 0 10px;
+  }
+}
 /*hero-section*/
 .hero-section {
   background-image: url("../../images/noise_transparent@2x.png"), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%);

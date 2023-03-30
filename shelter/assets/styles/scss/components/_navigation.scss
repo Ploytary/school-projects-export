@@ -39,3 +39,31 @@
     background-color: var(--accent-color-1st);
   }
 }
+
+.main-navigation__burger-button {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 30px;
+  & span {
+    background-color: var(--accent-color-1st);
+    height: 2px;
+    width: 100%
+  }
+}
+
+@include for-phone-portrait-down {
+
+  .main-navigation__navitation-links {
+    display: none;
+  }
+
+  .main-navigation__burger-button {
+    display: flex;
+  }
+
+  .page-header__main-navigation {
+    padding: 0 10px;
+  }
+}
