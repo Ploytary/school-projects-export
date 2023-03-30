@@ -152,8 +152,14 @@
     display: none;
   }
 
+  // .our-friends--details .pet-list__item:nth-of-type(n + 4) {
+  //   display: none;
+  // }
+
+}
+
+@media (max-width: 599px) {
   .our-friends--details .pet-list__item:nth-of-type(n + 4) {
     display: none;
   }
-
 }
