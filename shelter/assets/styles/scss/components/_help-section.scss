@@ -12,3 +12,21 @@
     text-align: center;
   }
 }
+
+@include for-phone-portrait-down {
+  .help {
+    padding-top: 42px;
+    padding-bottom: 42px;
+    .page__wrapper {
+      gap: 42px;
+    }
+  }
+  .help__title {
+    @include title-font-style-mobile;
+  }
+
+  .help .help__donation-shop {
+    width: calc(30px + 130px * 2);
+    margin: 0 auto;
+  }
+}
