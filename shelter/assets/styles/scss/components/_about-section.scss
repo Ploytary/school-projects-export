@@ -4,17 +4,22 @@
   padding: 80px 0 100px;
   .page__wrapper {
     display: flex;
+    flex-wrap: wrap-reverse;
     align-items: center;
+    gap: 120px;
   }
 }
 
 .about__column-decorative-image {
-  width: calc(50% - 5px);
-  height: 408px;
+  width: calc(50% - 5px - 120px);
+  min-width: 300px;
+  max-height: 408px;
+  aspect-ratio: 300 / 408;
   background: {
     image: url("../../images/about-pets-desktop.png");
     repeat: no-repeat;
-    position: bottom right 120px;
+    position: center right;
+    size: contain;
   }
 }
 
@@ -32,3 +37,40 @@
   max-width: 430px;
   @include body-font-style-desktop();
 }
+
+@include for-tablet-portrait-down {
+  .about {
+    .page__wrapper {
+      justify-content: center;
+      gap: 80px;
+    }
+  }
+  .about__column-decorative-image,
+  .about__column-text {
+    width: auto;
+  }
+}
+
+@include for-phone-portrait-down {
+  .about__title {
+    @include title-font-style-mobile;
+  }
+
+  .about__column-text {
+    padding: 0 15px;
+  }
+
+  .about {
+    padding-bottom: 42px;
+    .page__wrapper {
+      gap: 42px;
+    }
+  }
+
+  .about__column-decorative-image {
+    min-width: 260px;
+  }
+}
+
+
+
