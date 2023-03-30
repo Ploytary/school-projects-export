@@ -645,6 +645,8 @@ h1, h2, h3, h4, h5, h6, p {
   .pet-list__item:nth-of-type(n + 2) {
     display: none;
   }
+}
+@media (max-width: 599px) {
   .our-friends--details .pet-list__item:nth-of-type(n + 4) {
     display: none;
   }
