@@ -134,6 +134,12 @@
   }
 }
 
+@include for-tablet-portrait-down {
+  .pet-list {
+    gap: 30px 40px;
+  }
+}
+
 @include for-phone-portrait-down {
   .pet-list {
     gap: 30px 40px;

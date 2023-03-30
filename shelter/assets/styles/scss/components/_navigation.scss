@@ -40,16 +40,26 @@
   }
 }
 
-.main-navigation__burger-button {
+.burger-button {
   display: none;
   flex-direction: column;
   justify-content: space-around;
   width: 30px;
   height: 30px;
   & span {
-    background-color: var(--accent-color-1st);
     height: 2px;
     width: 100%
+  }
+  &--light {
+    & span {
+      background-color: var(--accent-color-1st);
+    }
+  }
+
+  &--dark {
+    & span {
+      background-color: var(--main-font-color-1st);
+    }
   }
 }
 
@@ -61,10 +71,6 @@
 
   .main-navigation__burger-button {
     display: flex;
-
-    & span {
-      background-color: var(--main-font-color-1st);
-    }
   }
 
   .page-header__main-navigation {

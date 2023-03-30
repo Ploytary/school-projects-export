@@ -47,6 +47,12 @@
   }
 }
 
+@include for-tablet-portrait-down {
+  .hero-section__text {
+    max-width: none;
+  }
+}
+
 @include for-phone-portrait-down {
   .hero-section {
     .page__wrapper {
