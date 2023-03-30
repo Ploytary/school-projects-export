@@ -118,18 +118,25 @@
 
 @include for-tablet-portrait-down {
   .pet-list {
-    gap: 40px;
     grid-template-columns: repeat(2, 270px);
   }
 
   .pet-list__item:nth-of-type(n + 3) {
     display: none;
   }
+
+  .our-friends--details .pet-list__item:nth-of-type(n) {
+    display: flex;
+  }
+
+  .our-friends--details .pet-list__item:nth-of-type(n + 7) {
+    display: none;
+  }
 }
 
 @include for-phone-portrait-down {
   .pet-list {
-    gap: 40px;
+    gap: 30px 40px;
     grid-template-columns: repeat(1, 270px);
     padding-left: 0;
     padding-right: 0;
@@ -138,4 +145,9 @@
   .pet-list__item:nth-of-type(n + 2) {
     display: none;
   }
+
+  .our-friends--details .pet-list__item:nth-of-type(n + 4) {
+    display: none;
+  }
+
 }

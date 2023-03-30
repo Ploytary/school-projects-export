@@ -19,11 +19,33 @@
     padding: 0 var(--page-box-horizontal-padding);
     transform: translateY(19px)
   }
+
+  &__title {
+    @include title-font-style-desktop();
+    text-align: center;
+  }
 }
 
-.our-friends__title {
-  @include title-font-style-desktop();
-  text-align: center;
+.our-friends--details {
+  .our-friends__pet-list {
+    padding-left: 0;
+    padding-right: 0;
+    grid-template-columns: repeat(auto-fit, 270px);
+  }
+  .page__wrapper {
+    @include flex-vertical(60px);
+    align-items: center;
+  }
+}
+
+@include for-tablet-portrait-down {
+  .our-friends--details {
+    padding-bottom: 76px;
+
+    .page__wrapper {
+      gap: 30px;
+    }
+  }
 }
 
 

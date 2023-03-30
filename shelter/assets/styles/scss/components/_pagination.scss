@@ -1,11 +1,23 @@
 .pagination {
   display: flex;
   gap: 20px;
+  justify-content: center;
 
   &__prev-button-group,
   &__page-number-group,
   &__next-button-group {
     display: flex;
     gap: 20px;
+  }
+}
+
+@include for-phone-portrait-down {
+  .pagination {
+    gap: 10px;
+    &__prev-button-group,
+    &__page-number-group,
+    &__next-button-group {
+      gap: 10px;
+    }
   }
 }
