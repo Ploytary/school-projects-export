@@ -82,7 +82,11 @@ $column-shift: 65px;
 
     &__text-column {
       flex-basis: auto;
+      padding: 0 164px;
+    }
 
+    &__legal-info {
+      max-width: none;
     }
   }
 }
@@ -121,6 +125,10 @@ $column-shift: 65px;
       @include label-font-style-mobile;
       color: var(--main-font-color-3rd);
       align-self: center;
+    }
+
+    &__text-column {
+      padding: 0
     }
   }
 }

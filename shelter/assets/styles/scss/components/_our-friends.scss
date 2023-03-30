@@ -61,6 +61,7 @@
 
   .our-friends__title {
     @include title-font-style-mobile();
+    color: var(--main-font-color-3rd);
     text-align: center;
   }
 
