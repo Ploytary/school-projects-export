@@ -18,12 +18,57 @@
 }
 
 .hero-section__slogan {
-  width: 310px;
+  max-width: 310px;
   @include display-font-style-desktop();
+  & br {
+    display: none;
+  }
 }
 
 .hero-section__text {
-  width: 460px;
+  max-width: 460px;
   @include body-font-style-desktop();
   color: var(--main-font-color-7th);
+}
+
+@include for-tablet-portrait-down {
+  .hero-section {
+    .page__wrapper {
+      padding-top: 150px;
+      padding-left: calc(var(--page-box-horizontal-padding) + 124px);
+      padding-right: calc(var(--page-box-horizontal-padding) + 124px);
+      padding-bottom: 693px;
+      background-image: url("../../images/start-screen-puppy-tablet.png");
+    }
+
+  &__link {
+    align-self: center;
+  }
+  }
+}
+
+@include for-phone-portrait-down {
+  .hero-section {
+    .page__wrapper {
+      padding-left: var(--page-box-horizontal-padding);
+      padding-right: var(--page-box-horizontal-padding);
+      padding-bottom: 377px;
+      align-items: center;
+      background-image: url("../../images/start-screen-puppy-mobile.png");
+    }
+
+    &__slogan {
+      @include display-font-style-mobile;
+      text-align: center;
+
+
+      & br {
+        display: inline;
+      }
+    }
+
+    &__text {
+      text-align: center;
+    }
+  }
 }

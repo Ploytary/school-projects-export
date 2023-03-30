@@ -35,6 +35,7 @@ $side-comment-font-size-desktop: list.slash(12px,18px);
 $title-font-size-mobile: list.slash(25px,1.3);
 $label-font-size-mobile: list.slash(15px,1.1);
 $body-compact-font-style-mobile: list.slash(15px,1.6);
+$display-font-size-mobile: list.slash(25px,1.3);
 
 //font-faces
 $font-family-georgia: 'Georgia', serif;
@@ -138,20 +139,28 @@ $font-family-arial: Arial, sans-serif;
     normal,
     $label-font-size-mobile,
     $font-family-georgia,
-    var(--main-font-color-2nd),
+    var(--main-font-color-3rd),
     0.06em
   )
 }
-
-
 
 @mixin body-compact-font-style-mobile {
   @include font-set(
     normal,
     $label-font-size-mobile,
     $font-family-georgia,
-    var(--main-font-color-2nd),
+    var(--main-font-color-1st),
     0
+  )
+}
+
+@mixin display-font-style-mobile {
+  @include font-set(
+    normal,
+    $display-font-size-mobile,
+    $font-family-georgia,
+    var(--main-font-color-5th),
+    0.06em
   )
 }
 
