@@ -61,6 +61,10 @@
 
   .main-navigation__burger-button {
     display: flex;
+
+    & span {
+      background-color: var(--main-font-color-1st);
+    }
   }
 
   .page-header__main-navigation {
