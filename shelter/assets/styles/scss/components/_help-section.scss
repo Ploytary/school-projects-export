@@ -23,6 +23,7 @@
   }
   .help__title {
     @include title-font-style-mobile;
+    color: var(--main-font-color-3rd);
   }
 
   .help .help__donation-shop {

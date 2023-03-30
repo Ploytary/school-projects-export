@@ -48,12 +48,23 @@
   .about__column-decorative-image,
   .about__column-text {
     width: auto;
+    padding-left: 139px;
+    padding-right: 139px;
+  }
+
+  .about__column-text {
+    width: 100%;
+  }
+
+  .about__text {
+    max-width: none;
   }
 }
 
 @include for-phone-portrait-down {
   .about__title {
     @include title-font-style-mobile;
+    color: var(--main-font-color-3rd);
     text-align: center;
     align-self: center;
   }
@@ -73,6 +84,8 @@
 
   .about__column-decorative-image {
     min-width: 260px;
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 
