@@ -7,7 +7,6 @@
     position: relative;
     @include flex-vertical(59px);
     align-items: center;
-    padding: 0 $section-horizontal-padding;
   }
 
   &__button-layout {
@@ -17,12 +16,60 @@
     height: max-content;
     display: flex;
     justify-content: space-between;
-    padding: 0 $section-horizontal-padding;
+    padding: 0 var(--page-box-horizontal-padding);
     transform: translateY(19px)
+  }
+
+  &__title {
+    @include title-font-style-desktop();
+    text-align: center;
   }
 }
 
-.our-friends__title {
-  @include title-font-style-desktop();
-  text-align: center;
+.our-friends--details {
+  .our-friends__pet-list {
+    padding-left: 0;
+    padding-right: 0;
+    grid-template-columns: repeat(auto-fit, 270px);
+  }
+  .page__wrapper {
+    @include flex-vertical(60px);
+    align-items: center;
+  }
 }
+
+@include for-tablet-portrait-down {
+  .our-friends--details {
+    padding-bottom: 76px;
+
+    .page__wrapper {
+      gap: 30px;
+    }
+  }
+}
+
+
+@include for-phone-portrait-down {
+  .our-friends {
+    padding-top: 42px;
+    padding-bottom: 42px;
+
+    .page__wrapper {
+      gap: 42px;
+    }
+  }
+
+  .our-friends__title {
+    @include title-font-style-mobile();
+    text-align: center;
+  }
+
+  .our-friends__button-layout {
+    position: static;
+    transform: none;
+    justify-content: center;
+    gap: 80px;
+  }
+  
+}
+
