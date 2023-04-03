@@ -511,7 +511,7 @@ h1, h2, h3, h4, h5, h6, p {
   padding-right: calc(52px + var(--page-box-horizontal-padding));
   grid-template-columns: repeat(3, 270px);
   justify-content: center;
-  gap: 90px;
+  gap: 30px clamp(40px, 10vw - 37px, 90px);
 }
 .pet-list__item {
   position: relative;
@@ -630,14 +630,10 @@ h1, h2, h3, h4, h5, h6, p {
 }
 @media (max-width: 1279px) {
   /*tablet upper break-point*/
-  .pet-list {
-    gap: 30px 40px;
-  }
 }
 @media (max-width: 767px) {
   /*phone upper break-point*/
   .pet-list {
-    gap: 30px 40px;
     grid-template-columns: repeat(1, 270px);
     padding-left: 0;
     padding-right: 0;
