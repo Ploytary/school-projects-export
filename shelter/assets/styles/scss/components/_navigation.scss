@@ -28,7 +28,11 @@
 
 .navitation-links__item--active {
   position: relative;
-  pointer-events: none;
+  // pointer-events: none;
+  
+  .link--navigation {
+    cursor: default;
+  }
   &::after {
     position: absolute;
     bottom: -3px;
@@ -40,12 +44,61 @@
   }
 }
 
+.main-navigation {
+  &--negative-style {
+    .link--navigation {
+      color: var(--main-font-color-7th);
+      &:hover {
+        color: var(--main-font-color-8th);
+      }
+    }
+
+    .navitation-links__item--active {
+      a.link--navigation {
+        color: var(--main-font-color-8th);
+        &:hover {
+          color: var(--main-font-color-8th);
+        }
+      }
+    }
+  }
+
+  &--positive-style {
+    .link--navigation {
+    color: var(--main-font-color-3rd);
+      &:hover {
+        color: var(--main-font-color-2nd);
+      }
+    }
+
+    .navitation-links__item--active {
+      a.link--navigation {
+        color: var(--main-font-color-3rd);
+        &:hover {
+          color: var(--main-font-color-3rd);
+        }
+      }
+    }
+  }
+
+}
+
+.main-navigation--expanded {
+  .main-navigation__burger-button {
+    position: fixed;
+    right: calc(10px + var(--page-box-horizontal-padding));
+    top: 46px; 
+    transform: rotate(90deg);
+  }
+}
+
 .burger-button {
   display: none;
   flex-direction: column;
   justify-content: space-around;
   width: 30px;
   height: 30px;
+  transition: all 0.3s ease;
   & span {
     height: 2px;
     width: 100%
@@ -61,16 +114,66 @@
       background-color: var(--main-font-color-1st);
     }
   }
+
+  &:hover {
+    span {
+      background-color: var(--accent-color-2nd);
+    }
+  }
 }
 
 @include for-phone-portrait-down {
 
   .main-navigation__navitation-links {
     display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 10;
+    width: 320px;
+    padding-top: 22px;
+  }
+
+  .main-navigation--negative-style {
+    .main-navigation__navitation-links  {
+      background-color: var(--main-color-5th);
+    } 
+  }
+
+  .main-navigation--positive-style {
+    .main-navigation__navitation-links  {
+      background-color: var(--main-color-1st);
+    } 
+  }
+
+
+
+  .link--navigation {
+    font: $menu-font-size-mobile $font-family-arial;
+  }
+
+  .main-navigation--contracted {
+    .main-navigation__navitation-links {
+      display: flex;
+      animation: menu-fly-out-to-right 0.4s both 0.05s;
+    } 
+  }
+
+  .main-navigation--expanded {
+    .navitation-links {
+      display: flex;
+      animation: menu-fly-in-from-right 0.4s both;
+    }
   }
 
   .main-navigation__burger-button {
     display: flex;
+    z-index: 11;
   }
 
   .page-header__main-navigation {

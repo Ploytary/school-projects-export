@@ -1,0 +1,19 @@
+@keyframes menu-fly-in-from-right {
+  0% {
+    transform: translateX(100%)
+  }
+
+  100% {
+    transform: translateX(0%)
+  }
+}
+
+@keyframes menu-fly-out-to-right {
+  0% {
+    transform: translateX(0%)
+  }
+
+  100% {
+    transform: translateX(100%)
+  }
+}

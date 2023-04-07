@@ -10,30 +10,6 @@
     @include body-font-style-desktop();
   }
 
-  &--negative-style {
-    color: var(--main-font-color-7th);
-    
-    .navitation-links__item--active & {
-      color: var(--main-font-color-8th);
-    }
-
-    &:hover {
-      color: var(--main-font-color-8th);
-    }
-  }
-
-  &--positive-style {
-    color: var(--main-font-color-3rd);
-
-    .navitation-links__item--active & {
-      color: var(--main-font-color-3rd);
-    }
-
-    &:hover {
-      color: var(--main-font-color-2nd);
-    }
-  }
-
   &--button-format {
     display: inline-block;
     padding: 13px 43px;

@@ -1,5 +1,6 @@
 @import "./base/mixins";
 @import "./abstracts/variables";
+@import "./abstracts/keyframes";
 @import "./base/fonts";
 @import "./layout/page";
 @import "./components/link";
@@ -16,3 +17,4 @@
 @import "./components/page-footer";
 @import "./components/pagination";
 @import "./components/pet-slider";
+@import "./components/modal";
