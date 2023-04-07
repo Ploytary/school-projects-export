@@ -9,8 +9,10 @@
 }
 
 .pet-slider--short {
-  @include flex-vertical(20px);
+  @include flex-vertical(0);
   align-items: center;
+  justify-content: flex-end;
+  min-height: 435px;
 
   .pet-slider__viewport {
     padding-bottom: 0;

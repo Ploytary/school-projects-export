@@ -17,3 +17,18 @@
     transform: translateX(100%)
   }
 }
+
+@keyframes slider-fly-in-from-right {
+  0% {
+    filter: saturate(0);
+    opacity: 0.5;
+  }
+
+  50% {
+    filter: saturate(0);
+  }
+  100% {
+    transform: none;
+    opacity: 1;
+  }
+}

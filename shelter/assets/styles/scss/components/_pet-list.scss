@@ -1,5 +1,6 @@
 /*pet-list*/
 
+
 .pet-list {
   @include normallized-list();
   display: grid;
@@ -9,6 +10,26 @@
   grid-template-columns: repeat(3, 270px);
   justify-content: center;
   gap: 30px clamp(40px, 10vw - 37px, 90px);
+
+  &--from-right {
+    @for $i from 0 through 2 {
+      .pet-list__item[data-number="#{$i}"] {
+        transform: translateX((2 - $i) * 100% + (2 - $i) * (90/2) + 50) translateY(-150px) scale(0.5) rotate(35deg);
+        animation: slider-fly-in-from-right 0.3s ease $i * 0.05s both;
+        z-index: 2 - $i;
+      }
+    }
+  }
+  
+  &--from-left {
+    @for $i from 0 through 2 {
+      .pet-list__item[data-number="#{$i}"] {
+        transform: translateX(-1 * ($i) * 100% - ($i) * (90/2) - 50) translateY(-150px) scale(0.5) rotate(-35deg);
+        animation: slider-fly-in-from-right 0.3s ease $i * 0.05s both;
+        z-index: $i;
+      }
+    }
+  }
 
   &__item {
     position: relative;
@@ -43,13 +64,20 @@
     }
   }
 
-
+  // @for $i from 0 through 2 {
+  //   .pet-list__item[data-number="#{$i}"] {
+  //     // background-color: red;
+  //     transform: translateX((2 - $i) * 100% + (2 - $i) * 40 + 50) translateY(-150px) scale(0.5) rotate(35deg);
+  //     animation: slider-fly-in-from-right 5s ease $i * 0.05s both;
+  //     z-index: 2 - $i;
+  //   }
+  // }
 
   &__pet-name {
     order: 2;
     @include label-font-style-desktop();
   }
-  
+
   &__pet-species {
     display: none;
     @include label-font-style-desktop();
@@ -107,12 +135,14 @@
   &__item:nth-of-type(n + 4) {
     display: none;
   }
+
   &--long {
     flex-wrap: wrap;
     gap: 30px 40px;
+
     .pet-list__item {
       display: flex;
-    } 
+    }
   }
 }
 
@@ -136,7 +166,21 @@
 
 @include for-tablet-portrait-down {
   .pet-list {
-    // gap: 30px 40px;
+    &--from-right {
+      @for $i from 0 through 1 {
+        .pet-list__item[data-number="#{$i}"] {
+          transform: translateX((1 - $i) * 100% + (1 - $i) * (40/2) + 30) translateY(-150px) scale(0.5) rotate(35deg);
+        }
+      }
+    }
+    
+    &--from-left {
+      @for $i from 0 through 1 {
+        .pet-list__item[data-number="#{$i}"] {
+          transform: translateX(-1 * ($i) * 100% - ($i) * (40/2) - 30) translateY(-150px) scale(0.5) rotate(-35deg);
+        }
+      }
+    }
   }
 }
 
@@ -146,6 +190,22 @@
     grid-template-columns: repeat(1, 270px);
     padding-left: 0;
     padding-right: 0;
+
+    &--from-right {
+      @for $i from 0 through 0 {
+        .pet-list__item[data-number="#{$i}"] {
+          transform: translateX(($i) * 100% + ($i) * (40/2) + 30) translateY(-150px) scale(0.5) rotate(35deg);
+        }
+      }
+    }
+    
+    &--from-left {
+      @for $i from 0 through 0 {
+        .pet-list__item[data-number="#{$i}"] {
+          transform: translateX(-1 * ($i) * 100% - ($i) * (40/2) - 30) translateY(-150px) scale(0.5) rotate(-35deg);
+        }
+      }
+    }
   }
 
   .pet-list__item:nth-of-type(n + 2) {
