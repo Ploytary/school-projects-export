@@ -19,6 +19,10 @@
   }
 }
 
+.pet-slider--expanded {
+  min-height: 435px;
+}
+
 @include for-tablet-portrait-down {
   .pet-slider__viewport {
     padding-bottom: 40px;

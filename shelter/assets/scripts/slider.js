@@ -1,5 +1,6 @@
 import { pets } from '../mock/pets.js';
 import { getRandomInt, shuffle } from './utils.js';
+import { Popup } from './popup.js';
 export { Slider };
 
 let GROUP_SIZE = 0;
@@ -13,11 +14,13 @@ let expandedSliderCardList = [];
 let dataArrayClone = getDataClone();
 const windowSize = document.body.clientWidth;
 
+const slider = document.querySelector('.pet-slider');
 const compactSlider = document.querySelector('.pet-slider--short');
 const expandedSlider = document.querySelector('.pet-slider--expanded');
 
+
 class Slider {
-  start() {
+  init() {
     if (compactSlider) {
       render(compactSlider, getCompactSliderComponent());
       const petList = compactSlider.querySelector('.pet-list');
@@ -47,6 +50,8 @@ class Slider {
           item.disabled = 'true';
         }
       });
+      const popup = new Popup(slider, dataArrayClone);
+      popup.init();
     }
     if (expandedSlider) {
       render(expandedSlider, getExpandedSliderComponent());
@@ -82,7 +87,9 @@ class Slider {
         }
 
         trackSliderAnimation(direction, petList);
-      })
+      });
+      const popup = new Popup(slider, dataArrayClone);
+      popup.init();
     }
     return;
   }
