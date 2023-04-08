@@ -115,9 +115,19 @@
     }
   }
 
-  &:hover {
+  &:active {
     span {
       background-color: var(--accent-color-2nd);
+    }
+  }
+}
+
+@media (hover: hover) {
+  .burger-button {
+    &:hover {
+      span {
+        background-color: var(--accent-color-2nd);
+      }
     }
   }
 }

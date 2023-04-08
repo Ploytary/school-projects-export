@@ -39,11 +39,11 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .page__wrapper {
+  margin: auto;
   @include for-desktop-only {
     max-width: var(--size-page-box-width-display);
     padding-left: var(--page-box-horizontal-padding);
     padding-right: var(--page-box-horizontal-padding);
-    margin: auto;
   }
 
   @include for-tablet-portrait-down {
