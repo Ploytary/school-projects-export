@@ -7,6 +7,7 @@
     position: relative;
     @include flex-vertical(59px);
     align-items: center;
+    overflow: hidden;
   }
 
   &__button-layout {
@@ -27,11 +28,6 @@
 }
 
 .our-friends--details {
-  .our-friends__pet-list {
-    padding-left: 0;
-    padding-right: 0;
-    grid-template-columns: repeat(auto-fit, 270px);
-  }
   .page__wrapper {
     @include flex-vertical(60px);
     align-items: center;

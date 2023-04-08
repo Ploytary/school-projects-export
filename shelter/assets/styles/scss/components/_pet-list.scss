@@ -20,13 +20,53 @@
       }
     }
   }
-  
+
   &--from-left {
     @for $i from 0 through 2 {
       .pet-list__item[data-number="#{$i}"] {
         transform: translateX(-1 * ($i) * 100% - ($i) * (90/2) - 50) translateY(-150px) scale(0.5) rotate(-35deg);
         animation: slider-fly-in-from-right 0.3s ease $i * 0.05s both;
         z-index: $i;
+      }
+    }
+  }
+
+  &--long {
+    &.pet-list--from-right {
+      @for $i from 0 to 4 {
+        .pet-list__item[data-number="#{$i}"] {
+          transform: translateX(calc(((4 - $i) * 100%) + (4 - $i + 1) * 40px - 300px)) translateY(-150px) scale(0.5) rotate(35deg);
+          animation: slider-fly-in-from-right 0.1s ease $i * 0.05s both;
+          z-index: 4 - $i;
+        }
+      }
+
+      @for $i from 4 to 8 {
+        .pet-list__item[data-number="#{$i}"] {
+          transform: translateX(calc(((8 - $i) * 100%) + (8 - $i + 1) * 40px - 300px)) translateY(-150px) scale(0.5) rotate(35deg);
+          animation: slider-fly-in-from-right 0.1s ease $i * 0.05s both;
+          z-index: 8 - $i;
+        }
+      }
+      
+    }
+  
+    &.pet-list--from-left {
+      @for $i from 0 to 4 {
+        .pet-list__item[data-number="#{$i}"] {
+          transform: translateX(calc((-1 * ($i + 1) * 100%) - ($i + 1) * 40px + 300px)) translateY(-150px) scale(0.5) rotate(-35deg);
+          animation: slider-fly-in-from-right 0.1s ease $i * 0.05s both;
+          z-index: $i;
+        }
+      }
+
+      @for $i from 4 to 8 {
+        .pet-list__item[data-number="#{$i}"] {
+          $j: $i - 4;
+          transform: translateX(calc((-1 * ($j + 1) * 100%) - ($j + 1) * 40px + 300px)) translateY(-150px) scale(0.5) rotate(-35deg);
+          animation: slider-fly-in-from-right 0.1s ease $i * 0.05s both;
+          z-index: $j;
+        }
       }
     }
   }
@@ -63,15 +103,6 @@
       filter: drop-shadow(0px 0px 8px var(--main-color-4th));
     }
   }
-
-  // @for $i from 0 through 2 {
-  //   .pet-list__item[data-number="#{$i}"] {
-  //     // background-color: red;
-  //     transform: translateX((2 - $i) * 100% + (2 - $i) * 40 + 50) translateY(-150px) scale(0.5) rotate(35deg);
-  //     animation: slider-fly-in-from-right 5s ease $i * 0.05s both;
-  //     z-index: 2 - $i;
-  //   }
-  // }
 
   &__pet-name {
     order: 2;
@@ -132,35 +163,27 @@
 }
 
 .pet-list {
-  &__item:nth-of-type(n + 4) {
-    display: none;
-  }
 
   &--long {
     flex-wrap: wrap;
+    padding-left: 0;
+    padding-right: 0;
+    grid-template-columns: repeat(auto-fit, 270px);
     gap: 30px 40px;
+  }
 
-    .pet-list__item {
-      display: flex;
-    }
+  .pet-list__item {
+    display: flex;
   }
 }
+
+
+
+
 
 @include for-tablet-portrait-down {
   .pet-list {
     grid-template-columns: repeat(2, 270px);
-  }
-
-  .pet-list__item:nth-of-type(n + 3) {
-    display: none;
-  }
-
-  .our-friends--details .pet-list__item:nth-of-type(n) {
-    display: flex;
-  }
-
-  .our-friends--details .pet-list__item:nth-of-type(n + 7) {
-    display: none;
   }
 }
 
@@ -173,11 +196,68 @@
         }
       }
     }
-    
+
     &--from-left {
       @for $i from 0 through 1 {
         .pet-list__item[data-number="#{$i}"] {
           transform: translateX(-1 * ($i) * 100% - ($i) * (40/2) - 30) translateY(-150px) scale(0.5) rotate(-35deg);
+        }
+      }
+    }
+
+    &--long {
+      &.pet-list--from-right {
+        @for $i from 0 to 2 {
+          .pet-list__item[data-number="#{$i}"] {
+            transform: translateX(calc(((2 - $i) * 100%) + (2 - $i + 1) * 40px - 250px)) translateY(-150px) scale(0.5) rotate(35deg);
+            animation: slider-fly-in-from-right 0.1s ease $i * 0.05s both;
+            z-index: 2 - $i;
+          }
+        }
+
+        @for $i from 2 to 4 {
+          .pet-list__item[data-number="#{$i}"] {
+            transform: translateX(calc(((4 - $i) * 100%) + (4 - $i + 1) * 40px - 250px)) translateY(-150px) scale(0.5) rotate(35deg);
+            animation: slider-fly-in-from-right 0.1s ease $i * 0.05s both;
+            z-index: 4 - $i;
+          }
+        }
+  
+        @for $i from 4 to 6 {
+          .pet-list__item[data-number="#{$i}"] {
+            transform: translateX(calc(((6 - $i) * 100%) + (6 - $i + 1) * 40px - 250px)) translateY(-150px) scale(0.5) rotate(35deg);
+            animation: slider-fly-in-from-right 0.1s ease $i * 0.05s both;
+            z-index: 6 - $i;
+          }
+        }
+        
+      }
+    
+      &.pet-list--from-left {
+        @for $i from 0 to 2 {
+          .pet-list__item[data-number="#{$i}"] {
+            transform: translateX(calc((-1 * ($i + 1) * 100%) - ($i + 1) * 40px + 250px)) translateY(-150px) scale(0.5) rotate(-35deg);
+            animation: slider-fly-in-from-right 0.1s ease $i * 0.05s both;
+            z-index: $i;
+          }
+        }
+
+        @for $i from 2 to 4 {
+          .pet-list__item[data-number="#{$i}"] {
+            $j: $i - 2;
+            transform: translateX(calc((-1 * ($i + 1) * 100%) - ($i + 1) * 40px + 250px)) translateY(-150px) scale(0.5) rotate(-35deg);
+            animation: slider-fly-in-from-right 0.1s ease $i * 0.05s both;
+            z-index: $j;
+          }
+        }
+  
+        @for $i from 4 to 6 {
+          .pet-list__item[data-number="#{$i}"] {
+            $j: $i - 4;
+            transform: translateX(calc((-1 * ($j + 1) * 100%) - ($j + 1) * 40px + 250px)) translateY(-150px) scale(0.5) rotate(-35deg);
+            animation: slider-fly-in-from-right 0.1s ease $i * 0.05s both;
+            z-index: $j;
+          }
         }
       }
     }
@@ -198,7 +278,7 @@
         }
       }
     }
-    
+
     &--from-left {
       @for $i from 0 through 0 {
         .pet-list__item[data-number="#{$i}"] {
@@ -206,15 +286,62 @@
         }
       }
     }
-  }
 
-  .pet-list__item:nth-of-type(n + 2) {
-    display: none;
-  }
-}
+    &--long {
+      &.pet-list--from-right {
+        @for $i from 0 to 1 {
+          .pet-list__item[data-number="#{$i}"] {
+            transform: translateX(calc(((1 - $i) * 0%) + (1 - $i + 1) * 0px - 25px)) translateY(-150px) scale(0.5) rotate(35deg);
+            animation: slider-fly-in-from-right 0.1s ease $i * 0.05s both;
+            z-index: 1 - $i;
+          }
+        }
 
-@media (max-width: 599px) {
-  .our-friends--details .pet-list__item:nth-of-type(n + 4) {
-    display: none;
+        @for $i from 1 to 2 {
+          .pet-list__item[data-number="#{$i}"] {
+            transform: translateX(calc(((2 - $i) * 0%) + (2 - $i + 1) * 0px - 25px)) translateY(-150px) scale(0.5) rotate(35deg);
+            animation: slider-fly-in-from-right 0.1s ease $i * 0.05s both;
+            z-index: 2 - $i;
+          }
+        }
+  
+        @for $i from 2 to 3 {
+          .pet-list__item[data-number="#{$i}"] {
+            transform: translateX(calc(((3 - $i) * 0%) + (3 - $i + 1) * 0px - 25px)) translateY(-150px) scale(0.5) rotate(35deg);
+            animation: slider-fly-in-from-right 0.1s ease $i * 0.05s both;
+            z-index: 3 - $i;
+          }
+        }
+        
+      }
+    
+      &.pet-list--from-left {
+        @for $i from 0 to 1 {
+          .pet-list__item[data-number="#{$i}"] {
+            transform: translateX(calc((-1 * ($i + 1) * 0%) - ($i + 1) * 0px + 25px)) translateY(-150px) scale(0.5) rotate(-35deg);
+            animation: slider-fly-in-from-right 0.1s ease $i * 0.05s both;
+            z-index: $i;
+          }
+        }
+
+        @for $i from 1 to 2 {
+          .pet-list__item[data-number="#{$i}"] {
+            $j: $i - 1;
+            transform: translateX(calc((-1 * ($i + 1) * 0%) - ($i + 1) * 0px + 25px)) translateY(-150px) scale(0.5) rotate(-35deg);
+            animation: slider-fly-in-from-right 0.1s ease $i * 0.05s both;
+            z-index: $j;
+          }
+        }
+  
+        @for $i from 2 to 3 {
+          .pet-list__item[data-number="#{$i}"] {
+            $j: $i - 2;
+            transform: translateX(calc((-1 * ($j + 1) * 0%) - ($j + 1) * 0px + 25px)) translateY(-150px) scale(0.5) rotate(-35deg);
+            animation: slider-fly-in-from-right 0.1s ease $i * 0.05s both;
+            z-index: $j;
+          }
+        }
+      }
+    }
   }
 }

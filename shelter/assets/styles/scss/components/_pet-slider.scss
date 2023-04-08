@@ -25,3 +25,9 @@
   }
 }
 
+@include for-phone-portrait-down {
+  .pet-slider--short {
+    gap: 20px;
+  }
+}
+
