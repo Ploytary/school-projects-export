@@ -21,6 +21,7 @@
   --main-color-2nd: #F6F6F6;
   --main-color-3rd: #FAFAFA;
   --main-color-4th: #CDCDCD;
+  --main-color-5th: #292929;
 }
 
 //font-sizes
@@ -31,10 +32,14 @@ $body-font-size-desktop: list.slash(15px,1.6);
 $body-compact-font-size-desktop: list.slash(15px,1.1);
 $button-font-size-desktop: list.slash(17px,1.3);
 $side-comment-font-size-desktop: list.slash(12px,18px);
+$body-modal-font-size-desktop: list.slash(15px,1.15);
+
+$body-compact-font-style-tablet: list.slash(13px,1.1);
 
 $title-font-size-mobile: list.slash(25px,1.3);
 $label-font-size-mobile: list.slash(15px,1.1);
 $body-compact-font-style-mobile: list.slash(15px,1.6);
+$menu-font-size-mobile: list.slash(32px,1.6);
 $display-font-size-mobile: list.slash(25px,1.3);
 
 //font-faces
@@ -160,6 +165,26 @@ $font-family-arial: Arial, sans-serif;
     $display-font-size-mobile,
     $font-family-georgia,
     var(--main-font-color-5th),
+    0.06em
+  )
+}
+
+@mixin body-compact-font-style-mobile {
+  @include font-set(
+    normal,
+    $body-compact-font-style-tablet,
+    $font-family-georgia,
+    var(--main-font-color-1st),
+    0.06em
+  )
+}
+
+@mixin body-modal-font-style-desktop {
+  @include font-set(
+    normal,
+    $body-modal-font-size-desktop,
+    $font-family-georgia,
+    var(--main-font-color-1st),
     0.06em
   )
 }
