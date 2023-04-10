@@ -41,3 +41,41 @@
     @content;
   }
 }
+
+@mixin slider-fade-in-animation($showCardCount, $rowsCount, $primaryShiftPersent, $secondaryShiftAbsolute, $gapLength) {
+  $animationDurationPerItem: 0.2s;
+  $animationDelayPartPersent: 3;
+  $translateY: -150px;
+  $scale: 0.5;
+  $rotate: 35deg;
+  $easingFunction: ease;
+
+  $animationDuration: calc(($animationDurationPerItem * $showCardCount) / (100 - $animationDelayPartPersent)) * 100;
+  $animationDelay: calc($animationDuration / 100 * $animationDelayPartPersent);
+  @for $rowNumber from 0 to $rowsCount {
+    $cardCountInRow: calc($showCardCount / $rowsCount);
+
+    &.pet-list--from-right {
+      @for $i from $rowNumber * $cardCountInRow to ($rowNumber + 1) * $cardCountInRow {
+        $y: (calc((($rowNumber + 1) * $cardCountInRow) - 1)) - $i % $cardCountInRow;
+        $shiftRate: ($rowNumber + 1) * $cardCountInRow;
+        .pet-list__item[data-number="#{$i}"] {
+          transform: translateX(calc((($shiftRate - $i) * $primaryShiftPersent) + ($shiftRate - $i + 1) * $gapLength + $secondaryShiftAbsolute)) translateY($translateY) scale($scale) rotate($rotate);
+          animation: slider-fly-in $animationDurationPerItem $easingFunction $y * $animationDelay both;
+          z-index: $shiftRate - $i;
+        }
+      }
+    }
+    
+    &.pet-list--from-left {
+      @for $i from $rowNumber * $cardCountInRow to ($rowNumber + 1) * $cardCountInRow {
+        $shiftRate: $i % $cardCountInRow + 1;
+        .pet-list__item[data-number="#{$i}"] {
+          transform: translateX(calc((-1 * $shiftRate * $primaryShiftPersent) - $shiftRate * $gapLength - $secondaryShiftAbsolute)) translateY($translateY) scale($scale) rotate($rotate * -1);
+          animation: slider-fly-in $animationDurationPerItem $easingFunction $i * $animationDelay both;
+          z-index: $shiftRate;
+        }
+      }
+    }
+  }
+}

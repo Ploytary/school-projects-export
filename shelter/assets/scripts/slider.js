@@ -49,6 +49,8 @@ class Slider {
         for (let item of buttons) {
           item.disabled = 'true';
         }
+
+        petList.style.pointerEvents = 'none';
       });
       const popup = new Popup(slider, dataArrayClone);
       popup.init();
@@ -309,7 +311,17 @@ function generateCardList(source, cardCount) {
 }
 
 function trackSliderAnimation(direction, petList) {
-  petList.lastElementChild.addEventListener('animationend', () => {
+  const sliderRows = window.getComputedStyle(petList).gridTemplateRows.split(' ').length
+  let index = 0;
+  
+  if (direction === 'right') {
+    index = GROUP_SIZE - (GROUP_SIZE / sliderRows);
+  }
+  if (direction === 'left') {
+    index = petList.children.length - 1;
+  }
+
+  petList.children[index].addEventListener('animationend', () => {
     petList.classList.remove('pet-list--from-right', 'pet-list--from-left');
     const buttons = document.querySelectorAll('.pet-slider__button');
     if (buttons) {
@@ -326,6 +338,8 @@ function trackSliderAnimation(direction, petList) {
         sliderPageButtonsControl(currentPage);
       }
     }
+
+    petList.style.pointerEvents = '';
   });
 }
 
