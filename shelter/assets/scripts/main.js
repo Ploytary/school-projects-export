@@ -14,5 +14,13 @@ const message = (
   `
 );
 
+
+
+if(!localStorage.getItem('visited')) {
+  alert('Информация для критериев, касающихся генератора карточек и слайдов, видна в консоли.');
+}
+localStorage.setItem('visited', true);
+
+
 //force github pages update
-console.log(message);
+// console.log(message);

@@ -54,6 +54,7 @@ class Slider {
       });
       const popup = new Popup(slider, dataArrayClone);
       popup.init();
+      console.log('критерий запоминания 1 шага и рандом последующих слайдов:');
     }
     if (expandedSlider) {
       render(expandedSlider, getExpandedSliderComponent());
@@ -275,7 +276,17 @@ function sizeControl(petList) {
 function expandedSliderInit(petList) {
   petList.innerHTML = '';
   expandedSliderCardList = generateCardList(dataArrayClone, 48);
+
+  console.log('сгенерированный массив на перезагрузке страницы:');
+  console.log(expandedSliderCardList.map((cardListItem) => cardListItem.name));
+  console.log('критерий повторов записей животных в сгенерированном массиве на перезагрузке страницы:');
+  pets.map((dataItem) => {
+    const filteredByName = expandedSliderCardList.filter((cardListItem) => cardListItem.name === dataItem.name);
+    console.log({name: dataItem.name, count: filteredByName.length});
+  });
+  
   render(petList, getSliderListElement(expandedSliderCardList.slice(currentPage, currentPage + GROUP_SIZE)));
+  
 }
 
 function compactSliderInit(petList) {
@@ -448,6 +459,8 @@ function slide(direction, petList) {
     movePrev(petList);
     lastFuncButton = direction;
   }
+  
+  console.log(currentCardGroup.map((card) => card.name));
 }
 
 function moveNext(petList) {
