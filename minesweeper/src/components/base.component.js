@@ -33,6 +33,9 @@ export class BaseComponent {
           add.call(this, item);
         }
       } else {
+        if (name === '') {
+          return;
+        }
         this.node.classList.add(name);
       }
     }
