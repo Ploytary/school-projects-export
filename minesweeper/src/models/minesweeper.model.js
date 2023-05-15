@@ -1,4 +1,5 @@
 import { getRandomInt } from '../utils/get-random-int';
+import { neighbourLocationMap } from '../utils/constants';
 
 const DEFAULT_SIZE = 10;
 const MINE_DENSITY_PERCENTAGE = 10;
@@ -41,13 +42,6 @@ export class MinesweeperModel {
       }
     }
 
-    /* eslint-disable prettier/prettier */
-    const neighbourLocation = [
-      [-1, -1], [-1, +0], [-1, +1],
-      [+0, -1], /*    */  [+0, +1],
-      [+1, -1], [+1, +0], [+1, +1],
-    ];
-    /* eslint-enable prettier/prettier */
     let cellCounter = 0;
     const dataMatrix = mineMatrix.map((line, lineIndex) => {
       return line.map((cell, cellIndex) => {
@@ -58,7 +52,7 @@ export class MinesweeperModel {
         }
 
         let neighboursCount = 0;
-        neighbourLocation.forEach((location) => {
+        neighbourLocationMap.forEach((location) => {
           let neighbour;
           if (
             lineIndex + location[0] >= 0 &&

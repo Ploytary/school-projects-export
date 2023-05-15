@@ -2,6 +2,8 @@ import { BaseComponent } from '../components/base.component';
 import { PlaygroundComponent } from '../components/playground/playground.component';
 import { TileComponent } from '../components/tile/tile.component';
 import { MinesweeperModel } from '../models/minesweeper.model';
+import { neighbourLocationMap } from '../utils/constants';
+import { getMatrixComponentPosiiton } from '../utils/get-matrix-position';
 
 export class PlaygroundController {
   playground = new PlaygroundComponent({ className: 'minesweeper__playground' });
@@ -55,15 +57,32 @@ export class PlaygroundController {
       }
     }
 
+    const { lineIndex, cellIndex } = getMatrixComponentPosiiton(this.tileComponents, targetComponent);
     const newTileComponent = this.createTileComponent(newData);
     targetComponent.node.replaceWith(newTileComponent.node);
     targetComponent.destroy();
-    targetComponent = newTileComponent;
+    targetComponent = null;
+    this.tileComponents[lineIndex][cellIndex] = newTileComponent;
   }
 
   uncoverTile(tileComponent) {
-    const SINGLE_MODE = true;
-    if (SINGLE_MODE) {
+    if (tileComponent.value === 0 && tileComponent.isCovered) {
+      const componentPosition = getMatrixComponentPosiiton(this.tileComponents, tileComponent);
+      const { cellIndex, lineIndex } = componentPosition;
+      this.model.updateData({ id: tileComponent.id, isCovered: false });
+      const size = this.tileComponents.length;
+      neighbourLocationMap.forEach((location) => {
+        if (
+          lineIndex + location[0] >= 0 &&
+          lineIndex + location[0] < size &&
+          cellIndex + location[1] >= 0 &&
+          cellIndex + location[1] < size
+        ) {
+          const neighbour = this.tileComponents[lineIndex + location[0]][cellIndex + location[1]];
+          this.uncoverTile(neighbour);
+        }
+      });
+    } else {
       this.model.updateData({ id: tileComponent.id, isCovered: false });
     }
   }
