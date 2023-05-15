@@ -3,7 +3,9 @@ import { BaseComponent } from '../base.component';
 import { SVGComponent } from '../svg.component';
 import { SvgIcons } from '../../enums/svg-icons';
 
+const MINE_CHAR = '*';
 const COLOR_VARIANT_CLASSES = [
+  '',
   'tile__content--color-variant-1st',
   'tile__content--color-variant-2nd',
   'tile__content--color-variant-3rd',
@@ -13,11 +15,13 @@ export class TileComponent extends BaseComponent {
   constructor({ cellData, className = [] }) {
     super({ className: [className, 'tile'] });
 
-    const { isCovered, value } = cellData;
+    const { id, isMarked, isCovered, value } = cellData;
+    this.isMarked = isMarked;
     this.isCovered = isCovered;
     this.value = value;
+    this.id = id;
 
-    if (this.value === '*') {
+    if (this.value === MINE_CHAR) {
       this.content = new BaseComponent({
         tagName: 'span',
         className: 'tile__content',
@@ -25,21 +29,27 @@ export class TileComponent extends BaseComponent {
       this.content.append(new SVGComponent({ template: SvgIcons.MINE }));
     } else {
       let colorVariantClass;
-      if (value === '*') {
+      if (this.value === MINE_CHAR) {
         colorVariantClass = '';
       } else {
         const cycle = COLOR_VARIANT_CLASSES.length;
-        const index = value % cycle;
-        colorVariantClass = index === 0 ? '' : COLOR_VARIANT_CLASSES[index];
+        const index = this.value % cycle;
+        colorVariantClass = COLOR_VARIANT_CLASSES[index];
       }
       this.content = new BaseComponent({
         tagName: 'span',
         className: [colorVariantClass, 'tile__content'],
-        textContent: this.value,
+        textContent: this.value === 0 ? '' : this.value,
       });
     }
+    this.append(this.content);
+    if (isCovered) {
+      this.cover = new BaseComponent({ className: 'tile__cover' });
+      this.append(this.cover);
+    }
+  }
 
-    this.cover = new BaseComponent({ className: 'tile__cover' });
-    this.append(this.content, this.cover);
+  setLeftClickHandler(handler) {
+    this.node.addEventListener('click', handler);
   }
 }
