@@ -4,11 +4,13 @@ import { TileComponent } from '../components/tile/tile.component';
 import { MinesweeperModel } from '../models/minesweeper.model';
 import { neighbourLocationMap, LOSE_SIGN, WIN_SIGN } from '../utils/constants';
 import { getMatrixComponentPosiiton } from '../utils/get-matrix-position';
+import { AudioComponent } from '../components/audio.component';
 
 export class PlaygroundController {
   playground = null;
   tileComponents = [];
   steps = 0;
+  soundEffectsComponent = new AudioComponent();
 
   constructor(settings, container, onEndGameHandler) {
     this.settings = settings;
@@ -52,12 +54,14 @@ export class PlaygroundController {
     tileComponent.setLeftClickHandler(() => {
       if (tileComponent.isCovered) {
         this.steps++;
+        this.soundEffectsComponent.playClickSound();
       }
       this.uncoverTile(tileComponent);
       if (tileComponent.value === '*') {
         this.showMines();
         this.stopPlaygroundEvents();
         this.onEndGameHandler(LOSE_SIGN);
+        this.soundEffectsComponent.playLoseSound();
       }
 
       const coveredTilesCount = this.tileComponents.flat(1).filter((component) => component.isCovered).length;
@@ -68,6 +72,7 @@ export class PlaygroundController {
       if (isAllTilesUncovered) {
         this.stopPlaygroundEvents();
         this.onEndGameHandler(WIN_SIGN, this.steps);
+        this.soundEffectsComponent.playWinSound();
       }
     });
     return tileComponent;
@@ -119,5 +124,13 @@ export class PlaygroundController {
 
   stopPlaygroundEvents() {
     this.tileComponents.flat(1).forEach((component) => component.removeHandler());
+  }
+
+  applySoundSettings() {
+    if (this.settings.mute) {
+      this.soundEffectsComponent.mute();
+    } else {
+      this.soundEffectsComponent.unmute();
+    }
   }
 }

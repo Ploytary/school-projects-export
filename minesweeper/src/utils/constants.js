@@ -1,3 +1,8 @@
+export const ThemeValues = {
+  LIGHT: 'light',
+  DARK: 'dark',
+};
+
 export const WIN_SIGN = 'win';
 export const LOSE_SIGN = 'lose';
 export const WIN_TEXT = 'Hooray! You found all mines in ## seconds and #N moves!';

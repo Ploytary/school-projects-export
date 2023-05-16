@@ -18,6 +18,8 @@ export class MinesweeperController {
     this.settings,
     this.minesweeperComponent,
     this.onStartGameButtonClickHandler.bind(this),
+    this.onThemeChangeHandler.bind(this),
+    this.onSoundChangeHandler.bind(this)
   );
   playgroundController = new PlaygroundController(
     this.settings,
@@ -33,6 +35,30 @@ export class MinesweeperController {
     this.container.append(this.minesweeperComponent);
     this.controlPanelController.render();
     this.playgroundController.render();
+
+    switch (this.settings.theme) {
+      case 'light':
+        this.minesweeperComponent.addClass(`theme-${ThemeValues.LIGHT}`);
+        break;
+      case 'night':
+        this.minesweeperComponent.addClass(`theme-${ThemeValues.DARK}`);
+        break;
+    }
+  }
+
+  onThemeChangeHandler() {
+    const prevThemeClassName = `theme-${this.settings.theme}`;
+    this.minesweeperComponent.toggleClass(prevThemeClassName);
+
+    this.settings.theme = this.settings.theme === ThemeValues.LIGHT ? ThemeValues.DARK : ThemeValues.LIGHT;
+
+    const newThemeClassName = `theme-${this.settings.theme}`;
+    this.minesweeperComponent.toggleClass(newThemeClassName);
+  }
+
+  onSoundChangeHandler() {
+    this.settings.mute = !this.settings.mute;
+    this.playgroundController.applySoundSettings();
   }
 
   onStartGameButtonClickHandler() {

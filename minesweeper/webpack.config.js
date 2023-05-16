@@ -81,6 +81,13 @@ module.exports = {
           filename: path.join(ASSETS_FOLDER_NAME, 'images', '[name][ext]'),
         },
       },
+      {
+        test: /\.mp3$/,
+        loader: 'file-loader',
+        generator: {
+          filename: path.join(ASSETS_FOLDER_NAME, 'audio', '[name][ext]'),
+        },
+      },
     ],
   },
 };

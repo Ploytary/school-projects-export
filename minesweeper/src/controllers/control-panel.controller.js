@@ -10,16 +10,46 @@ export class ControlPanelController {
     this.settings = settings;
     this.container = container;
     this.onStartGameButtonClickHandler = onStartGameButtonClickHandler;
+    this.onThemeChangeHandler = onThemeChangeHandler;
+    this.onSoundChangeHandler = onSoundChangeHandler;
   }
 
   render() {
     this.setHandlers();
     this.container.append(this.controlPanelComponent);
+
+    this.switchSoundButtonIcon();
+    this.switchThemeButtonIcon();
   }
 
   setHandlers() {
     this.controlPanelComponent.setNewGameButtonClickHandler(() => {
       this.onStartGameButtonClickHandler();
     });
+    this.controlPanelComponent.setSettingsButtonClickHandler();
+    this.controlPanelComponent.setScoreButtonClickHandler();
+    this.controlPanelComponent.setThemeButtonClickHandler(() => {
+      this.onThemeChangeHandler();
+      this.switchThemeButtonIcon();
+    });
+    this.controlPanelComponent.setSoundButtonClickHandler(() => {
+      this.onSoundChangeHandler();
+      this.switchSoundButtonIcon();
+    });
+  }
+
+  switchSoundButtonIcon() {
+    console.log(this.settings.mute);
+    const soundButtonIcon = new SVGComponent({
+      template: this.settings.mute === false ? SvgIcons.MUTE : SvgIcons.UNMUTE,
+    });
+    this.controlPanelComponent.setSoundButtonIcon(soundButtonIcon);
+  }
+
+  switchThemeButtonIcon() {
+    const themeButtonIcon = new SVGComponent({
+      template: this.settings.theme === ThemeValues.LIGHT ? SvgIcons.NIGHT : SvgIcons.DAY,
+    });
+    this.controlPanelComponent.setThemeButtonIcon(themeButtonIcon);
   }
 }
