@@ -5,7 +5,7 @@ import { EndGameModalComponent } from '../components/modal/end-game-modal.compon
 import { ThemeValues, WIN_SIGN, WIN_TEXT, LOSE_TEXT, LOSE_SIGN } from '../utils/constants';
 
 const DEFAULT_SETTINGS = {
-  boardSize: 15,
+  boardSize: 10,
   mineDensityPersentage: 10,
   theme: ThemeValues.LIGHT,
   mute: false,
@@ -26,6 +26,8 @@ export class MinesweeperController {
     this.minesweeperComponent,
     this.onGameEndHandler.bind(this)
   );
+  timer = null;
+  intervalId = null;
 
   constructor(container) {
     this.container = container;
@@ -65,25 +67,21 @@ export class MinesweeperController {
     this.playgroundController.render();
   }
 
-  stopTimer() {
-    console.log('stop timer');
-  }
-
-  startTimer() {
-    console.log('start timer');
-  }
-
   onSubmitClickHandler() {
     this.modal.destroy();
     this.modal = null;
   }
 
-  onGameEndHandler(sign, steps) {
-    this.stopTimer();
+  onGameEndHandler(sign, steps, timer) {
+    this.playgroundController.stopTimer();
     this.playgroundController.stopPlaygroundEvents();
     switch (sign) {
       case WIN_SIGN: {
-        const timeSubtring = '45 seconds';
+        const minutes = Math.floor(timer / 60);
+        const seconds = timer % 60;
+        const minuteSubstr = `${minutes === 0 ? '' : `${minutes}  ${minutes > 1 ? 'minutes' : 'minute'}`}`;
+        const secondSubstr = `${seconds === 0 ? '' : `${seconds}  ${seconds > 1 ? 'seconds' : 'second'}`}`;
+        const timeSubtring = `${minuteSubstr} ${secondSubstr}`;
         const winText = WIN_TEXT.replace('## seconds', timeSubtring).replace('#N', steps);
         this.modal = new EndGameModalComponent({ textContent: winText });
         break;

@@ -39,7 +39,6 @@ export class ControlPanelController {
   }
 
   switchSoundButtonIcon() {
-    console.log(this.settings.mute);
     const soundButtonIcon = new SVGComponent({
       template: this.settings.mute === false ? SvgIcons.MUTE : SvgIcons.UNMUTE,
     });

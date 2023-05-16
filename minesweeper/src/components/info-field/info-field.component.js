@@ -18,6 +18,6 @@ export class InfoFieldComponent extends BaseComponent {
   }
 
   setValue(value) {
-    this.valueElement = value;
+    this.valueComponent.getElement().textContent = value;
   }
 }

@@ -10,6 +10,8 @@ export class PlaygroundController {
   playground = null;
   tileComponents = [];
   steps = 0;
+  timer = null;
+  intervalId = null;
   soundEffectsComponent = new AudioComponent();
 
   constructor(settings, container, onEndGameHandler) {
@@ -42,6 +44,7 @@ export class PlaygroundController {
     });
 
     this.container.append(this.playground);
+    this.startTimer();
     window.addEventListener('beforeunload', () => this.model.saveModel());
   }
 
@@ -54,6 +57,7 @@ export class PlaygroundController {
     tileComponent.setLeftClickHandler(() => {
       if (tileComponent.isCovered) {
         this.steps++;
+        this.setStepsField();
         this.soundEffectsComponent.playClickSound();
       }
       this.uncoverTile(tileComponent);
@@ -71,7 +75,7 @@ export class PlaygroundController {
         0;
       if (isAllTilesUncovered) {
         this.stopPlaygroundEvents();
-        this.onEndGameHandler(WIN_SIGN, this.steps);
+        this.onEndGameHandler(WIN_SIGN, this.steps, this.timer);
         this.soundEffectsComponent.playWinSound();
       }
     });
@@ -132,5 +136,25 @@ export class PlaygroundController {
     } else {
       this.soundEffectsComponent.unmute();
     }
+  }
+
+  setTimerField({ minutes, seconds }) {
+    this.playground.getTimerComponent().setTime({ minutes, seconds });
+  }
+
+  setStepsField() {
+    this.playground.setStepsComponentValue(this.steps);
+  }
+
+  stopTimer() {
+    clearInterval(this.intervalId);
+  }
+
+  startTimer() {
+    this.timer = 0;
+    this.intervalId = setInterval(() => {
+      this.timer += 1;
+      this.playground.setTimerValue(this.timer);
+    }, 1000);
   }
 }

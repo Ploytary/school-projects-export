@@ -20,6 +20,7 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-prettier": "^4.2.1",
+    "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.1",
     "mini-css-extract-plugin": "^2.7.5",
     "node-sass": "^8.0.0",
