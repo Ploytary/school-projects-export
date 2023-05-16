@@ -1,8 +1,6 @@
 import { getRandomInt } from '../utils/get-random-int';
 import { neighbourLocationMap } from '../utils/constants';
 
-const DEFAULT_SIZE = 10;
-const MINE_DENSITY_PERCENTAGE = 10;
 const MODEL_STORAGE_KEY = 'minesweeperModel';
 const MINE_CHAR = '*';
 
@@ -12,12 +10,12 @@ export class MinesweeperModel {
   cells = [];
   onDataChangeHandler = null;
 
-  setModel() {
+  setModel(settings) {
     const isHasSave = !!localStorage.getItem(MODEL_STORAGE_KEY);
     if (isHasSave && isLoadSave) {
       this.cells = JSON.parse(localStorage.getItem(MODEL_STORAGE_KEY));
     } else {
-      this.cells = this.generateCellData();
+      this.cells = this.generateCellData(settings);
     }
   }
 
@@ -29,13 +27,13 @@ export class MinesweeperModel {
     return this.cells;
   }
 
-  generateCellData(size = DEFAULT_SIZE) {
-    const mineToInsertCount = Math.floor(Math.pow(size, 2) * (MINE_DENSITY_PERCENTAGE / 100));
-    const mineMatrix = new Array(size).fill(0).map(() => new Array(size).fill(0));
+  generateCellData({ boardSize, mineDensityPersentage }) {
+    const mineToInsertCount = Math.floor(Math.pow(boardSize, 2) * (mineDensityPersentage / 100));
+    const mineMatrix = new Array(boardSize).fill(0).map(() => new Array(boardSize).fill(0));
     let mineCount = 0;
     while (mineCount < mineToInsertCount) {
-      const lineIndex = getRandomInt(0, size - 1);
-      const cellIndex = getRandomInt(0, size - 1);
+      const lineIndex = getRandomInt(0, boardSize - 1);
+      const cellIndex = getRandomInt(0, boardSize - 1);
       if (mineMatrix[lineIndex][cellIndex] !== MINE_CHAR) {
         mineMatrix[lineIndex][cellIndex] = MINE_CHAR;
         mineCount += 1;
@@ -56,9 +54,9 @@ export class MinesweeperModel {
           let neighbour;
           if (
             lineIndex + location[0] >= 0 &&
-            lineIndex + location[0] < size &&
+            lineIndex + location[0] < boardSize &&
             cellIndex + location[1] >= 0 &&
-            cellIndex + location[1] < size
+            cellIndex + location[1] < boardSize
           ) {
             neighbour = mineMatrix[lineIndex + location[0]][cellIndex + location[1]];
           }

@@ -41,6 +41,14 @@ export class BaseComponent {
     }
   }
 
+  removeClass(name) {
+    this.node.classList.remove(name);
+  }
+
+  toggleClass(name) {
+    this.node.classList.toggle(name);
+  }
+
   destroy() {
     this.node.remove();
   }

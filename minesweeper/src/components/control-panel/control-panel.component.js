@@ -12,45 +12,22 @@ const RANGE_MAX_VALUE = 3;
 const RANGE_INIT_VALUE = 1;
 
 export class ControlPanelComponent extends BaseComponent {
+  newGameButton = new ButtonComponent({ className: 'minesweeper__new-game-button', textContent: 'new game' });
+
+  scoreButton = new ButtonComponent({ className: 'button--icon', a11yLabel: 'score' });
+  themeButton = new ButtonComponent({ className: 'button--icon', a11yLabel: 'theme' });
+  soundButton = new ButtonComponent({ className: 'button--icon', a11yLabel: 'sound' });
+  expSettingButton = new ButtonExpandableComponent({
+    icon: { template: SvgIcons.SETTINGS },
+    min: RANGE_MIN_VALUE,
+    max: RANGE_MAX_VALUE,
+    value: RANGE_INIT_VALUE,
+  });
+
   constructor({ className }) {
     super({ className: [className, 'control-panel'] });
 
-    this.newGameButton = new ButtonComponent({
-      className: 'minesweeper__new-game-button',
-      textContent: 'new game',
-    });
-
-    this.scoreButton = new ButtonComponent({
-      className: 'button--icon',
-      a11yLabel: 'score',
-    });
     this.scoreButton.append(new SVGComponent({ template: SvgIcons.LIST }));
-
-    this.themeButton = new ButtonComponent({
-      className: 'button--icon',
-      a11yLabel: 'theme',
-    });
-    this.themeButton.append(
-      new SVGComponent({ className: 'day', template: SvgIcons.DAY }),
-      new SVGComponent({ className: 'night', template: SvgIcons.NIGHT })
-    );
-
-    this.soundButton = new ButtonComponent({
-      className: 'button--icon',
-      a11yLabel: 'sound',
-    });
-    this.soundButton.append(
-      new SVGComponent({ className: 'unmute', template: SvgIcons.UNMUTE }),
-      new SVGComponent({ className: 'mute', template: SvgIcons.MUTE })
-    );
-
-    this.expSettingButton = new ButtonExpandableComponent({
-      icon: { template: SvgIcons.SETTINGS },
-      min: RANGE_MIN_VALUE,
-      max: RANGE_MAX_VALUE,
-      value: RANGE_INIT_VALUE,
-    });
-
     const buttonGroup = new BaseComponent({
       className: 'minesweeper__button-group',
     });
@@ -62,5 +39,29 @@ export class ControlPanelComponent extends BaseComponent {
     });
 
     this.append(buttonGroup, buttonList);
+  }
+
+  setThemeButtonIcon(iconComponent) {
+    this.themeButton.switchIcon(iconComponent);
+  }
+
+  setSoundButtonIcon(iconComponent) {
+    this.soundButton.switchIcon(iconComponent);
+  }
+
+  setNewGameButtonClickHandler(handler) {
+    this.newGameButton.getElement().addEventListener('click', handler);
+  }
+  setSettingsButtonClickHandler(handler) {
+    this.expSettingButton.getElement().addEventListener('click', handler);
+  }
+  setScoreButtonClickHandler(handler) {
+    this.scoreButton.getElement().addEventListener('click', handler);
+  }
+  setThemeButtonClickHandler(handler) {
+    this.themeButton.getElement().addEventListener('click', handler);
+  }
+  setSoundButtonClickHandler(handler) {
+    this.soundButton.getElement().addEventListener('click', handler);
   }
 }

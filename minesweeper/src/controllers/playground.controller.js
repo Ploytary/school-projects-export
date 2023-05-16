@@ -2,27 +2,35 @@ import { BaseComponent } from '../components/base.component';
 import { PlaygroundComponent } from '../components/playground/playground.component';
 import { TileComponent } from '../components/tile/tile.component';
 import { MinesweeperModel } from '../models/minesweeper.model';
-import { neighbourLocationMap } from '../utils/constants';
+import { neighbourLocationMap, LOSE_SIGN, WIN_SIGN } from '../utils/constants';
 import { getMatrixComponentPosiiton } from '../utils/get-matrix-position';
 
 export class PlaygroundController {
-  playground = new PlaygroundComponent({ className: 'minesweeper__playground' });
+  playground = null;
   tileComponents = [];
+  steps = 0;
 
-  constructor(container) {
+  constructor(settings, container, onEndGameHandler) {
+    this.settings = settings;
     this.container = container;
+    this.onEndGameHandler = onEndGameHandler;
     this.dataChangeHandler = this.dataChangeHandler.bind(this);
     this.model = new MinesweeperModel();
-    this.model.setModel();
-    this.model.setOnDataChangeHandler(this.dataChangeHandler);
   }
 
   render() {
+    this.model.setModel(this.settings);
+    this.model.setOnDataChangeHandler(this.dataChangeHandler);
     const data = this.model.getData();
     this.tileComponents = data.map((dataRow) => {
       return dataRow.map((cellData) => this.createTileComponent(cellData));
     });
 
+    if (this.playground) {
+      this.playground.destroy();
+    }
+
+    this.playground = new PlaygroundComponent({ className: 'minesweeper__playground' });
     this.tileComponents.forEach((dataRow) => {
       const line = new BaseComponent({ className: 'minesweeper__tile-row' });
       for (let tileComponent of dataRow) {
@@ -32,7 +40,6 @@ export class PlaygroundController {
     });
 
     this.container.append(this.playground);
-
     window.addEventListener('beforeunload', () => this.model.saveModel());
   }
 
@@ -43,7 +50,25 @@ export class PlaygroundController {
   createTileComponent(cellData) {
     const tileComponent = new TileComponent({ cellData });
     tileComponent.setLeftClickHandler(() => {
+      if (tileComponent.isCovered) {
+        this.steps++;
+      }
       this.uncoverTile(tileComponent);
+      if (tileComponent.value === '*') {
+        this.showMines();
+        this.stopPlaygroundEvents();
+        this.onEndGameHandler(LOSE_SIGN);
+      }
+
+      const coveredTilesCount = this.tileComponents.flat(1).filter((component) => component.isCovered).length;
+      const isAllTilesUncovered =
+        coveredTilesCount -
+          Math.floor(Math.pow(this.settings.boardSize, 2) * (this.settings.mineDensityPersentage / 100)) ===
+        0;
+      if (isAllTilesUncovered) {
+        this.stopPlaygroundEvents();
+        this.onEndGameHandler(WIN_SIGN, this.steps);
+      }
     });
     return tileComponent;
   }
@@ -85,5 +110,14 @@ export class PlaygroundController {
     } else {
       this.model.updateData({ id: tileComponent.id, isCovered: false });
     }
+  }
+
+  showMines() {
+    const mines = this.tileComponents.flat(1).filter((component) => component.value === '*');
+    mines.forEach((component) => this.uncoverTile(component));
+  }
+
+  stopPlaygroundEvents() {
+    this.tileComponents.flat(1).forEach((component) => component.removeHandler());
   }
 }

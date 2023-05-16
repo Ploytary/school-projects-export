@@ -50,6 +50,11 @@ export class TileComponent extends BaseComponent {
   }
 
   setLeftClickHandler(handler) {
-    this.node.addEventListener('click', handler);
+    this.handler = handler;
+    this.node.addEventListener('click', this.handler);
+  }
+
+  removeHandler() {
+    this.node.removeEventListener('click', this.handler);
   }
 }
