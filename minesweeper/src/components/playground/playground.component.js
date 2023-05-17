@@ -37,4 +37,8 @@ export class PlaygroundComponent extends BaseComponent {
     };
     this.timer.setTime(formattedTime);
   }
+
+  setContextHandler(handler) {
+    this.node.addEventListener('contextmenu', handler);
+  }
 }

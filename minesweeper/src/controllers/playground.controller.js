@@ -70,6 +70,7 @@ export class PlaygroundController {
     });
 
     this.container.append(this.playground);
+    this.playground.setContextHandler((evt) => evt.preventDefault());
   }
 
   startGame(componentToIgnore) {
@@ -111,7 +112,7 @@ export class PlaygroundController {
       if (tileComponent.isCovered) {
         this.steps++;
         this.setStepsField();
-        this.soundEffectsComponent.playClickSound();
+        this.soundEffectsComponent.playLeftClickSound();
       }
       this.uncoverTile(tileComponent);
       if (tileComponent.value === '*') {
@@ -138,6 +139,13 @@ export class PlaygroundController {
         this.model.eraseFromStorage();
         this.onEndGameHandler(WIN_SIGN, this.steps, this.timer);
         this.soundEffectsComponent.playWinSound();
+      }
+    });
+    tileComponent.setRightClickHandler((evt) => {
+      evt.preventDefault();
+      if (this.isGameStarted) {
+        this.soundEffectsComponent.playRightClickSound();
+        this.model.updateData({ id: tileComponent.id, isMarked: !tileComponent.isMarked });
       }
     });
     return tileComponent;

@@ -19,8 +19,13 @@ export class AudioComponent extends BaseComponent {
     });
   }
 
-  playClickSound() {
-    const componentToPlay = this.components.slice(0, 2)[Math.round(Math.random())];
+  playLeftClickSound() {
+    const componentToPlay = this.components[1];
+    this.playSound(componentToPlay);
+  }
+
+  playRightClickSound() {
+    const componentToPlay = this.components[0];
     this.playSound(componentToPlay);
   }
 

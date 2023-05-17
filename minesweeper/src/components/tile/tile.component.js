@@ -45,6 +45,9 @@ export class TileComponent extends BaseComponent {
     this.append(this.content);
     if (isCovered) {
       this.cover = new BaseComponent({ className: 'tile__cover' });
+      if (this.isMarked) {
+        this.cover.append(new SVGComponent({ template: SvgIcons.MARK }));
+      }
       this.append(this.cover);
     }
   }
@@ -52,6 +55,11 @@ export class TileComponent extends BaseComponent {
   setLeftClickHandler(handler) {
     this.handler = handler;
     this.node.addEventListener('click', this.handler);
+  }
+
+  setRightClickHandler(handler) {
+    this.handler = handler;
+    this.node.addEventListener('contextmenu', this.handler);
   }
 
   removeHandler() {
