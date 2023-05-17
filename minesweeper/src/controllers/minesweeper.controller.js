@@ -13,10 +13,14 @@ const DEFAULT_SETTINGS = {
   mute: false,
 };
 
+const SIZE_VARIANTS = [10, 15, 25];
+
 const SCORE_TABLE_STORAGE_KEY = 'scoreTable';
+const SETTINGS_STORAGE_KEY = 'settings';
 
 export class MinesweeperController {
-  settings = DEFAULT_SETTINGS;
+  savedSettings = JSON.parse(localStorage.getItem(SETTINGS_STORAGE_KEY));
+  settings = this.savedSettings || DEFAULT_SETTINGS;
   minesweeperComponent = new MinesweeperComponent();
   controlPanelController = new ControlPanelController(
     this.settings,
@@ -52,6 +56,10 @@ export class MinesweeperController {
         this.minesweeperComponent.addClass(`theme-${ThemeValues.DARK}`);
         break;
     }
+
+    window.addEventListener('beforeunload', () => {
+      localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(this.settings));
+    });
   }
 
   onThemeChangeHandler() {
@@ -86,6 +94,8 @@ export class MinesweeperController {
   }
 
   onStartGameButtonClickHandler() {
+    const value = this.controlPanelController.getSliderValue();
+    this.settings.boardSize = SIZE_VARIANTS[value];
     this.playgroundController.render();
   }
 

@@ -3,6 +3,8 @@ import { SVGComponent } from '../components/svg.component';
 import { SvgIcons } from '../enums/svg-icons';
 import { ThemeValues } from '../utils/constants';
 
+const SLIDER_POSITION_STORAGE_KEY = 'sliderPosition';
+
 export class ControlPanelController {
   controlPanelComponent = new ControlPanelComponent({ className: 'minesweeper__control-panel' });
 
@@ -34,7 +36,10 @@ export class ControlPanelController {
     this.controlPanelComponent.setNewGameButtonClickHandler(() => {
       this.onStartGameButtonClickHandler();
     });
-    this.controlPanelComponent.setSettingsButtonClickHandler();
+    this.controlPanelComponent.setSettingsButtonClickHandler(() => {
+      const value = this.controlPanelComponent.getSliderValue();
+      localStorage.setItem(SLIDER_POSITION_STORAGE_KEY, value);
+    });
     this.controlPanelComponent.setScoreButtonClickHandler(() => {
       this.onScoreTableButtonClickHandler();
     });
@@ -60,5 +65,9 @@ export class ControlPanelController {
       template: this.settings.theme === ThemeValues.LIGHT ? SvgIcons.NIGHT : SvgIcons.DAY,
     });
     this.controlPanelComponent.setThemeButtonIcon(themeButtonIcon);
+  }
+
+  getSliderValue() {
+    return this.controlPanelComponent.getSliderValue();
   }
 }

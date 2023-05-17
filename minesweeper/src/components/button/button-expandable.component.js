@@ -11,12 +11,11 @@ export class ButtonExpandableComponent extends BaseComponent {
       this.append(new SVGComponent(icon));
     }
 
-    this.append(
-      new RangeInputComponent({
-        min: min,
-        max: max,
-        value: value,
-      })
-    );
+    this.rangeInputComponent = new RangeInputComponent({ min: min, max: max, value: value });
+    this.append(this.rangeInputComponent);
+  }
+
+  getSliderValue() {
+    return this.rangeInputComponent.getValue();
   }
 }

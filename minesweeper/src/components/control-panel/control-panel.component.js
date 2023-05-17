@@ -7,9 +7,9 @@ import { ListComponent } from '../list.component';
 import { SVGComponent } from '../svg.component';
 import { SvgIcons } from '../../enums/svg-icons';
 
-const RANGE_MIN_VALUE = 1;
-const RANGE_MAX_VALUE = 3;
-const RANGE_INIT_VALUE = 1;
+const RANGE_MIN_VALUE = 0;
+const RANGE_MAX_VALUE = 2;
+const RANGE_INIT_VALUE = 0;
 
 export class ControlPanelComponent extends BaseComponent {
   newGameButton = new ButtonComponent({ className: 'minesweeper__new-game-button', textContent: 'new game' });
@@ -17,15 +17,16 @@ export class ControlPanelComponent extends BaseComponent {
   scoreButton = new ButtonComponent({ className: 'button--icon', a11yLabel: 'score' });
   themeButton = new ButtonComponent({ className: 'button--icon', a11yLabel: 'theme' });
   soundButton = new ButtonComponent({ className: 'button--icon', a11yLabel: 'sound' });
-  expSettingButton = new ButtonExpandableComponent({
-    icon: { template: SvgIcons.SETTINGS },
-    min: RANGE_MIN_VALUE,
-    max: RANGE_MAX_VALUE,
-    value: RANGE_INIT_VALUE,
-  });
 
   constructor({ className }) {
     super({ className: [className, 'control-panel'] });
+    const initRangeInputValue = localStorage.getItem('sliderPosition');
+    this.expSettingButton = new ButtonExpandableComponent({
+      icon: { template: SvgIcons.SETTINGS },
+      min: RANGE_MIN_VALUE,
+      max: RANGE_MAX_VALUE,
+      value: initRangeInputValue || RANGE_INIT_VALUE,
+    });
 
     this.scoreButton.append(new SVGComponent({ template: SvgIcons.LIST }));
     const buttonGroup = new BaseComponent({
@@ -49,11 +50,15 @@ export class ControlPanelComponent extends BaseComponent {
     this.soundButton.switchIcon(iconComponent);
   }
 
+  getSliderValue() {
+    return this.expSettingButton.getSliderValue();
+  }
+
   setNewGameButtonClickHandler(handler) {
     this.newGameButton.getElement().addEventListener('click', handler);
   }
   setSettingsButtonClickHandler(handler) {
-    this.expSettingButton.getElement().addEventListener('click', handler);
+    this.expSettingButton.getElement().addEventListener('change', handler);
   }
   setScoreButtonClickHandler(handler) {
     this.scoreButton.getElement().addEventListener('click', handler);
