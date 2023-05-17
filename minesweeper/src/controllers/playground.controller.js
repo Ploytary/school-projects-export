@@ -6,11 +6,14 @@ import { neighbourLocationMap, LOSE_SIGN, WIN_SIGN } from '../utils/constants';
 import { getMatrixComponentPosiiton } from '../utils/get-matrix-position';
 import { AudioComponent } from '../components/audio.component';
 
+const TIMER_STORAGE_KEY = 'timer';
+const STEPS_STORAGE_KEY = 'steps';
+
 export class PlaygroundController {
   playground = null;
   tileComponents = [];
   steps = 0;
-  timer = null;
+  timer = 0;
   intervalId = null;
   isGameStarted = false;
   soundEffectsComponent = new AudioComponent();
@@ -25,6 +28,19 @@ export class PlaygroundController {
   }
 
   render() {
+    window.addEventListener('beforeunload', () => {
+      if (this.isGameStarted) {
+        this.model.saveInStorage();
+        localStorage.setItem(TIMER_STORAGE_KEY, this.timer);
+        localStorage.setItem(STEPS_STORAGE_KEY, this.steps);
+      }
+    });
+    const savedModel = this.model.loadFromStorage();
+    if (savedModel) {
+      this.startGame();
+      return;
+    }
+
     this.isGameStarted = false;
     this.model.setModel(this.settings, true);
     this.model.setOnDataChangeHandler(this.onStartGameHandler);
@@ -57,14 +73,22 @@ export class PlaygroundController {
   }
 
   startGame(componentToIgnore) {
+    this.isGameStarted = true;
     const ignoreCellCoorditanes = getMatrixComponentPosiiton(this.tileComponents, componentToIgnore);
     this.model.setModel(this.settings, false, ignoreCellCoorditanes);
     this.model.setOnDataChangeHandler(this.dataChangeHandler);
     const data = this.model.getData();
     this.createTileComponents(data);
     this.renderPlayground();
+    const savedTimer = localStorage.getItem(TIMER_STORAGE_KEY);
+    const savedSteps = localStorage.getItem(STEPS_STORAGE_KEY);
+    this.timer = +savedTimer || 0;
+    this.steps = +savedSteps || 0;
+    this.playground.setTimerValue(this.timer);
+    this.playground.setStepsComponentValue(this.steps);
+    this.applySoundSettings();
     this.startTimer();
-    window.addEventListener('beforeunload', () => this.model.saveModel());
+    this.model.saveInStorage();
   }
 
   dataChangeHandler(newData) {
@@ -72,7 +96,6 @@ export class PlaygroundController {
   }
 
   onStartGameHandler(cellToIgnore) {
-    console.log(cellToIgnore);
     this.startGame(cellToIgnore);
   }
 
@@ -82,7 +105,6 @@ export class PlaygroundController {
       if (!this.isGameStarted) {
         const tilePosition = getMatrixComponentPosiiton(this.tileComponents, tileComponent);
         this.startGame(tileComponent);
-        this.isGameStarted = true;
         tileComponent = this.tileComponents[tilePosition.lineIndex][tilePosition.cellIndex];
       }
 
@@ -95,6 +117,10 @@ export class PlaygroundController {
       if (tileComponent.value === '*') {
         this.showMines();
         this.stopPlaygroundEvents();
+        this.isGameStarted = false;
+        localStorage.removeItem(STEPS_STORAGE_KEY);
+        localStorage.removeItem(TIMER_STORAGE_KEY);
+        this.model.eraseFromStorage();
         this.onEndGameHandler(LOSE_SIGN);
         this.soundEffectsComponent.playLoseSound();
       }
@@ -106,11 +132,23 @@ export class PlaygroundController {
         0;
       if (isAllTilesUncovered) {
         this.stopPlaygroundEvents();
+        this.isGameStarted = false;
+        localStorage.removeItem(STEPS_STORAGE_KEY);
+        localStorage.removeItem(TIMER_STORAGE_KEY);
+        this.model.eraseFromStorage();
         this.onEndGameHandler(WIN_SIGN, this.steps, this.timer);
         this.soundEffectsComponent.playWinSound();
       }
     });
     return tileComponent;
+  }
+
+  restartGame() {
+    this.model.eraseFromStorage();
+    this.stopTimer();
+    localStorage.removeItem(TIMER_STORAGE_KEY);
+    localStorage.removeItem(STEPS_STORAGE_KEY);
+    this.render();
   }
 
   rerenderTile(newData) {
@@ -182,10 +220,13 @@ export class PlaygroundController {
   }
 
   startTimer() {
-    this.timer = 0;
     this.intervalId = setInterval(() => {
       this.timer += 1;
       this.playground.setTimerValue(this.timer);
     }, 1000);
+  }
+
+  getModel() {
+    return this.model;
   }
 }

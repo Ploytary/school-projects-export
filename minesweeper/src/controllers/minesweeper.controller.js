@@ -47,12 +47,11 @@ export class MinesweeperController {
     this.container.append(this.minesweeperComponent);
     this.controlPanelController.render();
     this.playgroundController.render();
-
     switch (this.settings.theme) {
       case 'light':
         this.minesweeperComponent.addClass(`theme-${ThemeValues.LIGHT}`);
         break;
-      case 'night':
+      case 'dark':
         this.minesweeperComponent.addClass(`theme-${ThemeValues.DARK}`);
         break;
     }
@@ -96,7 +95,7 @@ export class MinesweeperController {
   onStartGameButtonClickHandler() {
     const value = this.controlPanelController.getSliderValue();
     this.settings.boardSize = SIZE_VARIANTS[value];
-    this.playgroundController.render();
+    this.playgroundController.restartGame();
   }
 
   onEndGameSubmitClickHandler() {

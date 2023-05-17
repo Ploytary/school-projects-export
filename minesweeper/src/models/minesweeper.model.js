@@ -4,14 +4,14 @@ import { neighbourLocationMap } from '../utils/constants';
 const MODEL_STORAGE_KEY = 'minesweeperModel';
 const MINE_CHAR = '*';
 
-const isLoadSave = false;
+const isLoadSave = true;
 
 export class MinesweeperModel {
   cells = [];
   onDataChangeHandler = null;
 
   setModel(settings, setZeroCells, cellToIgnoreCoordinates) {
-    const isHasSave = !!localStorage.getItem(MODEL_STORAGE_KEY);
+    const isHasSave = !!this.loadFromStorage();
     if (isHasSave && isLoadSave) {
       this.cells = JSON.parse(localStorage.getItem(MODEL_STORAGE_KEY));
     } else {
@@ -19,8 +19,16 @@ export class MinesweeperModel {
     }
   }
 
-  saveModel() {
+  saveInStorage() {
     localStorage.setItem(MODEL_STORAGE_KEY, JSON.stringify(this.cells));
+  }
+
+  eraseFromStorage() {
+    localStorage.removeItem(MODEL_STORAGE_KEY);
+  }
+
+  loadFromStorage() {
+    return localStorage.getItem(MODEL_STORAGE_KEY);
   }
 
   getData() {
