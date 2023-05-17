@@ -77,11 +77,13 @@ export class PlaygroundController {
   }
 
   createTileComponent(cellData) {
-    const tileComponent = new TileComponent({ cellData });
+    let tileComponent = new TileComponent({ cellData });
     tileComponent.setLeftClickHandler(() => {
       if (!this.isGameStarted) {
+        const tilePosition = getMatrixComponentPosiiton(this.tileComponents, tileComponent);
         this.startGame(tileComponent);
         this.isGameStarted = true;
+        tileComponent = this.tileComponents[tilePosition.lineIndex][tilePosition.cellIndex];
       }
 
       if (tileComponent.isCovered) {
