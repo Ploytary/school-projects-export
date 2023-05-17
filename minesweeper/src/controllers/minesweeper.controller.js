@@ -125,7 +125,9 @@ export class MinesweeperController {
           time: `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`,
           steps: steps,
         };
-        this.scoreTable.push(scoreRecord);
+        this.scoreTable.unshift(scoreRecord);
+        this.scoreTable.length = 10;
+        this.scoreTable = this.scoreTable.filter((score) => score !== null);
         localStorage.setItem(SCORE_TABLE_STORAGE_KEY, JSON.stringify(this.scoreTable));
         break;
       }
