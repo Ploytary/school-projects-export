@@ -12,6 +12,7 @@ export class PlaygroundController {
   steps = 0;
   timer = null;
   intervalId = null;
+  isGameStarted = false;
   soundEffectsComponent = new AudioComponent();
 
   constructor(settings, container, onEndGameHandler) {
@@ -19,17 +20,26 @@ export class PlaygroundController {
     this.container = container;
     this.onEndGameHandler = onEndGameHandler;
     this.dataChangeHandler = this.dataChangeHandler.bind(this);
+    this.onStartGameHandler = this.onStartGameHandler.bind(this);
     this.model = new MinesweeperModel();
   }
 
   render() {
-    this.model.setModel(this.settings);
-    this.model.setOnDataChangeHandler(this.dataChangeHandler);
+    this.isGameStarted = false;
+    this.model.setModel(this.settings, true);
+    this.model.setOnDataChangeHandler(this.onStartGameHandler);
     const data = this.model.getData();
+    this.createTileComponents(data);
+    this.renderPlayground();
+  }
+
+  createTileComponents(data) {
     this.tileComponents = data.map((dataRow) => {
       return dataRow.map((cellData) => this.createTileComponent(cellData));
     });
+  }
 
+  renderPlayground() {
     if (this.playground) {
       this.playground.destroy();
     }
@@ -44,6 +54,15 @@ export class PlaygroundController {
     });
 
     this.container.append(this.playground);
+  }
+
+  startGame(componentToIgnore) {
+    const ignoreCellCoorditanes = getMatrixComponentPosiiton(this.tileComponents, componentToIgnore);
+    this.model.setModel(this.settings, false, ignoreCellCoorditanes);
+    this.model.setOnDataChangeHandler(this.dataChangeHandler);
+    const data = this.model.getData();
+    this.createTileComponents(data);
+    this.renderPlayground();
     this.startTimer();
     window.addEventListener('beforeunload', () => this.model.saveModel());
   }
@@ -52,9 +71,19 @@ export class PlaygroundController {
     this.rerenderTile(newData);
   }
 
+  onStartGameHandler(cellToIgnore) {
+    console.log(cellToIgnore);
+    this.startGame(cellToIgnore);
+  }
+
   createTileComponent(cellData) {
     const tileComponent = new TileComponent({ cellData });
     tileComponent.setLeftClickHandler(() => {
+      if (!this.isGameStarted) {
+        this.startGame(tileComponent);
+        this.isGameStarted = true;
+      }
+
       if (tileComponent.isCovered) {
         this.steps++;
         this.setStepsField();

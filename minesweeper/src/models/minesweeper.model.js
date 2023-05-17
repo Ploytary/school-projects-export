@@ -10,12 +10,12 @@ export class MinesweeperModel {
   cells = [];
   onDataChangeHandler = null;
 
-  setModel(settings) {
+  setModel(settings, setZeroCells, cellToIgnoreCoordinates) {
     const isHasSave = !!localStorage.getItem(MODEL_STORAGE_KEY);
     if (isHasSave && isLoadSave) {
       this.cells = JSON.parse(localStorage.getItem(MODEL_STORAGE_KEY));
     } else {
-      this.cells = this.generateCellData(settings);
+      this.cells = this.generateCellData(settings, setZeroCells, cellToIgnoreCoordinates);
     }
   }
 
@@ -27,16 +27,30 @@ export class MinesweeperModel {
     return this.cells;
   }
 
-  generateCellData({ boardSize, mineDensityPersentage }) {
+  generateCellData({ boardSize, mineDensityPersentage }, setZeroCells, cellToIgnoreCoordinates) {
     const mineToInsertCount = Math.floor(Math.pow(boardSize, 2) * (mineDensityPersentage / 100));
     const mineMatrix = new Array(boardSize).fill(0).map(() => new Array(boardSize).fill(0));
+
+    if (setZeroCells) {
+      let cellCounter = 0;
+      return mineMatrix.map((line) => {
+        return line.map((cell) => {
+          const cellData = { id: cellCounter, isMarked: false, isCovered: true, value: cell };
+          cellCounter += 1;
+          return cellData;
+        });
+      });
+    }
+
     let mineCount = 0;
     while (mineCount < mineToInsertCount) {
       const lineIndex = getRandomInt(0, boardSize - 1);
       const cellIndex = getRandomInt(0, boardSize - 1);
       if (mineMatrix[lineIndex][cellIndex] !== MINE_CHAR) {
-        mineMatrix[lineIndex][cellIndex] = MINE_CHAR;
-        mineCount += 1;
+        if (!(lineIndex === cellToIgnoreCoordinates.lineIndex && cellIndex === cellToIgnoreCoordinates.cellIndex)) {
+          mineMatrix[lineIndex][cellIndex] = MINE_CHAR;
+          mineCount += 1;
+        }
       }
     }
 
