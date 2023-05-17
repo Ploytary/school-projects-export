@@ -6,12 +6,20 @@ import { ThemeValues } from '../utils/constants';
 export class ControlPanelController {
   controlPanelComponent = new ControlPanelComponent({ className: 'minesweeper__control-panel' });
 
-  constructor(settings, container, onStartGameButtonClickHandler, onThemeChangeHandler, onSoundChangeHandler) {
+  constructor(
+    settings,
+    container,
+    onStartGameButtonClickHandler,
+    onThemeChangeHandler,
+    onSoundChangeHandler,
+    onScoreTableButtonClickHandler
+  ) {
     this.settings = settings;
     this.container = container;
     this.onStartGameButtonClickHandler = onStartGameButtonClickHandler;
     this.onThemeChangeHandler = onThemeChangeHandler;
     this.onSoundChangeHandler = onSoundChangeHandler;
+    this.onScoreTableButtonClickHandler = onScoreTableButtonClickHandler;
   }
 
   render() {
@@ -27,7 +35,9 @@ export class ControlPanelController {
       this.onStartGameButtonClickHandler();
     });
     this.controlPanelComponent.setSettingsButtonClickHandler();
-    this.controlPanelComponent.setScoreButtonClickHandler();
+    this.controlPanelComponent.setScoreButtonClickHandler(() => {
+      this.onScoreTableButtonClickHandler();
+    });
     this.controlPanelComponent.setThemeButtonClickHandler(() => {
       this.onThemeChangeHandler();
       this.switchThemeButtonIcon();

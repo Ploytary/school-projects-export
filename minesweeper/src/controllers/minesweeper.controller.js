@@ -3,6 +3,8 @@ import { ControlPanelController } from './control-panel.controller';
 import { PlaygroundController } from './playground.controller';
 import { EndGameModalComponent } from '../components/modal/end-game-modal.component';
 import { ThemeValues, WIN_SIGN, WIN_TEXT, LOSE_TEXT, LOSE_SIGN } from '../utils/constants';
+import { ScoreTableModalComponent } from '../components/modal/score-table-modal.component';
+import { BaseComponent } from '../components/base.component';
 
 const DEFAULT_SETTINGS = {
   boardSize: 10,
@@ -10,6 +12,8 @@ const DEFAULT_SETTINGS = {
   theme: ThemeValues.LIGHT,
   mute: false,
 };
+
+const SCORE_TABLE_STORAGE_KEY = 'scoreTable';
 
 export class MinesweeperController {
   settings = DEFAULT_SETTINGS;
@@ -19,7 +23,8 @@ export class MinesweeperController {
     this.minesweeperComponent,
     this.onStartGameButtonClickHandler.bind(this),
     this.onThemeChangeHandler.bind(this),
-    this.onSoundChangeHandler.bind(this)
+    this.onSoundChangeHandler.bind(this),
+    this.onScoreTableButtonClickHandler.bind(this)
   );
   playgroundController = new PlaygroundController(
     this.settings,
@@ -28,6 +33,7 @@ export class MinesweeperController {
   );
   timer = null;
   intervalId = null;
+  scoreTable = JSON.parse(localStorage.getItem(SCORE_TABLE_STORAGE_KEY)) || [];
 
   constructor(container) {
     this.container = container;
@@ -63,13 +69,34 @@ export class MinesweeperController {
     this.playgroundController.applySoundSettings();
   }
 
+  onScoreTableButtonClickHandler() {
+    if (this.scoreTable.length > 0) {
+      const list = this.scoreTable.map((item) => {
+        const { name, time, steps } = item;
+        const content = `${name} | ${time} | ${steps} moves`;
+        const note = new BaseComponent({ textContent: content });
+        return note;
+      });
+      this.scoreModal = new ScoreTableModalComponent({ items: list });
+    } else {
+      this.scoreModal = new ScoreTableModalComponent();
+    }
+    this.scoreModal.setSubmitClickHandler(this.onScoreTableSubmitClickHandler.bind(this));
+    this.minesweeperComponent.append(this.scoreModal);
+  }
+
   onStartGameButtonClickHandler() {
     this.playgroundController.render();
   }
 
-  onSubmitClickHandler() {
-    this.modal.destroy();
-    this.modal = null;
+  onEndGameSubmitClickHandler() {
+    this.endGameModal.destroy();
+    this.endGameModal = null;
+  }
+
+  onScoreTableSubmitClickHandler() {
+    this.scoreModal.destroy();
+    this.scoreModal = null;
   }
 
   onGameEndHandler(sign, steps, timer) {
@@ -83,13 +110,20 @@ export class MinesweeperController {
         const secondSubstr = `${seconds === 0 ? '' : `${seconds}  ${seconds > 1 ? 'seconds' : 'second'}`}`;
         const timeSubtring = `${minuteSubstr} ${secondSubstr}`;
         const winText = WIN_TEXT.replace('## seconds', timeSubtring).replace('#N', steps);
-        this.modal = new EndGameModalComponent({ textContent: winText });
+        this.endGameModal = new EndGameModalComponent({ textContent: winText });
+        const scoreRecord = {
+          name: new Date().toLocaleTimeString('en-US', { hour12: false }),
+          time: `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`,
+          steps: steps,
+        };
+        this.scoreTable.push(scoreRecord);
+        localStorage.setItem(SCORE_TABLE_STORAGE_KEY, JSON.stringify(this.scoreTable));
         break;
       }
       case LOSE_SIGN:
-        this.modal = new EndGameModalComponent({ textContent: LOSE_TEXT });
+        this.endGameModal = new EndGameModalComponent({ textContent: LOSE_TEXT });
     }
-    this.modal.setSubmitClickHandler(this.onSubmitClickHandler.bind(this));
-    this.minesweeperComponent.append(this.modal);
+    this.endGameModal.setSubmitClickHandler(this.onEndGameSubmitClickHandler.bind(this));
+    this.minesweeperComponent.append(this.endGameModal);
   }
 }

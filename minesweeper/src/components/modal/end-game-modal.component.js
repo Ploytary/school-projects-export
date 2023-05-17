@@ -1,4 +1,4 @@
-import './end-game-modal.component.scss';
+import './modal.component.scss';
 import { BaseComponent } from '../base.component';
 import { ButtonComponent } from '../button/button.component';
 
