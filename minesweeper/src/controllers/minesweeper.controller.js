@@ -110,7 +110,6 @@ export class MinesweeperController {
 
   onGameEndHandler(sign, steps, timer) {
     this.playgroundController.stopTimer();
-    this.playgroundController.stopPlaygroundEvents();
     switch (sign) {
       case WIN_SIGN: {
         const minutes = Math.floor(timer / 60);

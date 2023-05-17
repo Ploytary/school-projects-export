@@ -204,7 +204,7 @@ export class PlaygroundController {
   }
 
   stopPlaygroundEvents() {
-    this.tileComponents.flat(1).forEach((component) => component.removeHandler());
+    this.tileComponents.flat(1).forEach((component) => component.removeHandlers());
   }
 
   applySoundSettings() {
