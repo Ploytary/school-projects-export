@@ -12,10 +12,19 @@ export class ButtonExpandableComponent extends BaseComponent {
     }
 
     this.rangeInputComponent = new RangeInputComponent({ min: min, max: max, value: value });
-    this.append(this.rangeInputComponent);
+    this.outputField = new BaseComponent({ tagName: 'output', className: 'button-expandable__output' });
+    this.append(this.outputField, this.rangeInputComponent);
   }
 
   getSliderValue() {
     return this.rangeInputComponent.getValue();
+  }
+
+  setSliderValue(value) {
+    this.rangeInputComponent.setValue(value);
+  }
+
+  setOutputValue(value) {
+    this.outputField.getElement().textContent = value;
   }
 }

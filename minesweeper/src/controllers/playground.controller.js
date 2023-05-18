@@ -127,10 +127,7 @@ export class PlaygroundController {
       }
 
       const coveredTilesCount = this.tileComponents.flat(1).filter((component) => component.isCovered).length;
-      const isAllTilesUncovered =
-        coveredTilesCount -
-          Math.floor(Math.pow(this.settings.boardSize, 2) * (this.settings.mineDensityPersentage / 100)) ===
-        0;
+      const isAllTilesUncovered = coveredTilesCount - this.settings.boardMineCount === 0;
       if (isAllTilesUncovered) {
         this.stopPlaygroundEvents();
         this.isGameStarted = false;

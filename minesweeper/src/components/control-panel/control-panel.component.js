@@ -7,10 +7,6 @@ import { ListComponent } from '../list.component';
 import { SVGComponent } from '../svg.component';
 import { SvgIcons } from '../../enums/svg-icons';
 
-const RANGE_MIN_VALUE = 0;
-const RANGE_MAX_VALUE = 2;
-const RANGE_INIT_VALUE = 0;
-
 export class ControlPanelComponent extends BaseComponent {
   newGameButton = new ButtonComponent({ className: 'minesweeper__new-game-button', textContent: 'new game' });
 
@@ -22,11 +18,18 @@ export class ControlPanelComponent extends BaseComponent {
   constructor({ className }) {
     super({ className: [className, 'control-panel'] });
     const initRangeInputValue = localStorage.getItem('sliderPosition');
-    this.expSettingButton = new ButtonExpandableComponent({
-      icon: { template: SvgIcons.SETTINGS },
-      min: RANGE_MIN_VALUE,
-      max: RANGE_MAX_VALUE,
-      value: initRangeInputValue || RANGE_INIT_VALUE,
+    this.tileSettingButton = new ButtonExpandableComponent({
+      icon: { template: SvgIcons.TILE },
+      min: 0,
+      max: 2,
+      value: initRangeInputValue || 0,
+    });
+
+    this.mineSettingButton = new ButtonExpandableComponent({
+      icon: { template: SvgIcons.MINE },
+      min: 10,
+      max: 99,
+      value: initRangeInputValue || 10,
     });
 
     this.scoreButton.append(new SVGComponent({ template: SvgIcons.LIST }));
@@ -35,7 +38,7 @@ export class ControlPanelComponent extends BaseComponent {
     const buttonGroup = new BaseComponent({
       className: 'minesweeper__button-group',
     });
-    buttonGroup.append(this.newGameButton, this.expSettingButton);
+    buttonGroup.append(this.newGameButton, this.tileSettingButton, this.mineSettingButton);
     const buttonList = new ListComponent({
       tagName: 'ul',
       className: 'minesweeper__button-list',
@@ -53,15 +56,22 @@ export class ControlPanelComponent extends BaseComponent {
     this.soundButton.switchIcon(iconComponent);
   }
 
-  getSliderValue() {
-    return this.expSettingButton.getSliderValue();
+  getTileSettingSliderValue() {
+    return this.tileSettingButton.getSliderValue();
+  }
+
+  getMineSettingSliderValue() {
+    return this.mineSettingButton.getSliderValue();
   }
 
   setNewGameButtonClickHandler(handler) {
     this.newGameButton.getElement().addEventListener('click', handler);
   }
-  setSettingsButtonClickHandler(handler) {
-    this.expSettingButton.getElement().addEventListener('change', handler);
+  setTileSettingsButtonClickHandler(handler) {
+    this.tileSettingButton.getElement().addEventListener('input', handler);
+  }
+  setMineSettingsButtonClickHandler(handler) {
+    this.mineSettingButton.getElement().addEventListener('input', handler);
   }
   setScoreButtonClickHandler(handler) {
     this.scoreButton.getElement().addEventListener('click', handler);

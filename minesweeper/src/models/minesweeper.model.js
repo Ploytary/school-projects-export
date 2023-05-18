@@ -35,8 +35,7 @@ export class MinesweeperModel {
     return this.cells;
   }
 
-  generateCellData({ boardSize, mineDensityPersentage }, setZeroCells, cellToIgnoreCoordinates) {
-    const mineToInsertCount = Math.floor(Math.pow(boardSize, 2) * (mineDensityPersentage / 100));
+  generateCellData({ boardSize, boardMineCount }, setZeroCells, cellToIgnoreCoordinates) {
     const mineMatrix = new Array(boardSize).fill(0).map(() => new Array(boardSize).fill(0));
 
     if (setZeroCells) {
@@ -51,7 +50,7 @@ export class MinesweeperModel {
     }
 
     let mineCount = 0;
-    while (mineCount < mineToInsertCount) {
+    while (mineCount < boardMineCount) {
       const lineIndex = getRandomInt(0, boardSize - 1);
       const cellIndex = getRandomInt(0, boardSize - 1);
       if (mineMatrix[lineIndex][cellIndex] !== MINE_CHAR) {

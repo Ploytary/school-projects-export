@@ -3,17 +3,16 @@ import { ControlPanelController } from './control-panel.controller';
 import { PlaygroundController } from './playground.controller';
 import { EndGameModalComponent } from '../components/modal/end-game-modal.component';
 import { ThemeValues, WIN_SIGN, WIN_TEXT, LOSE_TEXT, LOSE_SIGN } from '../utils/constants';
+import { SIZE_VARIANTS } from '../utils/constants';
 import { ScoreTableModalComponent } from '../components/modal/score-table-modal.component';
 import { BaseComponent } from '../components/base.component';
 
 const DEFAULT_SETTINGS = {
   boardSize: 10,
-  mineDensityPersentage: 10,
+  boardMineCount: 10,
   theme: ThemeValues.LIGHT,
   mute: false,
 };
-
-const SIZE_VARIANTS = [10, 15, 25];
 
 const SCORE_TABLE_STORAGE_KEY = 'scoreTable';
 const SETTINGS_STORAGE_KEY = 'settings';
@@ -93,8 +92,11 @@ export class MinesweeperController {
   }
 
   onStartGameButtonClickHandler() {
-    const value = this.controlPanelController.getSliderValue();
-    this.settings.boardSize = SIZE_VARIANTS[value];
+    const tileSliderValue = this.controlPanelController.getTileSettingSliderValue();
+    const mineSliderValue = this.controlPanelController.getMineSettingSliderValue();
+
+    this.settings.boardSize = SIZE_VARIANTS[tileSliderValue];
+    this.settings.boardMineCount = mineSliderValue;
     this.playgroundController.restartGame();
   }
 

@@ -14,4 +14,8 @@ export class RangeInputComponent extends BaseComponent {
   getValue() {
     return this.node.value;
   }
+
+  setValue(value) {
+    this.node.value = value;
+  }
 }

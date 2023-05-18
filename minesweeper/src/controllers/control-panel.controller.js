@@ -2,8 +2,10 @@ import { ControlPanelComponent } from '../components/control-panel/control-panel
 import { SVGComponent } from '../components/svg.component';
 import { SvgIcons } from '../enums/svg-icons';
 import { ThemeValues } from '../utils/constants';
+import { SIZE_VARIANTS } from '../utils/constants';
 
-const SLIDER_POSITION_STORAGE_KEY = 'sliderPosition';
+const TILE_SLIDER_POSITION_STORAGE_KEY = 'tileSliderPosition';
+const MINE_SLIDER_POSITION_STORAGE_KEY = 'mineSliderPosition';
 
 export class ControlPanelController {
   controlPanelComponent = new ControlPanelComponent({ className: 'minesweeper__control-panel' });
@@ -30,15 +32,33 @@ export class ControlPanelController {
 
     this.switchSoundButtonIcon();
     this.switchThemeButtonIcon();
+
+    const tileSliderValue = localStorage.getItem(TILE_SLIDER_POSITION_STORAGE_KEY) || 0;
+    this.controlPanelComponent.tileSettingButton.setSliderValue(tileSliderValue);
+    this.controlPanelComponent.tileSettingButton.setOutputValue(SIZE_VARIANTS[tileSliderValue]);
+    const mineSliderValue = localStorage.getItem(MINE_SLIDER_POSITION_STORAGE_KEY) || 10;
+    this.controlPanelComponent.mineSettingButton.setSliderValue(mineSliderValue);
+    this.controlPanelComponent.mineSettingButton.setOutputValue(mineSliderValue);
+
+    window.addEventListener('beforeunload', () => {
+      localStorage.setItem(TILE_SLIDER_POSITION_STORAGE_KEY, this.controlPanelComponent.getTileSettingSliderValue());
+      localStorage.setItem(MINE_SLIDER_POSITION_STORAGE_KEY, this.controlPanelComponent.getMineSettingSliderValue());
+    });
   }
 
   setHandlers() {
     this.controlPanelComponent.setNewGameButtonClickHandler(() => {
       this.onStartGameButtonClickHandler();
     });
-    this.controlPanelComponent.setSettingsButtonClickHandler(() => {
-      const value = this.controlPanelComponent.getSliderValue();
-      localStorage.setItem(SLIDER_POSITION_STORAGE_KEY, value);
+    this.controlPanelComponent.setTileSettingsButtonClickHandler(() => {
+      const value = this.controlPanelComponent.getTileSettingSliderValue();
+      localStorage.setItem(TILE_SLIDER_POSITION_STORAGE_KEY, value);
+      this.controlPanelComponent.tileSettingButton.setOutputValue(SIZE_VARIANTS[value]);
+    });
+    this.controlPanelComponent.setMineSettingsButtonClickHandler(() => {
+      const value = this.controlPanelComponent.getMineSettingSliderValue();
+      localStorage.setItem(MINE_SLIDER_POSITION_STORAGE_KEY, value);
+      this.controlPanelComponent.mineSettingButton.setOutputValue(value);
     });
     this.controlPanelComponent.setScoreButtonClickHandler(() => {
       this.onScoreTableButtonClickHandler();
@@ -67,7 +87,11 @@ export class ControlPanelController {
     this.controlPanelComponent.setThemeButtonIcon(themeButtonIcon);
   }
 
-  getSliderValue() {
-    return this.controlPanelComponent.getSliderValue();
+  getTileSettingSliderValue() {
+    return this.controlPanelComponent.getTileSettingSliderValue();
+  }
+
+  getMineSettingSliderValue() {
+    return this.controlPanelComponent.getMineSettingSliderValue();
   }
 }
