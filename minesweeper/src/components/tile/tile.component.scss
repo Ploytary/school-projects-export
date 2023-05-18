@@ -3,8 +3,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  aspect-ratio: 1 / 1;
   width: 24px;
-  height: 24px;
+  background-color: var(--additional-color-5);
   border-radius: 3px;
   overflow: hidden;
   transition-property: background, box-shadow;
@@ -12,17 +13,24 @@
   transition-timing-function: ease-in;
 
   svg {
-    fill: var(--main-color-1);
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    fill: var(--additional-color-11);
   }
 
   &__content {
     display: flex;
+    font-size: 100%;
   }
 
   &__cover {
     position: absolute;
     inset: 0;
     background-color: var(--additional-color-7);
+
+    svg {
+      fill: var(--additional-color-2);
+    }
 
     &:hover {
       transform: translate(-1px, -1px);
@@ -32,7 +40,7 @@
   }
 
   &__content--color-variant-1st {
-    color: var(--accent-color-3);
+    color: var(--accent-color-1);
   }
 
   &__content--color-variant-2nd {
@@ -40,6 +48,6 @@
   }
 
   &__content--color-variant-3rd {
-    color: var(--accent-color-1);
+    color: var(--accent-color-3);
   }
 }

@@ -6,7 +6,6 @@
   align-items: center;
   position: relative;
   pointer-events: none;
-  user-select: none;
 
   &__value {
     padding: 10px 16px;
@@ -18,7 +17,7 @@
 
   &__label {
     position: absolute;
-    bottom: -25%;
+    bottom: -30%;
     font-size: 12px;
     text-transform: capitalize;
     color: var(--additional-color-9);

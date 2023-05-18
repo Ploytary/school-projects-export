@@ -1,4 +1,3 @@
-@import './fonts.scss';
 
 *,
 ::after,
@@ -9,6 +8,10 @@
 body {
   margin: 0;
   font-family: "Roboto", sans-serif;
+}
+
+html {
+  min-width: 500px;
 }
 
 ul,

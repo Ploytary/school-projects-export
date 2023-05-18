@@ -28,6 +28,8 @@
   --additional-color-6: #6750A4;
   --additional-color-7: #D0BCFF;
   --additional-color-9: #E8DEF8;
+  --additional-color-10: #D0C4C4;
+  --additional-color-11: #E8DEF8;
 }
 
 .minesweeper {
@@ -38,19 +40,58 @@
   padding: 50px 10px 10px 10px;
   margin: 0 5px;
   max-width: 690px;
-  min-width: 490px;
+  min-width: 1px;
   background-color: var(--additional-color-1);
   box-shadow: 0px 6px 10px 4px rgba(0, 0, 0, 0.15), 0px 2px 3px rgba(0, 0, 0, 0.3);
   border-radius: 50px;
+  user-select: none;
 
   &__button-group {
     display: flex;
-    gap: 10px;
+    gap: 5px;
+
+    @media (max-width:699px) {
+      margin-right: 55px;
+    }
   }
 
   &__button-list {
+    position: absolute;
+    right: 0;
     display: flex;
-    gap: 10px;
+    
+    align-items: center;
+    gap: 5px;
+    
+    border-radius: 20px;
+
+    li:last-of-type {
+      display: none;
+    }
+
+    @media (max-width:699px) {
+      flex-direction: column;
+      background-color: var(--additional-color-6);
+
+      li:last-of-type {
+        display: inline-flex;
+      }
+
+      li {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+  
+      &:focus-within {
+        li {
+          position: relative;
+        }
+        li:last-of-type {
+          order: -1;
+        }
+      };
+    }
   }
 
   &__info-bar {
@@ -72,11 +113,4 @@
     justify-content: center;
     gap: 2px;
   }
-}
-
-// TODO: delete
-.zapp {
-  width: 300px;
-  height: 300px;
-  background-color: purple;
 }

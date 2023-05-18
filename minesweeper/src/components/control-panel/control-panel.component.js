@@ -17,6 +17,7 @@ export class ControlPanelComponent extends BaseComponent {
   scoreButton = new ButtonComponent({ className: 'button--icon', a11yLabel: 'score' });
   themeButton = new ButtonComponent({ className: 'button--icon', a11yLabel: 'theme' });
   soundButton = new ButtonComponent({ className: 'button--icon', a11yLabel: 'sound' });
+  burgerButton = new ButtonComponent({ className: 'button--icon', a11yLabel: 'burger' });
 
   constructor({ className }) {
     super({ className: [className, 'control-panel'] });
@@ -29,6 +30,8 @@ export class ControlPanelComponent extends BaseComponent {
     });
 
     this.scoreButton.append(new SVGComponent({ template: SvgIcons.LIST }));
+    this.burgerButton.append(new SVGComponent({ template: SvgIcons.BURGER }));
+
     const buttonGroup = new BaseComponent({
       className: 'minesweeper__button-group',
     });
@@ -36,7 +39,7 @@ export class ControlPanelComponent extends BaseComponent {
     const buttonList = new ListComponent({
       tagName: 'ul',
       className: 'minesweeper__button-list',
-      items: [this.scoreButton, this.themeButton, this.soundButton],
+      items: [this.scoreButton, this.themeButton, this.soundButton, this.burgerButton],
     });
 
     this.append(buttonGroup, buttonList);

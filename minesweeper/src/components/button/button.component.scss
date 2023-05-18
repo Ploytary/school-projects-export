@@ -2,10 +2,11 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 24px;
+  padding: 10px 10px;
   border-style: none;
   border-radius: 20px;
   background-color: var(--additional-color-5);
+  font-family: inherit;
   color: var(--additional-color-9);
   font-size: 14px;
   text-transform: capitalize;
@@ -26,6 +27,7 @@
   }
 
   svg {
+    flex-shrink: 0;
     fill: var(--additional-color-7);
   }
 

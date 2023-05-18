@@ -5,7 +5,6 @@ import { SvgIcons } from '../../enums/svg-icons';
 
 const MINE_CHAR = '*';
 const COLOR_VARIANT_CLASSES = [
-  '',
   'tile__content--color-variant-1st',
   'tile__content--color-variant-2nd',
   'tile__content--color-variant-3rd',

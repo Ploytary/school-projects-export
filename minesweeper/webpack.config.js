@@ -13,11 +13,7 @@ const STYLE_BUNDLE_NAME = 'main.css';
 const ASSETS_FOLDER_NAME = 'assets';
 const HTML_TEMPLATE_NAME = 'index.html';
 
-const FAVICON_PATH = path.resolve(
-  __dirname,
-  SOURCE_FOLDER_NAME,
-  'assets/images/favicon.svg'
-);
+const FAVICON_PATH = path.resolve(__dirname, SOURCE_FOLDER_NAME, ASSETS_FOLDER_NAME, 'images/favicon.svg');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -49,7 +45,7 @@ module.exports = {
       },
     }),
     new MiniCssExtractPlugin({
-      filename: path.join(ASSETS_FOLDER_NAME, 'styles', STYLE_BUNDLE_NAME),
+      filename: `${ASSETS_FOLDER_NAME}/styles/${STYLE_BUNDLE_NAME}`,
     }),
   ],
   module: {
@@ -84,8 +80,9 @@ module.exports = {
       {
         test: /\.mp3$/,
         loader: 'file-loader',
-        generator: {
-          filename: path.join(ASSETS_FOLDER_NAME, 'audio', '[name][ext]'),
+        options: {
+          outputPath: path.join(ASSETS_FOLDER_NAME, 'audio'),
+          name: '[name].[ext]',
         },
       },
     ],
