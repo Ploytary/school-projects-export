@@ -118,8 +118,9 @@ export class MinesweeperController {
         const seconds = timer % 60;
         const minuteSubstr = `${minutes === 0 ? '' : `${minutes}  ${minutes > 1 ? 'minutes' : 'minute'}`}`;
         const secondSubstr = `${seconds === 0 ? '' : `${seconds}  ${seconds > 1 ? 'seconds' : 'second'}`}`;
-        const timeSubtring = `${minuteSubstr} ${secondSubstr}`;
-        const winText = WIN_TEXT.replace('## seconds', timeSubtring).replace('#N', steps);
+        const timeSubtring =
+          minuteSubstr === '' && secondSubstr === '' ? `instantly in` : `in ${minuteSubstr} ${secondSubstr} and`;
+        const winText = WIN_TEXT.replace('in ## seconds and', timeSubtring).replace('#N', steps);
         this.endGameModal = new EndGameModalComponent({ textContent: winText });
         const scoreRecord = {
           name: new Date().toLocaleTimeString('en-US', { hour12: false }),

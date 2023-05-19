@@ -8,12 +8,15 @@ import { AudioComponent } from '../components/audio.component';
 
 const TIMER_STORAGE_KEY = 'timer';
 const STEPS_STORAGE_KEY = 'steps';
+const UNMARKED_MINES_COUNTER_STORAGE_KEY = 'unmarkedMinesCounter';
 
 export class PlaygroundController {
   playground = null;
   tileComponents = [];
   steps = 0;
   timer = 0;
+  time = 0;
+  unmarkedMinesCounter = 0;
   intervalId = null;
   isGameStarted = false;
   soundEffectsComponent = new AudioComponent();
@@ -33,6 +36,7 @@ export class PlaygroundController {
         this.model.saveInStorage();
         localStorage.setItem(TIMER_STORAGE_KEY, this.timer);
         localStorage.setItem(STEPS_STORAGE_KEY, this.steps);
+        localStorage.setItem(UNMARKED_MINES_COUNTER_STORAGE_KEY, this.unmarkedMinesCounter);
       }
     });
     const savedModel = this.model.loadFromStorage();
@@ -83,10 +87,14 @@ export class PlaygroundController {
     this.renderPlayground();
     const savedTimer = localStorage.getItem(TIMER_STORAGE_KEY);
     const savedSteps = localStorage.getItem(STEPS_STORAGE_KEY);
+    const savedUnmarkedMinesCounter = localStorage.getItem(UNMARKED_MINES_COUNTER_STORAGE_KEY);
     this.timer = +savedTimer || 0;
     this.steps = +savedSteps || 0;
+    this.unmarkedMinesCounter = +savedUnmarkedMinesCounter || this.settings.boardMineCount;
     this.playground.setTimerValue(this.timer);
+    this.playground.setTimeValue(this.timer);
     this.playground.setStepsComponentValue(this.steps);
+    this.playground.setUnmarkedMinesValue(this.unmarkedMinesCounter);
     this.applySoundSettings();
     this.startTimer();
     this.model.saveInStorage();
@@ -121,6 +129,7 @@ export class PlaygroundController {
         this.isGameStarted = false;
         localStorage.removeItem(STEPS_STORAGE_KEY);
         localStorage.removeItem(TIMER_STORAGE_KEY);
+        localStorage.removeItem(UNMARKED_MINES_COUNTER_STORAGE_KEY);
         this.model.eraseFromStorage();
         this.onEndGameHandler(LOSE_SIGN);
         this.soundEffectsComponent.playLoseSound();
@@ -133,6 +142,7 @@ export class PlaygroundController {
         this.isGameStarted = false;
         localStorage.removeItem(STEPS_STORAGE_KEY);
         localStorage.removeItem(TIMER_STORAGE_KEY);
+        localStorage.removeItem(UNMARKED_MINES_COUNTER_STORAGE_KEY);
         this.model.eraseFromStorage();
         this.onEndGameHandler(WIN_SIGN, this.steps, this.timer);
         this.soundEffectsComponent.playWinSound();
@@ -143,6 +153,10 @@ export class PlaygroundController {
       if (this.isGameStarted) {
         this.soundEffectsComponent.playRightClickSound();
         this.model.updateData({ id: tileComponent.id, isMarked: !tileComponent.isMarked });
+        this.unmarkedMinesCounter =
+          this.settings.boardMineCount -
+          this.tileComponents.flat(1).filter((component) => component.isMarked === true).length;
+        this.playground.setUnmarkedMinesValue(this.unmarkedMinesCounter);
       }
     });
     return tileComponent;
@@ -153,6 +167,7 @@ export class PlaygroundController {
     this.stopTimer();
     localStorage.removeItem(TIMER_STORAGE_KEY);
     localStorage.removeItem(STEPS_STORAGE_KEY);
+    localStorage.removeItem(UNMARKED_MINES_COUNTER_STORAGE_KEY);
     this.render();
   }
 
@@ -177,7 +192,7 @@ export class PlaygroundController {
     if (tileComponent.value === 0 && tileComponent.isCovered) {
       const componentPosition = getMatrixComponentPosiiton(this.tileComponents, tileComponent);
       const { cellIndex, lineIndex } = componentPosition;
-      this.model.updateData({ id: tileComponent.id, isCovered: false });
+      this.model.updateData({ id: tileComponent.id, isCovered: false, isMarked: false });
       const size = this.tileComponents.length;
       neighbourLocationMap.forEach((location) => {
         if (
@@ -191,7 +206,11 @@ export class PlaygroundController {
         }
       });
     } else {
-      this.model.updateData({ id: tileComponent.id, isCovered: false });
+      this.model.updateData({ id: tileComponent.id, isCovered: false, isMarked: false });
+      this.unmarkedMinesCounter =
+        this.settings.boardMineCount -
+        this.tileComponents.flat(1).filter((component) => component.isMarked === true).length;
+      this.playground.setUnmarkedMinesValue(this.unmarkedMinesCounter);
     }
   }
 
@@ -228,6 +247,7 @@ export class PlaygroundController {
     this.intervalId = setInterval(() => {
       this.timer += 1;
       this.playground.setTimerValue(this.timer);
+      this.playground.setTimeValue(this.timer);
     }, 1000);
   }
 
