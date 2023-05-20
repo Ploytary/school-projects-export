@@ -1,6 +1,10 @@
 import './assets/styles/global-styles.scss';
 import './assets/fonts/Roboto-Regular.woff';
-import { HomePage } from './pages/home';
+import { BaseComponent } from './components/base.component';
+import { MinesweeperController } from './controllers/minesweeper.controller';
 
-const home = new HomePage();
-document.body.append(home.getElement());
+const pageWrapper = new BaseComponent({ className: 'page-wrapper' });
+document.body.append(pageWrapper.getElement());
+
+const minesweeperController = new MinesweeperController(pageWrapper);
+minesweeperController.render();

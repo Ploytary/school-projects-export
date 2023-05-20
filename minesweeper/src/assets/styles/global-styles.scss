@@ -8,10 +8,12 @@
 body {
   margin: 0;
   font-family: "Roboto", sans-serif;
+  height: 100%;
 }
 
 html {
   min-width: 500px;
+  height: 100vh;
 }
 
 ul,
@@ -37,7 +39,6 @@ dl {
 
 .page-wrapper {
   display: flex;
-  height: 100vh;
   justify-content: center;
-  align-items: center;
+  height: 100%;
 }
