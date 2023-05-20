@@ -117,7 +117,7 @@ export class PlaygroundController {
         tileComponent = this.tileComponents[tilePosition.lineIndex][tilePosition.cellIndex];
       }
 
-      if (tileComponent.isCovered) {
+      if (tileComponent.isCovered && !tileComponent.isMarked) {
         this.steps++;
         this.setStepsField();
         this.soundEffectsComponent.playLeftClickSound();
@@ -147,6 +147,10 @@ export class PlaygroundController {
         this.onEndGameHandler(WIN_SIGN, this.steps, this.timer);
         this.soundEffectsComponent.playWinSound();
       }
+      this.unmarkedMinesCounter =
+        this.settings.boardMineCount -
+        this.tileComponents.flat(1).filter((component) => component.isMarked === true).length;
+      this.playground.setUnmarkedMinesValue(this.unmarkedMinesCounter);
     });
     tileComponent.setRightClickHandler((evt) => {
       evt.preventDefault();
@@ -189,7 +193,7 @@ export class PlaygroundController {
   }
 
   uncoverTile(tileComponent) {
-    if (tileComponent.value === 0 && tileComponent.isCovered) {
+    if (tileComponent.value === 0 && tileComponent.isCovered && tileComponent.isMarked === false) {
       const componentPosition = getMatrixComponentPosiiton(this.tileComponents, tileComponent);
       const { cellIndex, lineIndex } = componentPosition;
       this.model.updateData({ id: tileComponent.id, isCovered: false, isMarked: false });
@@ -206,11 +210,9 @@ export class PlaygroundController {
         }
       });
     } else {
-      this.model.updateData({ id: tileComponent.id, isCovered: false, isMarked: false });
-      this.unmarkedMinesCounter =
-        this.settings.boardMineCount -
-        this.tileComponents.flat(1).filter((component) => component.isMarked === true).length;
-      this.playground.setUnmarkedMinesValue(this.unmarkedMinesCounter);
+      if (!tileComponent.isMarked) {
+        this.model.updateData({ id: tileComponent.id, isCovered: false, isMarked: false });
+      }
     }
   }
 
