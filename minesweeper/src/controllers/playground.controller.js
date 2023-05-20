@@ -156,7 +156,7 @@ export class PlaygroundController {
     });
     tileComponent.setRightClickHandler((evt) => {
       evt.preventDefault();
-      if (this.isGameStarted) {
+      if (this.isGameStarted && tileComponent.isCovered) {
         this.soundEffectsComponent.playRightClickSound();
         this.model.updateData({ id: tileComponent.id, isMarked: !tileComponent.isMarked });
         this.unmarkedMinesCounter =
