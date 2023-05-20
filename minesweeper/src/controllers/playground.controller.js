@@ -135,8 +135,10 @@ export class PlaygroundController {
         this.soundEffectsComponent.playLoseSound();
       }
 
-      const coveredTilesCount = this.tileComponents.flat(1).filter((component) => component.isCovered).length;
-      const isAllTilesUncovered = coveredTilesCount - this.settings.boardMineCount === 0;
+      const coveredTilesCount = this.tileComponents
+        .flat(1)
+        .filter((component) => component.isCovered && component.value !== '*').length;
+      const isAllTilesUncovered = coveredTilesCount === 0;
       if (isAllTilesUncovered) {
         this.stopPlaygroundEvents();
         this.isGameStarted = false;
