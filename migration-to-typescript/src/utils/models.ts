@@ -125,3 +125,8 @@ export interface AccessData {
 }
 
 export type DrawViewCallback = (data: unknown) => void;
+
+export interface INewsAppController {
+    getSources: (callback: DrawViewCallback) => void;
+    getNews: (event: MouseEvent, callback: DrawViewCallback) => void;
+}
