@@ -4,8 +4,8 @@ export const getGuaranteedElement = (parentElement: HTMLElement | Document, sele
 };
 
 export function isValidParsedObject<T>(data: unknown, verifProp: keyof T): data is T {
-    if (Array.isArray(data) && data.length > 0) {
-        return data[0][verifProp] !== undefined;
+    if (typeof data === 'object' && data !== null) {
+        return verifProp in data;
     } else {
         return false;
     }
