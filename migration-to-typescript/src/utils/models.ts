@@ -88,13 +88,13 @@ export interface ISourcesResponse extends INewsResponse {
     sources: ISource[];
 }
 
-export interface IHeadLinesResponse extends INewsResponse {
+export interface IArticlesResponse extends INewsResponse {
     totalResults: number;
     articles: IArticle[];
 }
 
 export interface IViewClass {
-    drawNews: (data: IHeadLinesResponse) => void;
+    drawNews: (data: IArticlesResponse) => void;
     drawSources: (data: ISourcesResponse) => void;
 }
 
