@@ -101,3 +101,27 @@ export interface IViewClass {
 export interface IDrawable<T> {
     draw: (data: T) => void;
 }
+
+export interface INewsRequest {
+    endpoint: string;
+    options?: QueryStringOptions;
+}
+
+export type QueryStringOptions = {
+    [key: string]: string;
+};
+
+export interface ILoaderClass {
+    getResp: (request: INewsRequest, callback: (data?: unknown) => void) => void;
+}
+
+export enum RequestMethod {
+    GET = 'GET',
+    POST = 'POST',
+}
+
+export interface AccessData {
+    apiKey: string;
+}
+
+export type DrawViewCallback = (data: unknown) => void;
