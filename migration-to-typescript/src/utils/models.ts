@@ -130,3 +130,7 @@ export interface INewsAppController {
     getSources: (callback: DrawViewCallback) => void;
     getNews: (event: MouseEvent, callback: DrawViewCallback) => void;
 }
+
+export interface IApplication {
+    start: () => void | never;
+}
