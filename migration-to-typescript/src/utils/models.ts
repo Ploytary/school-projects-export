@@ -80,6 +80,24 @@ export interface IArticle {
     content: string | null;
 }
 
+interface INewsResponse {
+    status: 'ok' | 'error';
+}
+
+export interface ISourcesResponse extends INewsResponse {
+    sources: ISource[];
+}
+
+export interface IHeadLinesResponse extends INewsResponse {
+    totalResults: number;
+    articles: IArticle[];
+}
+
+export interface IViewClass {
+    drawNews: (data: IHeadLinesResponse) => void;
+    drawSources: (data: ISourcesResponse) => void;
+}
+
 export interface IDrawable<T> {
     draw: (data: T) => void;
 }
