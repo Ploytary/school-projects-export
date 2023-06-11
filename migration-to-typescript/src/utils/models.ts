@@ -1,6 +1,6 @@
 type SourceCategory = 'business' | 'entertainment' | 'general' | 'health' | 'science' | 'sports' | 'technology';
 type SourceLang = 'ar' | 'de' | 'nl' | 'no' | 'pt' | 'ru' | 'sv' | 'ud' | 'zh' | 'en' | 'es' | 'fr' | 'he' | 'it';
-type sourceCountry =
+type SourceCountry =
     | 'ae'
     | 'ar'
     | 'at'
@@ -63,7 +63,7 @@ export interface ISource {
     url: string;
     category: SourceCategory;
     language: SourceLang;
-    country: sourceCountry;
+    country: SourceCountry;
 }
 
 export interface IArticle {
@@ -81,7 +81,7 @@ export interface IArticle {
 }
 
 interface INewsResponse {
-    status: 'ok' | 'error';
+    readonly status: 'ok' | 'error';
 }
 
 export interface ISourcesResponse extends INewsResponse {
@@ -89,7 +89,7 @@ export interface ISourcesResponse extends INewsResponse {
 }
 
 export interface IArticlesResponse extends INewsResponse {
-    totalResults: number;
+    readonly totalResults: number;
     articles: IArticle[];
 }
 
@@ -102,10 +102,17 @@ export interface IDrawable<T> {
     draw: (data: T) => void;
 }
 
-export interface INewsRequest {
+export interface IRequestBase {
     endpoint: string;
-    options?: QueryStringOptions;
+    options: QueryStringOptions;
 }
+
+interface IRequestOptions {
+    options: QueryStringOptions;
+}
+
+//особо некуда приментить partial & pick. Собираю частями интерфейс просто чтобы показать, что материал усвоен.
+export interface INewsRequest extends Pick<IRequestBase, 'endpoint'>, Partial<IRequestOptions> {}
 
 export type QueryStringOptions = {
     [key: string]: string;

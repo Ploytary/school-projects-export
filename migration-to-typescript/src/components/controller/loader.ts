@@ -37,7 +37,7 @@ class Loader implements ILoaderClass {
 
     private makeUrl(options: QueryStringOptions, endpoint: string): string {
         const urlOptions: AccessData & QueryStringOptions = { ...this.options, ...options };
-        let url = `${this.baseLink}${endpoint}?`;
+        let url = `${this.baseLink}${endpoint}?`; //ts ругается на очевидную анотацию. Не типизирую
 
         Object.keys(urlOptions).forEach((key: string): void => {
             url += `${key}=${urlOptions[key]}&`;
