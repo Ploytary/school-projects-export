@@ -2,6 +2,7 @@ const path = require('path');
 const { merge } = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 
 const baseConfig = {
     entry: path.resolve(__dirname, './src/index.ts'),
@@ -17,6 +18,17 @@ const baseConfig = {
                 use: 'ts-loader',
                 exclude: /node_modules/,
             },
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'font/[name][ext][query]',
+                },
+            },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: 'asset/resource',
+            },
         ],
     },
     resolve: {
@@ -30,8 +42,17 @@ const baseConfig = {
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, './src/index.html'),
             filename: 'index.html',
+            favicon: "src/favicon.png"
         }),
         new CleanWebpackPlugin(),
+        new CopyPlugin({
+            patterns: [
+              {
+                from: "src/assets/img",
+                to: "img/",
+              },
+            ],
+          }),
     ],
 };
 
