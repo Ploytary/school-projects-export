@@ -1,15 +1,23 @@
 import { BaseComponent } from '../components/base.component';
+import { Svg } from '../enums/svg';
 
-export interface IBaseConfigOptions {
+export interface IBaseConfig {
   tagName: string;
   className: string | string[];
   textContent: string;
   parentComponent: BaseComponent<HTMLElement>;
 }
 
-export interface IConfigOptions extends Partial<IBaseConfigOptions> {
-  [key: string]: string | string[] | BaseComponent<HTMLElement> | undefined;
+export type IAdaptedConfig<ExtendElementInterface> = Partial<IBaseConfig> &
+  Omit<Partial<ExtendElementInterface>, keyof IBaseConfig>;
+
+interface IIconized {
+  svgIcon: Svg;
 }
 
-export type IAdaptedConfigOptions<ExtendElementInterface> = Partial<IBaseConfigOptions> &
-  Omit<Partial<ExtendElementInterface>, keyof IBaseConfigOptions>;
+interface IAllyLabeled {
+  allyLabel: string;
+}
+
+export interface IButtonConfig extends IAdaptedConfig<HTMLButtonElement>, Partial<IIconized>, Partial<IAllyLabeled> {}
+export interface ISvgConfig extends Partial<IBaseConfig>, IIconized {}
