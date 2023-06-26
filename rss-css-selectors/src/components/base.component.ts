@@ -3,12 +3,7 @@ import { IBaseConfig } from '../types/constructor-config-options';
 export class BaseComponent<T extends HTMLElement> {
   protected node: T;
 
-  public constructor({
-    tagName = 'div',
-    className = [],
-    textContent = '',
-    parentComponent,
-  }: Partial<IBaseConfig> = {}) {
+  public constructor({ tagName = 'div', className = [], textContent = '', parentComponent }: IBaseConfig = {}) {
     this.node = document.createElement(tagName) as T;
     this.addClass(className);
     this.node.textContent = textContent;
@@ -17,9 +12,13 @@ export class BaseComponent<T extends HTMLElement> {
     }
   }
 
-  public append(...components: BaseComponent<HTMLElement>[]): void {
+  public append(...components: (BaseComponent<HTMLElement> | SVGElement)[]): void {
     for (const component of components) {
-      this.node.append(component.getNode());
+      if (component instanceof BaseComponent) {
+        this.node.append(component.getNode());
+      } else {
+        this.node.append(component);
+      }
     }
   }
 
@@ -31,7 +30,9 @@ export class BaseComponent<T extends HTMLElement> {
     if (Array.isArray(className)) {
       this.node.classList.add(...className);
     } else {
-      this.node.classList.add(className);
+      if (className) {
+        this.node.classList.add(className);
+      }
     }
   }
 

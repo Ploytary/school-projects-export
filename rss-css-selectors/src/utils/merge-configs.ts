@@ -1,6 +1,6 @@
 import { IBaseConfig } from '../types/constructor-config-options';
 
-export type MergeConfigs = <T extends Partial<IBaseConfig>>(baseConfig: T, additionalConfig?: T) => T;
+export type MergeConfigs = <T extends IBaseConfig>(baseConfig: T, additionalConfig?: T) => T;
 
 export const mergeConfigs: MergeConfigs = (baseConfig, additionalConfig) => {
   const configClone = Object.assign({}, baseConfig, additionalConfig);
