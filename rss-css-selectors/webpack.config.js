@@ -77,14 +77,14 @@ module.exports = {
         test: /\.(woff|woff2|ttf|otf|eot)$/,
         type: 'asset/resource',
         generator: {
-          filename: path.join(FolderName.ASSETS, 'fonts', '[name][ext]'),
+          filename: `${FolderName.ASSETS}/fonts/[name][ext]`,
         },
       },
       {
         test: /\.(jpe?g|png|gif|svg|ico)$/,
         type: 'asset/resource',
         generator: {
-          filename: path.join(FolderName.ASSETS, 'images', '[name][ext]'),
+          filename: `${FolderName.ASSETS}/images/[name][ext]`,
         },
       },
       {
