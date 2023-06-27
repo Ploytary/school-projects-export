@@ -1,9 +1,13 @@
-import { Svg } from '../enums/svg';
+import { getRandomInteger } from '../utils/get-random-integer';
 import { BaseComponent } from './base.component';
 import { ButtonComponent } from './button/button.component';
+import { HelpComponent } from './help/help.component';
+import { MenuComponent } from './menu/menu.component';
 import { PageFooterComponent } from './page/page-footer.component';
 import { PageHeaderComponent } from './page/page-header.component';
 import { PageMainComponent } from './page/page-main.component';
+import { GameLevelModel } from '../model/levels.model';
+import { ISelectedLevel } from '../types/model';
 
 const pageClass = 'page';
 const ChildElementsClasses = {
@@ -34,12 +38,15 @@ export class App {
 }
 
 const app = new App();
-
+const levels = new GameLevelModel().getLevels();
+const currentIndex = getRandomInteger(0, levels.length - 1);
+const currentLevel = levels[currentIndex];
 const mainContainer = app.getContainer();
+const levelInfoObject: ISelectedLevel = { levels, currentLevel, currentIndex };
 
-const resetButton = new ButtonComponent({
-  className: ['button--bordered', 'menu__reset-button'],
-  textContent: 'Reset Progress',
+const menu = new MenuComponent(levels, { className: 'task__menu', parentComponent: mainContainer });
+const help = new HelpComponent(levelInfoObject, {
+  className: 'task__help',
   parentComponent: mainContainer,
 });
 
@@ -57,28 +64,7 @@ const selectorHelpButton = new ButtonComponent({
   parentComponent: mainContainer,
 });
 
-const closeButton = new ButtonComponent({
-  className: ['button--navigation'],
-  allyLabel: 'Close menu',
-  parentComponent: mainContainer,
-  svgIcon: Svg.CROSS,
-});
-
 const simpleButton = new ButtonComponent({
   textContent: `Help, Im stuck!`,
-  parentComponent: mainContainer,
-});
-
-const nextButton = new ButtonComponent({
-  className: ['button--navigation', 'button--navigation-next'],
-  allyLabel: 'Next task',
-  svgIcon: Svg.ARROW,
-  parentComponent: mainContainer,
-});
-
-const prevButton = new ButtonComponent({
-  className: ['button--navigation', 'button--navigation-prev'],
-  allyLabel: 'Prev task',
-  svgIcon: Svg.ARROW,
   parentComponent: mainContainer,
 });
