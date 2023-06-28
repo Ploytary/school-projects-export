@@ -1,3 +1,5 @@
+import { BaseComponent } from '../components/base.component';
+
 export interface IGameLevel {
   helpTitle?: string;
   selectorName?: string;
@@ -16,4 +18,10 @@ export interface ISelectedLevel {
   levels: IGameLevel[];
   currentIndex: number;
   currentLevel: IGameLevel;
+}
+
+export interface ICodeViewConfig {
+  title: string;
+  filename: string;
+  content: BaseComponent<HTMLElement>[];
 }

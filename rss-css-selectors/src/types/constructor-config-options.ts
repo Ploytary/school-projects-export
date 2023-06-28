@@ -21,4 +21,5 @@ interface IAllyLabeled {
 
 export interface IButtonConfig extends IAdaptedConfig<HTMLButtonElement>, Partial<IIconized>, Partial<IAllyLabeled> {}
 export interface ILinkConfig extends IAdaptedConfig<HTMLAnchorElement>, Partial<IIconized>, Partial<IAllyLabeled> {}
+export interface IInputConfig extends IAdaptedConfig<HTMLInputElement>, Partial<IAllyLabeled> {}
 export interface ISvgConfig extends IBaseConfig, IIconized {}

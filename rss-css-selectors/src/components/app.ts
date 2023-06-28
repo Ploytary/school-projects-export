@@ -8,6 +8,7 @@ import { PageHeaderComponent } from './page/page-header.component';
 import { PageMainComponent } from './page/page-main.component';
 import { GameLevelModel } from '../model/levels.model';
 import { ISelectedLevel } from '../types/model';
+import { EditorComponent } from './editor/editor.component';
 
 const pageClass = 'page';
 const ChildElementsClasses = {
@@ -50,19 +51,7 @@ const help = new HelpComponent(levelInfoObject, {
   parentComponent: mainContainer,
 });
 
-const selectorEnterButton = new ButtonComponent({
-  className: ['button--code'],
-  allyLabel: 'Apply selector',
-  textContent: 'Enter',
-  parentComponent: mainContainer,
-});
-
-const selectorHelpButton = new ButtonComponent({
-  className: ['button--code'],
-  allyLabel: 'Get help',
-  textContent: 'Help',
-  parentComponent: mainContainer,
-});
+const editor = new EditorComponent(currentLevel, { className: 'task__editor', parentComponent: mainContainer });
 
 const simpleButton = new ButtonComponent({
   textContent: `Help, Im stuck!`,
