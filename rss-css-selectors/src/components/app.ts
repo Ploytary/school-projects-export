@@ -9,6 +9,7 @@ import { PageMainComponent } from './page/page-main.component';
 import { GameLevelModel } from '../model/levels.model';
 import { ISelectedLevel } from '../types/model';
 import { EditorComponent } from './editor/editor.component';
+import { TableComponent } from './table/table.component';
 
 const pageClass = 'page';
 const ChildElementsClasses = {
@@ -41,10 +42,12 @@ export class App {
 const app = new App();
 const levels = new GameLevelModel().getLevels();
 const currentIndex = getRandomInteger(0, levels.length - 1);
+// const currentIndex = 13;
 const currentLevel = levels[currentIndex];
 const mainContainer = app.getContainer();
 const levelInfoObject: ISelectedLevel = { levels, currentLevel, currentIndex };
 
+const table = new TableComponent(currentLevel, { parentComponent: mainContainer });
 const menu = new MenuComponent(levels, { className: 'task__menu', parentComponent: mainContainer });
 const help = new HelpComponent(levelInfoObject, {
   className: 'task__help',

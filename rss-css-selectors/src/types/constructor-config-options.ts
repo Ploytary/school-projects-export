@@ -2,11 +2,13 @@ import { BaseComponent } from '../components/base.component';
 import { Svg } from '../enums/svg';
 
 export interface IBaseConfig {
-  tagName?: string;
+  tagName?: keyof HTMLElementTagNameMap | ITableDishTags;
   className?: string | string[];
   textContent?: string;
   parentComponent?: BaseComponent<HTMLElement>;
 }
+
+type ITableDishTags = 'apple' | 'orange' | 'pickle' | 'bento' | 'plate';
 
 export type IAdaptedConfig<ExtendElementInterface> = IBaseConfig &
   Omit<Partial<ExtendElementInterface>, keyof IBaseConfig>;
