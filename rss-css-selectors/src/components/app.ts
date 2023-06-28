@@ -1,6 +1,5 @@
 import { getRandomInteger } from '../utils/get-random-integer';
 import { BaseComponent } from './base.component';
-import { ButtonComponent } from './button/button.component';
 import { HelpComponent } from './help/help.component';
 import { MenuComponent } from './menu/menu.component';
 import { PageFooterComponent } from './page/page-footer.component';
@@ -8,8 +7,7 @@ import { PageHeaderComponent } from './page/page-header.component';
 import { PageMainComponent } from './page/page-main.component';
 import { GameLevelModel } from '../model/levels.model';
 import { ISelectedLevel } from '../types/model';
-import { EditorComponent } from './editor/editor.component';
-import { TableComponent } from './table/table.component';
+import { PlaygroundComponent } from './playground/playground.component';
 
 const pageClass = 'page';
 const ChildElementsClasses = {
@@ -47,16 +45,12 @@ const currentLevel = levels[currentIndex];
 const mainContainer = app.getContainer();
 const levelInfoObject: ISelectedLevel = { levels, currentLevel, currentIndex };
 
-const table = new TableComponent(currentLevel, { parentComponent: mainContainer });
+const playground = new PlaygroundComponent(currentLevel, {
+  className: 'task__playground',
+  parentComponent: mainContainer,
+});
 const menu = new MenuComponent(levels, { className: 'task__menu', parentComponent: mainContainer });
 const help = new HelpComponent(levelInfoObject, {
   className: 'task__help',
-  parentComponent: mainContainer,
-});
-
-const editor = new EditorComponent(currentLevel, { className: 'task__editor', parentComponent: mainContainer });
-
-const simpleButton = new ButtonComponent({
-  textContent: `Help, Im stuck!`,
   parentComponent: mainContainer,
 });

@@ -1,0 +1,41 @@
+.playground {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+  padding: 0 20px 20px;
+  align-items: center;
+  overflow: auto;
+
+  &__description {
+    color: var(--main-color-4);
+    font-size: 28px;
+    text-align: center;
+  }
+
+  &__note {
+    width: 80%;
+  }
+
+  &__table {
+    margin-bottom: 20px;
+  }
+
+  &__help {
+    width: 375px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: fixed;
+  }
+
+  &__menu {
+    position: fixed;
+  }
+
+  @media (min-width: 1024px) {
+    &__description {
+      font-size: 36px;
+    }
+  }
+}
