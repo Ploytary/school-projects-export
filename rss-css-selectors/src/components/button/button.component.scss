@@ -41,12 +41,16 @@
 
   &--code {
     padding: 1px 3px;
-    background-color: transparent;
+    background-color: var(--main-color-1);
     border-style: solid;
     border-color: var(--main-color-5);
     border-width: 2px 2px 5px 2px;
     border-radius: 3px;
-    font-size: 14px;
+    font-size: 11px;
+
+    @media (min-width: 1024px) {
+      font-size: 14px;
+    }
 
     &:hover {
       background-color: var(--main-color-2);

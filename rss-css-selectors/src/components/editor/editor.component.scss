@@ -3,6 +3,7 @@
   padding: 10px;
   width: 100%;
   background-color: var(--main-color-10);
+  border-radius: 4px;
 
   &__css-editor,
   &__html-viewer {
@@ -37,7 +38,7 @@
   &__field {
     display: flex;
     flex-grow: 1;
-    font-size: 13px;
+    font-size: 12px;
   }
 
   &__field-stroke-numbers-column {
@@ -58,7 +59,11 @@
     cursor: default;
 
     .children-wrapper {
-      padding-left: 15px;
+      padding-left: 10px;
+
+      @media (min-width: 1024px) {
+        padding-left: 15px;
+      }
     }
   }
 
@@ -93,6 +98,8 @@
 
   &__input-stroke-buttons {
     position: absolute;
+    display: flex;
+    gap: 2px;
     right: 0;
   }
 
@@ -114,7 +121,7 @@
     }
   }
 
-  @media (min-width: 1350px) {
+  @media (min-width: 1024px) {
     &__field {
       font-size: 15px;
     }

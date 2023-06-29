@@ -1,6 +1,6 @@
 $shadow: #000000;
 $light: #ffffff;
-$size: 15vw;
+$size: 12vw;
 
 .table {
   perspective: 400px;
@@ -64,6 +64,44 @@ $size: 15vw;
   }
 }
 
+%children {
+  orange, apple, pickle {
+    &:nth-last-child(3) {
+      position: absolute;
+      translate: 0% -100%;
+      z-index: 3;
+    }
+  
+    &.small:nth-last-child(3) {
+      position: absolute;
+      translate: 0% -150%;
+      z-index: 3;
+    }
+  
+    &:nth-last-child(2) {
+      position: absolute;
+      translate: 0% -50%;
+      z-index: 2;
+    }
+  
+    &.small:nth-last-child(2) {
+      position: absolute;
+      translate: 0% -75%;
+      z-index: 3;
+    }
+
+    &:last-of-type {
+      position: absolute;
+      z-index: 1;
+    }
+  
+    &.small:last-of-type  {
+      position: absolute;
+      z-index: 1;
+    }
+  }
+}
+
 bento {
   display: flex;
   flex-direction: column;
@@ -81,41 +119,7 @@ bento {
   border-width: 20px 2px;
   box-shadow: 0px 8px 0px rgba($shadow, 0.1);
 
-  orange, apple, pickle {
-    &:nth-last-child(3) {
-      position: absolute;
-      transform: translateY(-100%);
-      z-index: 3;
-    }
-  
-    &.small:nth-last-child(3) {
-      position: absolute;
-      transform: translateY(-150%);
-      z-index: 3;
-    }
-  
-    &:nth-last-child(2) {
-      position: absolute;
-      transform: translateY(-50%);
-      z-index: 2;
-    }
-  
-    &.small:nth-last-child(2) {
-      position: absolute;
-      transform: translateY(-75%);
-      z-index: 3;
-    }
-
-    &:last-of-type {
-      position: absolute;
-      z-index: 0;
-    }
-  
-    &.small:last-of-type  {
-      position: absolute;
-      z-index: 0;
-    }
-  }
+  @extend %children;
 }
 
 plate {
@@ -133,6 +137,8 @@ plate {
   border-radius: 50%;
   border-bottom: solid 0.3vw rgba($shadow, 0.2);
 
+  @extend %children;
+
   bento {
     width: 65%;
     flex-grow: 0;
@@ -140,42 +146,6 @@ plate {
     apple, orange, pickle {
       transform: translateY(-50%);
       position: absolute;
-    }
-  }
-
-  orange, apple, pickle {
-    &:nth-last-child(3) {
-      position: absolute;
-      transform: translateY(-100%);
-      z-index: 3;
-    }
-  
-    &.small:nth-last-child(3) {
-      position: absolute;
-      transform: translateY(-150%);
-      z-index: 3;
-    }
-  
-    &:nth-last-child(2) {
-      position: absolute;
-      transform: translateY(-50%);
-      z-index: 2;
-    }
-  
-    &.small:nth-last-child(2) {
-      position: absolute;
-      transform: translateY(-75%);
-      z-index: 3;
-    }
-
-    &:last-of-type {
-      position: absolute;
-      z-index: 0;
-    }
-  
-    &.small:last-of-type  {
-      position: absolute;
-      z-index: 0;
     }
   }
 
@@ -218,15 +188,15 @@ pickle {
   background: var(--accent-color-5);
   aspect-ratio: 25 / 60;
   border: solid 2px rgba($shadow, 0.4);
-  border-width: 0.12vw 0.12vw 0.54vw 0.12vw;
+  border-width: $size / 2 * 0.02 $size / 2 * 0.02 $size / 2 * 0.09 $size / 2 * 0.02;
   border-radius: 30px;
   box-shadow: 0px 5px 0px rgba($shadow, 0.2);
     
   &.small {
-    max-width: 10px;
-    min-width: 4px;
+    max-width: 18px;
+    min-width: 7px;
     width: calc(#{$size} * 0.15);
-    border-width: 0.12vw 0.24vw 0.48vw 0.12vw;
+    border-width: $size / 2 * 0.01 $size / 2 * 0.02 $size / 2 * 0.06 $size / 2 * 0.02;
   }
 }
 
@@ -239,7 +209,7 @@ pickle {
   width: calc(#{$size} * 0.6);
   aspect-ratio: 1 / 1;
   border: solid 3px rgba($shadow, 0.25);
-  border-width: 0.12vw 0.24vw 0.9vw 0.12vw;
+  border-width: $size / 2 * 0.02 $size / 2 * 0.04 $size / 2 * 0.15 $size / 2 * 0.04;
   border-radius: 50%;
   box-shadow: 0px 5px 0px rgba(0,0,0, 0.2);
 
@@ -261,7 +231,7 @@ pickle {
     max-width: 30px;
     min-width: 12px;
     width: calc(#{$size} * 0.3);
-    border-width: 0.12vw 0.24vw 0.48vw 0.12vw;
+    border-width: $size / 2 * 0.02 $size / 2 * 0.04 $size / 2 * 0.08 $size / 2 * 0.04;
   }
 }
 

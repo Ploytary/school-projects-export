@@ -1,8 +1,4 @@
-section.task__menu {
-  display: none;
-}
-
-.task {
+main .task {
   display: flex;
   justify-content: space-between;
   font-size: 16px;
@@ -20,6 +16,10 @@ section.task__menu {
     bottom: 0;
     position: fixed;
     transform: translateX(100%);
+
+    &--selected {
+      transform: translateX(0%);
+    }
   }
 
   &__button-side-panel {
@@ -44,8 +44,7 @@ section.task__menu {
   @media (min-width: 1024px) {
     width: calc(100% - 375px);
 
-    &__help,
-    &__menu {
+    &__help {
       transform: translateX(0%);
     }
   }
