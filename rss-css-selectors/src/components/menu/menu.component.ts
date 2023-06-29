@@ -49,7 +49,7 @@ export class MenuComponent extends BaseComponent<HTMLElement> {
   }
 
   private setTaskListComponent(list: IGameLevel[]) {
-    const listComponent = new BaseComponent({ tagName: 'ol', className: ChildrenClasses.LIST, parentComponent: this });
+    const listComponent = new BaseComponent({ tagName: 'ol', className: ChildrenClasses.LIST });
     const taskItemComponents = list.map((task, index) => {
       const listItem = new BaseComponent({
         tagName: 'li',
@@ -83,7 +83,7 @@ export class MenuComponent extends BaseComponent<HTMLElement> {
     });
     listComponent.append(...taskItemComponents);
 
-    return taskItemComponents;
+    return { taskItemComponents, listComponent };
   }
 
   private setChildComponents(list: IGameLevel[]) {
@@ -111,9 +111,9 @@ export class MenuComponent extends BaseComponent<HTMLElement> {
       textContent: ElementsText.RESET_BUTTON,
     });
 
-    const taskItemComponents = this.setTaskListComponent(list);
+    const { taskItemComponents, listComponent } = this.setTaskListComponent(list);
 
-    this.append(allyHeader, headLine, resetButton);
+    this.append(allyHeader, headLine, listComponent, resetButton);
 
     return { closeButton, resetButton, taskItemComponents };
   }
