@@ -21,10 +21,15 @@ export class LinkComponent extends BaseComponent<NodeInterface> {
       const icon = getElementFromTemplate<Svg>(resultConfig.svgIcon);
       this.setSvgIcon(icon);
     }
+
     if (resultConfig.allyLabel) {
       this.append(
         new BaseComponent({ tagName: 'span', className: 'visually-hidden', textContent: resultConfig.allyLabel })
       );
+    }
+
+    if (resultConfig.href) {
+      this.node.href = resultConfig.href;
     }
   }
 

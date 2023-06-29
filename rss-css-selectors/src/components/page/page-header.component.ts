@@ -13,7 +13,6 @@ const componentBaseConfig: IBaseConfig = {
 const headerLinks: ILinkConfig[] = [
   {
     className: 'logo',
-    href: '#',
     svgIcon: Svg.LOGO,
   },
 ];
