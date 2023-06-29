@@ -1,18 +1,13 @@
-import { getRandomInteger } from '../utils/get-random-integer';
 import { BaseComponent } from './base.component';
-import { HelpComponent } from './help/help.component';
-import { MenuComponent } from './menu/menu.component';
 import { PageFooterComponent } from './page/page-footer.component';
 import { PageHeaderComponent } from './page/page-header.component';
 import { PageMainComponent } from './page/page-main.component';
-import { GameLevelModel } from '../model/levels.model';
-import { ISelectedLevel } from '../types/model';
-import { PlaygroundComponent } from './playground/playground.component';
+import { TaskComponent } from './task/task.component';
 
 const pageClass = 'page';
 const ChildElementsClasses = {
   HEADER: `${pageClass}__header`,
-  MAIN: `${pageClass}__container`,
+  MAIN: `${pageClass}__content`,
   FOOTER: `${pageClass}__footer`,
 };
 
@@ -38,19 +33,5 @@ export class App {
 }
 
 const app = new App();
-const levels = new GameLevelModel().getLevels();
-const currentIndex = getRandomInteger(0, levels.length - 1);
-// const currentIndex = 13;
-const currentLevel = levels[currentIndex];
 const mainContainer = app.getContainer();
-const levelInfoObject: ISelectedLevel = { levels, currentLevel, currentIndex };
-
-const playground = new PlaygroundComponent(currentLevel, {
-  className: 'task__playground',
-  parentComponent: mainContainer,
-});
-const menu = new MenuComponent(levels, { className: 'task__menu', parentComponent: mainContainer });
-const help = new HelpComponent(levelInfoObject, {
-  className: 'task__help',
-  parentComponent: mainContainer,
-});
+const task = new TaskComponent({ parentComponent: mainContainer });
