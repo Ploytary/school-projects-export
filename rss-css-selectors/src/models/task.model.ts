@@ -1,6 +1,6 @@
-import { IGameLevel } from '../types/model';
+import { IGameLevel, IStoredProgress } from '../types/model';
 
-const gameLevels: IGameLevel[] = [
+const baseGameLevels: IGameLevel[] = [
   {
     helpTitle: 'Select elements by their type',
     selectorName: 'Type Selector',
@@ -685,15 +685,102 @@ const gameLevels: IGameLevel[] = [
   },
 ];
 
-const myGameLevels: IGameLevel[] = [];
+const myGameLevels: IGameLevel[] = [
+  {
+    helpTitle: 'Select elements by their type',
+    selectorName: 'Type Selector',
+    doThis: 'Select the plates',
+    selector: 'plate',
+    syntax: 'A',
+    help: 'Selects all elements of type <strong>A</strong>. Type refers to the type of tag, so <tag>div</tag>, <tag>p</tag> and <tag>ul</tag> are all different element types.',
+    examples: [
+      '<strong>div</strong> selects all <tag>div</tag> elements.',
+      '<strong>p</strong> selects all <tag>p</tag> elements.',
+    ],
+    boardMarkup: `
+    <plate></plate>
+    <plate></plate>
+    `,
+  },
+  {
+    doThis: 'Select the bento boxes',
+    selector: 'bento',
+    syntax: 'A',
+    helpTitle: 'Select elements by their type',
+    selectorName: 'Type Selector',
+    help: 'Selects all elements of type <strong>A</strong>. Type refers to the type of tag, so <tag>div</tag>, <tag>p</tag> and <tag>ul</tag> are all different element types.',
+    examples: [
+      '<strong>div</strong> selects all <tag>div</tag> elements.',
+      '<strong>p</strong> selects all <tag>p</tag> elements.',
+    ],
+    boardMarkup: `
+    <bento></bento>
+    <plate></plate>
+    <bento></bento>
+    `,
+  },
+];
 
-export class GameLevelModel {
+const PROGRESS_KEY = 'progress';
+
+export class TaskModel {
   levels: IGameLevel[] = [];
   constructor() {
-    this.levels = [...gameLevels, ...myGameLevels];
+    this.levels = this.mergeLevels(baseGameLevels, myGameLevels);
+    this.loadFromStorage();
+  }
+
+  private mergeLevels(baseLevels: IGameLevel[], ...data: IGameLevel[][]) {
+    let result: IGameLevel[] = baseLevels;
+    data.forEach((dataItem) => dataItem.forEach((level) => (level.isNew = true)));
+    result = result.concat(...data);
+
+    return result;
   }
 
   public getLevels() {
     return this.levels;
+  }
+
+  public saveToStorage() {
+    const saves: IStoredProgress[] = [];
+    const completedLevels = this.levels.filter((level) => level.isComplete);
+    if (completedLevels.length > 0) {
+      for (const level of completedLevels) {
+        const { isComplete, isWithHelp } = level;
+        const key = this.levels.findIndex((item) => item === level).toString();
+        const save: IStoredProgress = {
+          [key]: {
+            isComplete,
+            isWithHelp,
+          },
+        };
+        saves.push(save);
+      }
+    }
+    if (saves.length > 0) {
+      localStorage.setItem(PROGRESS_KEY, JSON.stringify(saves));
+    }
+  }
+
+  private loadFromStorage() {
+    const savedProgressString = localStorage.getItem(PROGRESS_KEY);
+    if (savedProgressString) {
+      const savedProgress = JSON.parse(savedProgressString) as IStoredProgress[];
+      for (const levelRecord in savedProgress) {
+        const index = Number(levelRecord);
+        const progressData = savedProgress[index];
+        const mergedWithStorage: IGameLevel[] = [];
+        this.levels = mergedWithStorage.concat(
+          this.levels.slice(0, index),
+          [Object.assign({}, this.levels[index], progressData)],
+          this.levels.slice(index + 1)
+        );
+      }
+    }
+  }
+
+  public resetLevels() {
+    this.levels = this.mergeLevels(baseGameLevels, myGameLevels);
   }
 }

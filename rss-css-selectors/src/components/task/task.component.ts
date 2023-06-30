@@ -1,5 +1,5 @@
 import './task.component.scss';
-import { GameLevelModel } from '../../model/levels.model';
+import { TaskModel } from '../../models/task.model';
 import { IBaseConfig } from '../../types/constructor-config-options';
 import { ISelectedLevel } from '../../types/model';
 import { getRandomInteger } from '../../utils/get-random-integer';
@@ -35,7 +35,7 @@ export class TaskComponent extends BaseComponent<HTMLElement> {
     const resultConfig = mergeConfigs<IBaseConfig>(componentBaseConfig, constructorConfig);
     super(resultConfig);
 
-    const levels = new GameLevelModel().getLevels();
+    const levels = new TaskModel().getLevels();
     const currentIndex = getRandomInteger(0, levels.length - 1);
     const currentLevel = levels[currentIndex];
     const levelInfoObject: ISelectedLevel = { levels, currentLevel, currentIndex };

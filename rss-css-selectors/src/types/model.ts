@@ -25,3 +25,10 @@ export interface ICodeViewConfig {
   filename: string;
   content: BaseComponent<HTMLElement>[];
 }
+
+export interface IStoredProgress {
+  [key: string]: {
+    isComplete?: boolean;
+    isWithHelp?: boolean;
+  };
+}
