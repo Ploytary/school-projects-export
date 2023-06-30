@@ -1,8 +1,8 @@
+import { TaskService } from '../services/task.service';
 import { BaseComponent } from './base.component';
 import { PageFooterComponent } from './page/page-footer.component';
 import { PageHeaderComponent } from './page/page-header.component';
 import { PageMainComponent } from './page/page-main.component';
-import { TaskComponent } from './task/task.component';
 
 const pageClass = 'page';
 const ChildElementsClasses = {
@@ -33,5 +33,5 @@ export class App {
 }
 
 const app = new App();
-const mainContainer = app.getContainer();
-const task = new TaskComponent({ parentComponent: mainContainer });
+const mainContainer = app.getContainer().getNode();
+const task = new TaskService(mainContainer);

@@ -3,12 +3,15 @@ import { IBaseConfig } from '../types/constructor-config-options';
 export class BaseComponent<T extends HTMLElement> {
   protected node: T;
 
-  public constructor({ tagName = 'div', className = [], textContent = '', parentComponent }: IBaseConfig = {}) {
+  public constructor({ tagName = 'div', className = [], textContent = '', parentComponent, title }: IBaseConfig = {}) {
     this.node = document.createElement(tagName) as T;
     this.addClass(className);
     this.node.textContent = textContent;
     if (parentComponent) {
       parentComponent.append(this);
+    }
+    if (title) {
+      this.node.title = title;
     }
   }
 
@@ -34,6 +37,14 @@ export class BaseComponent<T extends HTMLElement> {
         this.node.classList.add(className);
       }
     }
+  }
+
+  public removeClass(className: string) {
+    this.node.classList.remove(className);
+  }
+
+  public toggleClass(className: string, force?: boolean) {
+    this.node.classList.toggle(className, force);
   }
 
   public destroy(): void {

@@ -2,7 +2,7 @@ import './help.component.scss';
 import { GlobalClass } from '../../enums/global-class';
 import { IconClass } from '../../enums/icon-class';
 import { Svg } from '../../enums/svg';
-import { IBaseConfig, IButtonConfig } from '../../types/constructor-config-options';
+import { IBaseConfig } from '../../types/constructor-config-options';
 import { getElementFromTemplate } from '../../utils/get-element-from-template';
 import { mergeConfigs } from '../../utils/merge-configs';
 import { BaseComponent } from '../base.component';
@@ -40,6 +40,10 @@ const ChildrenClasses = {
 };
 
 export class HelpComponent extends BaseComponent<HTMLElement> {
+  prevLevelButton: ButtonComponent;
+  nextLevelButton: ButtonComponent;
+  menuButton: ButtonComponent;
+
   constructor(selectedLevel: ISelectedLevel, constructorConfig?: IBaseConfig) {
     const resultConfig = mergeConfigs<IBaseConfig>(componentBaseConfig, constructorConfig);
     super(resultConfig);
@@ -50,7 +54,11 @@ export class HelpComponent extends BaseComponent<HTMLElement> {
       textContent: ElementsText.COMPONENT_ALLY_TITLE,
     });
 
-    const headLine = this.setHeadline(selectedLevel);
+    const { headLine, prevLevelButton, nextLevelButton, menuButton } = this.setHeadline(selectedLevel);
+    this.prevLevelButton = prevLevelButton;
+    this.nextLevelButton = nextLevelButton;
+    this.menuButton = menuButton;
+
     const textContainer = this.setTextContent(selectedLevel);
     this.append(allyHeader, headLine, textContainer);
   }
@@ -61,21 +69,20 @@ export class HelpComponent extends BaseComponent<HTMLElement> {
       className: ChildrenClasses.NAVIGATION_SIGN,
     });
 
-    const { levels, currentIndex } = selectedLevel;
-    new BaseComponent({
+    const { levels, currentLevel } = selectedLevel;
+    const currentIndex = levels.findIndex((item) => item === currentLevel);
+
+    const navigationSignText = new BaseComponent({
       tagName: 'span',
       className: ChildrenClasses.NAVIGATION_SIGN_TEXT,
-      parentComponent: navigationSign,
       textContent: `Level ${currentIndex + 1} of ${levels.length}`,
     });
 
     const signMarkContainer = new BaseComponent({
       tagName: 'div',
       className: ChildrenClasses.NAVIGATION_SIGN_MARKS_CONT,
-      parentComponent: navigationSign,
     });
 
-    const currentLevel = levels[currentIndex];
     if (currentLevel.isComplete) {
       signMarkContainer.append(getElementFromTemplate<Svg>(Svg.CHECK_MARK, IconClass.CHECK));
     }
@@ -86,31 +93,8 @@ export class HelpComponent extends BaseComponent<HTMLElement> {
       signMarkContainer.append(getElementFromTemplate<Svg>(Svg.NEW_MARK, IconClass.NEW));
     }
 
+    navigationSign.append(navigationSignText, signMarkContainer);
     return navigationSign;
-  }
-
-  private setNavigationControls() {
-    const buttonConfigs: IButtonConfig[] = [
-      {
-        className: ['button--navigation', 'button--navigation-prev'],
-        allyLabel: 'previous task',
-        svgIcon: Svg.ARROW,
-      },
-      {
-        className: ['button--navigation', 'button--navigation-next'],
-        allyLabel: 'next task',
-        svgIcon: Svg.ARROW,
-      },
-    ];
-
-    const buttonComponents = buttonConfigs.map((config) => new ButtonComponent(config));
-    const navigationControls = new BaseComponent({
-      tagName: 'div',
-      className: ChildrenClasses.NAVIGATION_CONTROLS,
-    });
-    navigationControls.append(...buttonComponents);
-
-    return navigationControls;
   }
 
   private setHeadline(selectedLevel: ISelectedLevel) {
@@ -120,7 +104,21 @@ export class HelpComponent extends BaseComponent<HTMLElement> {
       className: ChildrenClasses.NAVIGATION,
     });
     const navigationSign = this.setNavigationSign(selectedLevel);
-    const navigationControls = this.setNavigationControls();
+    const prevLevelButton = new ButtonComponent({
+      className: ['button--navigation', 'button--navigation-prev'],
+      allyLabel: 'previous task',
+      svgIcon: Svg.ARROW,
+    });
+    const nextLevelButton = new ButtonComponent({
+      className: ['button--navigation', 'button--navigation-next'],
+      allyLabel: 'next task',
+      svgIcon: Svg.ARROW,
+    });
+    const navigationControls = new BaseComponent({
+      tagName: 'div',
+      className: ChildrenClasses.NAVIGATION_CONTROLS,
+    });
+    navigationControls.append(prevLevelButton, nextLevelButton);
     navigation.append(navigationSign, navigationControls);
 
     const menuButton = new ButtonComponent({
@@ -130,7 +128,7 @@ export class HelpComponent extends BaseComponent<HTMLElement> {
     });
 
     headLine.append(navigation, menuButton);
-    return headLine;
+    return { headLine, prevLevelButton, nextLevelButton, menuButton };
   }
 
   private setTextContent(selectedLevel: ISelectedLevel) {
@@ -195,5 +193,15 @@ export class HelpComponent extends BaseComponent<HTMLElement> {
     }
 
     return textContainer;
+  }
+
+  public setPrevLevelButtonClickHandler(handler: unknown) {
+    this.prevLevelButton.setClickHandler(handler);
+  }
+  public setNextLevelButtonClickHandler(handler: unknown) {
+    this.nextLevelButton.setClickHandler(handler);
+  }
+  public setMenuButtonClickHandler(handler: unknown) {
+    this.menuButton.setClickHandler(handler);
   }
 }

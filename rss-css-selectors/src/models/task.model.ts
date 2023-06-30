@@ -1,3 +1,5 @@
+import { StorageKeys } from '../enums/storage-keys';
+import { StateService } from '../services/state.service';
 import { IGameLevel, IStoredProgress } from '../types/model';
 
 const baseGameLevels: IGameLevel[] = [
@@ -721,8 +723,6 @@ const myGameLevels: IGameLevel[] = [
   },
 ];
 
-const PROGRESS_KEY = 'progress';
-
 export class TaskModel {
   levels: IGameLevel[] = [];
   constructor() {
@@ -759,12 +759,12 @@ export class TaskModel {
       }
     }
     if (saves.length > 0) {
-      localStorage.setItem(PROGRESS_KEY, JSON.stringify(saves));
+      localStorage.setItem(StorageKeys.PROGRESS, JSON.stringify(saves));
     }
   }
 
   private loadFromStorage() {
-    const savedProgressString = localStorage.getItem(PROGRESS_KEY);
+    const savedProgressString = localStorage.getItem(StorageKeys.PROGRESS);
     if (savedProgressString) {
       const savedProgress = JSON.parse(savedProgressString) as IStoredProgress[];
       for (const levelRecord in savedProgress) {
@@ -781,6 +781,9 @@ export class TaskModel {
   }
 
   public resetLevels() {
+    localStorage.removeItem(StorageKeys.PROGRESS);
+    StateService.cleanStorage();
+    StateService.setLevel(0);
     this.levels = this.mergeLevels(baseGameLevels, myGameLevels);
   }
 }

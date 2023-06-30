@@ -16,7 +16,6 @@ export interface IGameLevel {
 
 export interface ISelectedLevel {
   levels: IGameLevel[];
-  currentIndex: number;
   currentLevel: IGameLevel;
 }
 

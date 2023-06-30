@@ -7,7 +7,7 @@ import { IBaseConfig, IButtonConfig } from '../../types/constructor-config-optio
 import { getElementFromTemplate } from '../../utils/get-element-from-template';
 import { mergeConfigs } from '../../utils/merge-configs';
 import { GlobalClass } from '../../enums/global-class';
-import { IGameLevel } from '../../types/model';
+import { ISelectedLevel } from '../../types/model';
 
 const componentBaseConfig: IBaseConfig = {
   tagName: 'section',
@@ -39,23 +39,26 @@ export class MenuComponent extends BaseComponent<HTMLElement> {
   closeButton: ButtonComponent;
   resetButton: ButtonComponent;
 
-  constructor(levels: IGameLevel[], constructorConfig?: IButtonConfig) {
+  constructor(levelInfoObject: ISelectedLevel, constructorConfig?: IButtonConfig) {
     const resultConfig = mergeConfigs<IButtonConfig>(componentBaseConfig, constructorConfig);
     super(resultConfig);
-    const { taskItemComponents, closeButton, resetButton } = this.setChildComponents(levels);
+    const { taskItemComponents, closeButton, resetButton } = this.setChildComponents(levelInfoObject);
     this.taskItemComponents = taskItemComponents;
     this.closeButton = closeButton;
     this.resetButton = resetButton;
   }
 
-  private setTaskListComponent(list: IGameLevel[]) {
+  private setTaskListComponent(levelInfoObject: ISelectedLevel) {
+    const { levels, currentLevel } = levelInfoObject;
+    const levelIndex = levels.findIndex((item) => item === currentLevel);
     const listComponent = new BaseComponent({ tagName: 'ol', className: ChildrenClasses.LIST });
-    const taskItemComponents = list.map((task, index) => {
+    const taskItemComponents = levels.map((task, index) => {
       const listItem = new BaseComponent({
         tagName: 'li',
         className: [
           ChildrenClasses.LIST_ITEM,
           task.isComplete ? ChildrenClasses.LIST_ITEM_COMPELTE : ChildrenClasses.LIST_ITEM,
+          levelIndex === index ? ChildrenClasses.LIST_ITEM_CURRENT : ChildrenClasses.LIST_ITEM,
         ],
       });
       const svgIcon = getElementFromTemplate<Svg>(Svg.CHECK_MARK, IconClass.CHECK);
@@ -86,7 +89,7 @@ export class MenuComponent extends BaseComponent<HTMLElement> {
     return { taskItemComponents, listComponent };
   }
 
-  private setChildComponents(list: IGameLevel[]) {
+  private setChildComponents(levelInfoObject: ISelectedLevel) {
     const allyHeader = new BaseComponent({
       tagName: 'h3',
       className: [ChildrenClasses.TITLE, GlobalClass.ALLY_HIDDEN],
@@ -111,10 +114,35 @@ export class MenuComponent extends BaseComponent<HTMLElement> {
       textContent: ElementsText.RESET_BUTTON,
     });
 
-    const { taskItemComponents, listComponent } = this.setTaskListComponent(list);
+    const { taskItemComponents, listComponent } = this.setTaskListComponent(levelInfoObject);
 
     this.append(allyHeader, headLine, listComponent, resetButton);
 
     return { closeButton, resetButton, taskItemComponents };
+  }
+
+  public setCloseButtonClickHandler(handler: unknown) {
+    this.closeButton.setClickHandler(handler);
+  }
+  public setResetButtonClickHandler(handler: unknown) {
+    this.resetButton.setClickHandler(handler);
+  }
+  public setListItemClickHandler(handler: unknown) {
+    for (const item of this.taskItemComponents) {
+      item.getNode().addEventListener('click', (evt) => {
+        if (typeof handler !== 'function') {
+          return;
+        }
+        if (!(evt.target instanceof Element)) {
+          return;
+        }
+        const listItemElement = evt.target.closest(`.${ChildrenClasses.LIST_ITEM}`);
+        if (listItemElement) {
+          const listElement = listItemElement.parentElement as HTMLElement;
+          const selectedItemIndex = Array.from(listElement.children).findIndex((item) => item === listItemElement);
+          handler(selectedItemIndex);
+        }
+      });
+    }
   }
 }

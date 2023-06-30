@@ -1,10 +1,11 @@
-const CURRENT_LEVEL_KEY = 'currentLevel';
+import { StorageKeys } from '../enums/storage-keys';
 
 export abstract class StateService {
-  static currentLevel: number = StateService.loadCurrentLevel();
+  private static currentLevel: number = StateService.loadCurrentLevel();
+  private static onLevelChangeHandlers: (() => void)[] = [];
 
   private static loadCurrentLevel(): number {
-    const value = localStorage.getItem(CURRENT_LEVEL_KEY) ?? 0;
+    const value = localStorage.getItem(StorageKeys.CURRENT_LEVEL) ?? 0;
     return +value;
   }
 
@@ -13,14 +14,33 @@ export abstract class StateService {
   }
 
   public static saveToStorage() {
-    localStorage.setItem(CURRENT_LEVEL_KEY, this.currentLevel.toString());
+    localStorage.setItem(StorageKeys.CURRENT_LEVEL, this.currentLevel.toString());
+  }
+
+  public static cleanStorage() {
+    localStorage.removeItem(StorageKeys.CURRENT_LEVEL);
   }
 
   public static setNextLevel() {
     this.currentLevel += 1;
+    StateService.levelChangeNotify();
   }
 
   public static setPrevLevel() {
     this.currentLevel -= 1;
+    StateService.levelChangeNotify();
+  }
+
+  public static setLevel(value: number) {
+    this.currentLevel = value;
+    StateService.levelChangeNotify();
+  }
+
+  public static setChangeLevelHandler(handler: () => void) {
+    this.onLevelChangeHandlers.push(handler);
+  }
+
+  private static levelChangeNotify() {
+    this.onLevelChangeHandlers.forEach((handler) => handler());
   }
 }

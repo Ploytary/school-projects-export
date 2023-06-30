@@ -39,6 +39,16 @@
     gap: 10px;
     padding: 5px 20px;
     line-height: 100%;
+    user-select: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--main-color-7);
+    }
+
+    &:active {
+      background-color: var(--main-color-5);
+    }
 
     .check-mark {
       fill: var(--main-color-4);
@@ -51,7 +61,11 @@
     }
 
     &--current {
-      background-color: var(--main-color-6);
+      background-color: var(--main-color-5);
+
+      &:hover {
+        background-color: var(--main-color-5);
+      }
     }
   }
 

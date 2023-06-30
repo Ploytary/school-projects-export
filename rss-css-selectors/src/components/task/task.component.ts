@@ -1,78 +1,70 @@
 import './task.component.scss';
-import { TaskModel } from '../../models/task.model';
 import { IBaseConfig } from '../../types/constructor-config-options';
-import { ISelectedLevel } from '../../types/model';
-import { getRandomInteger } from '../../utils/get-random-integer';
 import { mergeConfigs } from '../../utils/merge-configs';
 import { BaseComponent } from '../base.component';
-import { HelpComponent } from '../help/help.component';
-import { MenuComponent } from '../menu/menu.component';
-import { PlaygroundComponent } from '../playground/playground.component';
 import { Svg } from '../../enums/svg';
 import { ButtonComponent } from '../button/button.component';
 
-const componentBaseConfig: IBaseConfig = {
+export const componentBaseConfig: IBaseConfig = {
   tagName: 'section',
   className: 'task',
 };
 
 const ChildrenClasses = {
   ROOT: componentBaseConfig.className,
-  PLAYGROUND: `${componentBaseConfig.className}__playground`,
-  HELP: `${componentBaseConfig.className}__help`,
-  MENU: `${componentBaseConfig.className}__menu`,
   BUTTON_PANEL: `${componentBaseConfig.className}__button-side-panel`,
+  BUTTONS: 'button--navigation',
+};
+
+const ElementsText = {
+  ALLY_MENU: 'Menu',
+  ALLY_HELP: 'Level description',
 };
 
 export class TaskComponent extends BaseComponent<HTMLElement> {
-  playground: PlaygroundComponent;
+  buttonPanel: BaseComponent<HTMLElement>;
   panelMenuButton: ButtonComponent;
   panelHelpButton: ButtonComponent;
-  help: HelpComponent;
-  menu: MenuComponent;
 
   constructor(constructorConfig?: IBaseConfig) {
     const resultConfig = mergeConfigs<IBaseConfig>(componentBaseConfig, constructorConfig);
     super(resultConfig);
 
-    const levels = new TaskModel().getLevels();
-    const currentIndex = getRandomInteger(0, levels.length - 1);
-    const currentLevel = levels[currentIndex];
-    const levelInfoObject: ISelectedLevel = { levels, currentLevel, currentIndex };
-
-    this.playground = new PlaygroundComponent(currentLevel, {
-      className: ChildrenClasses.PLAYGROUND,
-      parentComponent: this,
-    });
-
-    const { panelMenuButton, panelHelpButton } = this.setButtonPanel();
+    const { buttonPanel, panelMenuButton, panelHelpButton } = this.setButtonPanel();
     this.panelMenuButton = panelMenuButton;
     this.panelHelpButton = panelHelpButton;
-
-    this.help = new HelpComponent(levelInfoObject, {
-      className: ChildrenClasses.HELP,
-      parentComponent: this,
-    });
-    this.menu = new MenuComponent(levels, {
-      className: ChildrenClasses.MENU,
-      parentComponent: this,
-    });
+    this.buttonPanel = buttonPanel;
   }
 
-  setButtonPanel() {
-    const panel = new BaseComponent({ tagName: 'div', className: ChildrenClasses.BUTTON_PANEL, parentComponent: this });
+  private setButtonPanel() {
+    const buttonPanel = new BaseComponent({
+      tagName: 'div',
+      className: ChildrenClasses.BUTTON_PANEL,
+      parentComponent: this,
+    });
     const panelMenuButton = new ButtonComponent({
-      className: 'button--navigation',
+      className: ChildrenClasses.BUTTONS,
       svgIcon: Svg.MENU,
-      allyLabel: 'Menu',
-      parentComponent: panel,
+      allyLabel: ElementsText.ALLY_MENU,
+      parentComponent: buttonPanel,
     });
     const panelHelpButton = new ButtonComponent({
-      className: 'button--navigation',
+      className: ChildrenClasses.BUTTONS,
       svgIcon: Svg.DESCRIPTION,
-      allyLabel: 'Level description',
-      parentComponent: panel,
+      allyLabel: ElementsText.ALLY_HELP,
+      parentComponent: buttonPanel,
     });
-    return { panelMenuButton, panelHelpButton };
+    return { buttonPanel, panelMenuButton, panelHelpButton };
+  }
+
+  public setPanelMenuButtonClickHandler(handler: unknown) {
+    this.panelMenuButton.setClickHandler(handler);
+  }
+  public setPanelHelpButtonClickHandler(handler: unknown) {
+    this.panelHelpButton.setClickHandler(handler);
+  }
+
+  public setAreaClickHandler(handler: (evt: MouseEvent) => void) {
+    this.getNode().addEventListener('click', (evt) => handler(evt));
   }
 }

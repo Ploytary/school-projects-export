@@ -31,4 +31,19 @@ export class ButtonComponent extends BaseComponent<NodeInterface> {
   private setSvgIcon(icon: SVGElement) {
     this.node.append(icon);
   }
+
+  public setClickHandler(handler: unknown) {
+    if (typeof handler !== 'function') {
+      return;
+    }
+
+    this.getNode().addEventListener('click', (evt) => {
+      if (evt.target instanceof Element) {
+        const isButton = evt.target.closest('button');
+        if (isButton) {
+          handler();
+        }
+      }
+    });
+  }
 }

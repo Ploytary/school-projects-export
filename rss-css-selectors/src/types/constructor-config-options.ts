@@ -6,6 +6,7 @@ export interface IBaseConfig {
   className?: string | string[];
   textContent?: string;
   parentComponent?: BaseComponent<HTMLElement>;
+  title?: string;
 }
 
 type ITableDishTags = 'apple' | 'orange' | 'pickle' | 'bento' | 'plate';
