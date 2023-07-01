@@ -34,11 +34,11 @@ Ex → "5" for level 5
 */`,
 };
 
-const ChildrenClasses = {
+export const ChildrenClasses = {
   ROOT: componentBaseConfig.className,
   CSS_EDITOR: [`${componentBaseConfig.className}__css-editor`, 'code-view--light'],
   HTML_VIEWER: [`${componentBaseConfig.className}__html-viewer`, 'code-view--dark'],
-  HTML_VIEWER_CONTENT: `table`,
+  HTML_VIEWER_CONTENT: `markup`,
   SELECTOR_INPUT_FIELD: `code-view__selector-field`,
   SELECTOR_INPUT_PLACEHOLDER: 'Type in a CSS selector',
   SELECTOR_NOTE: `code-view__css-note`,
@@ -115,7 +115,7 @@ export class EditorComponent extends BaseComponent<HTMLElement> {
     elements.unshift(document.createTextNode('<div class="table">'));
     elements.push(document.createTextNode('</div>'));
 
-    const htmlViewContent = new BaseComponent({ className: 'table' });
+    const htmlViewContent = new BaseComponent({ className: ChildrenClasses.HTML_VIEWER_CONTENT });
     htmlViewContent.getNode().append(...elements);
 
     const options: ICodeViewConfig = {
@@ -150,5 +150,14 @@ export class EditorComponent extends BaseComponent<HTMLElement> {
       }
       return wrappedElementsArray;
     }
+  }
+
+  public setElementsHoverHandler(handler: (evt: MouseEvent) => void) {
+    if (!(typeof handler === 'function')) {
+      return 0;
+    }
+    this.getNode().addEventListener('mouseover', (evt) => {
+      handler(evt);
+    });
   }
 }

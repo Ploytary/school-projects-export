@@ -1,12 +1,12 @@
 import { HelpComponent } from '../components/help/help.component';
 import { MenuComponent } from '../components/menu/menu.component';
-import { PlaygroundComponent } from '../components/playground/playground.component';
 import { TaskComponent, componentBaseConfig } from '../components/task/task.component';
 import { TaskModel } from '../models/task.model';
 import { IGameLevel, ISelectedLevel } from '../types/model';
+import { PlaygroundService } from './playground.service';
 import { StateService } from './state.service';
 
-const ChildrenClasses = {
+export const ChildrenClasses = {
   PLAYGROUND: `${componentBaseConfig.className}__playground`,
   HELP: `${componentBaseConfig.className}__help`,
   HELP_SELECTED_STATUS: `${componentBaseConfig.className}__help--selected`,
@@ -20,7 +20,7 @@ export class TaskService {
   taskComponent: TaskComponent = new TaskComponent();
   helpComponent: HelpComponent;
   menuComponent: MenuComponent;
-  playgroundComponent: PlaygroundComponent;
+  playgroundService: PlaygroundService;
   container: HTMLElement;
 
   constructor(container: HTMLElement) {
@@ -30,23 +30,23 @@ export class TaskService {
     StateService.setChangeLevelHandler(this.OnChangeLevelHandler.bind(this));
     const currentLevelIndex = StateService.getCurrentLevel();
 
-    const { helpComponent, menuComponent, playgroundComponent } = this.render(currentLevelIndex);
+    const { helpComponent, menuComponent, playgroundService } = this.render(currentLevelIndex);
     this.helpComponent = helpComponent;
     this.menuComponent = menuComponent;
-    this.playgroundComponent = playgroundComponent;
+    this.playgroundService = playgroundService;
   }
 
   private OnChangeLevelHandler() {
     this.helpComponent.destroy();
     this.menuComponent.destroy();
-    this.playgroundComponent.destroy();
+    this.playgroundService.destroy();
     this.render(StateService.getCurrentLevel());
   }
 
   private render(levelIndex: number) {
     const currentLevel = this.levels[levelIndex];
 
-    const playgroundComponent = new PlaygroundComponent(currentLevel, {
+    const playgroundService = new PlaygroundService(this.taskComponent.getNode(), currentLevel, {
       className: ChildrenClasses.PLAYGROUND,
     });
 
@@ -59,14 +59,14 @@ export class TaskService {
       className: ChildrenClasses.MENU,
     });
 
-    this.playgroundComponent = playgroundComponent;
+    this.playgroundService = playgroundService;
     this.helpComponent = helpComponent;
     this.menuComponent = menuComponent;
-    this.taskComponent.append(playgroundComponent, helpComponent, menuComponent);
+    this.taskComponent.append(helpComponent, menuComponent);
 
     this.setChildComponentsHandlers();
 
-    return { playgroundComponent, helpComponent, menuComponent };
+    return { playgroundService, helpComponent, menuComponent };
   }
 
   private setComponentHandlers() {
@@ -98,33 +98,25 @@ export class TaskService {
   }
 
   private OnMenuResetButtonClickHandler() {
-    console.log('reset data');
     this.taskModel.resetLevels();
-    console.log(StateService.getCurrentLevel());
   }
 
   private OnMenuListItemClickHandler(itemIndex: number) {
-    console.log('click on item');
     StateService.setLevel(itemIndex);
-    console.log(StateService.getCurrentLevel());
   }
 
   private OnHelpPrevLevelButtonClickHandler() {
     if (StateService.getCurrentLevel() === 0) {
       return;
     }
-    console.log('prev');
     StateService.setPrevLevel();
-    console.log(StateService.getCurrentLevel());
   }
 
   private OnHelpNextLevelButtonClickHandler() {
     if (StateService.getCurrentLevel() >= this.levels.length - 1) {
       return;
     }
-    console.log('next');
     StateService.setNextLevel();
-    console.log(StateService.getCurrentLevel());
   }
 
   private OnHelpMenuButtonClickHandler() {

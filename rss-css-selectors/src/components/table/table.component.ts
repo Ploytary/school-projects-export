@@ -14,7 +14,7 @@ const ElementsText = {
   COMPONENT_ALLY_TITLE: 'CSS representation table',
 };
 
-const ChildrenClasses = {
+export const ChildrenClasses = {
   ROOT: componentBaseConfig.className,
   SURFACE: `${componentBaseConfig.className}__surface`,
   NAMETAG_PLACE: `${componentBaseConfig.className}__nametag-place`,
@@ -49,7 +49,7 @@ export class TableComponent extends BaseComponent<HTMLElement> {
 
     const { boardMarkup, selector } = level;
     const tableSurface = new BaseComponent({ className: ChildrenClasses.SURFACE, parentComponent: this });
-    const nametagPlace = new BaseComponent({ className: ChildrenClasses.NAMETAG_PLACE, parentComponent: tableSurface });
+    new BaseComponent({ className: ChildrenClasses.NAMETAG_PLACE, parentComponent: tableSurface });
     this.dishesPlace = new BaseComponent({ className: ChildrenClasses.DISHES_PLACE, parentComponent: tableSurface });
 
     const tableEdge = new BaseComponent({ className: ChildrenClasses.EDGE, parentComponent: this });
@@ -92,5 +92,14 @@ export class TableComponent extends BaseComponent<HTMLElement> {
     } else {
       userSelectElements.forEach((element) => element.classList.add(AnimationClasses.WRONG_ELEMENT));
     }
+  }
+
+  public setElementsHoverHandler(handler: (evt: MouseEvent) => void) {
+    if (!(typeof handler === 'function')) {
+      return 0;
+    }
+    this.getNode().addEventListener('mouseover', (evt) => {
+      handler(evt);
+    });
   }
 }

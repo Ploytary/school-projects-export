@@ -7,6 +7,7 @@ import { BaseComponent } from '../base.component';
 import { EditorComponent } from '../editor/editor.component';
 import { NoteComponent } from '../note/note.component';
 import { TableComponent } from '../table/table.component';
+import { alignComponentPosition } from '../../utils/align-element-position';
 
 const componentBaseConfig: IBaseConfig = {
   tagName: 'section',
@@ -19,12 +20,16 @@ const ChildrenClasses = {
   NOTE: `${componentBaseConfig.className}__note`,
   TABLE: `${componentBaseConfig.className}__table`,
   EDITOR: `${componentBaseConfig.className}__editor`,
+  TOOLTIP: `${componentBaseConfig.className}__tooltip`,
+  TOOLTIP_VISIBILITY: `${componentBaseConfig.className}__tooltip--visible`,
+  DISHES_SIZE: `small`,
 };
 
 export class PlaygroundComponent extends BaseComponent<HTMLElement> {
   taskDescription: BaseComponent<HTMLElement>;
-  table: BaseComponent<HTMLElement>;
-  editor: BaseComponent<HTMLElement>;
+  table: TableComponent;
+  editor: EditorComponent;
+  tooltip: BaseComponent<HTMLElement>;
 
   constructor(level: IGameLevel, constructorConfig?: IBaseConfig) {
     const resultConfig = mergeConfigs<IBaseConfig>(componentBaseConfig, constructorConfig);
@@ -51,5 +56,43 @@ export class PlaygroundComponent extends BaseComponent<HTMLElement> {
 
     this.table = new TableComponent(level, { className: ChildrenClasses.TABLE, parentComponent: this });
     this.editor = new EditorComponent(level, { className: ChildrenClasses.EDITOR, parentComponent: this });
+    this.tooltip = new BaseComponent({ className: ChildrenClasses.TOOLTIP, parentComponent: this.table });
+  }
+
+  public setCsssHoverHandler(handler: (evt: MouseEvent) => void) {
+    this.table.setElementsHoverHandler(handler);
+  }
+  public setMarkupHoverHandler(handler: (evt: MouseEvent) => void) {
+    this.editor.setElementsHoverHandler(handler);
+  }
+
+  public setTooltip(element: Element) {
+    const tagName = element.tagName.toLocaleLowerCase();
+    const idText = element.id ? ` id="${element.id}"` : '';
+    const classText = element.className
+      ? ` ${element.classList.contains(ChildrenClasses.DISHES_SIZE) ? `class="${ChildrenClasses.DISHES_SIZE}"` : ''}`
+      : '';
+    const getAttributeText = element.getAttribute('for') ? ` for="${element.getAttribute('for')}"` : ``;
+    const text = `<${tagName}${idText}${classText}${getAttributeText}></${tagName}>`;
+    this.tooltip.getNode().textContent = text;
+
+    const verticalPosition = 75;
+
+    if (element instanceof HTMLElement) {
+      if (element.parentElement instanceof HTMLDivElement) {
+        alignComponentPosition(element, this.tooltip, verticalPosition);
+      } else {
+        const parent = element.parentElement;
+        if (!parent) {
+          return;
+        }
+        alignComponentPosition(parent, this.tooltip, verticalPosition);
+      }
+    }
+
+    this.tooltip.addClass(ChildrenClasses.TOOLTIP_VISIBILITY);
+    element.addEventListener('mouseout', () => {
+      this.tooltip.removeClass(ChildrenClasses.TOOLTIP_VISIBILITY);
+    });
   }
 }

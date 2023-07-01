@@ -6,6 +6,12 @@ $size: 12vw;
   perspective: 400px;
   -webkit-perspective: 400px;
 
+  --size: 12vw;
+
+  @media (min-width: 1024px) {
+    --size: 7vw;
+  }
+
   &__surface {
     padding: 20px 35px 20px;
     background: var(--accent-color-1);
@@ -110,7 +116,7 @@ bento {
   flex-grow: 1;
   flex-shrink: 0;
   min-width: 40px;
-  width: $size;
+  width: var(--size);
   max-width: 100px;
   aspect-ratio: 1 / 1;
   background: var(--accent-color-2);
@@ -130,13 +136,13 @@ plate {
   align-items: center;
   flex-grow: 1;
   min-width: 40px;
-  width: $size;
+  width: var(--size);
   max-width: 100px;
   aspect-ratio: 1 / 1;
   background: white;
   border-radius: 50%;
   border-bottom: solid 0.3vw rgba($shadow, 0.2);
-
+  
   @extend %children;
 
   bento {
@@ -184,7 +190,7 @@ pickle {
   z-index: 1;
   max-width: 25px;
   min-width: 10px;
-  width: calc(#{$size} * 0.25);
+  width: calc(var(--size) * 0.25);
   background: var(--accent-color-5);
   aspect-ratio: 25 / 60;
   border: solid 2px rgba($shadow, 0.4);
@@ -195,7 +201,7 @@ pickle {
   &.small {
     max-width: 18px;
     min-width: 7px;
-    width: calc(#{$size} * 0.15);
+    width: calc(var(--size) * 0.15);
     border-width: $size / 2 * 0.01 $size / 2 * 0.02 $size / 2 * 0.06 $size / 2 * 0.02;
   }
 }
@@ -206,7 +212,7 @@ pickle {
   z-index: 1;
   max-width: 60px;
   min-width: 24px;
-  width: calc(#{$size} * 0.6);
+  width: calc(var(--size) * 0.6);
   aspect-ratio: 1 / 1;
   border: solid 3px rgba($shadow, 0.25);
   border-width: $size / 2 * 0.02 $size / 2 * 0.04 $size / 2 * 0.15 $size / 2 * 0.04;
@@ -230,7 +236,7 @@ pickle {
   &.small {
     max-width: 30px;
     min-width: 12px;
-    width: calc(#{$size} * 0.3);
+    width: calc(var(--size) * 0.3);
     border-width: $size / 2 * 0.02 $size / 2 * 0.04 $size / 2 * 0.08 $size / 2 * 0.04;
   }
 }
