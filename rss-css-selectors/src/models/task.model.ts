@@ -731,9 +731,12 @@ export class TaskModel {
   }
 
   private mergeLevels(baseLevels: IGameLevel[], ...data: IGameLevel[][]) {
-    let result: IGameLevel[] = baseLevels;
-    data.forEach((dataItem) => dataItem.forEach((level) => (level.isNew = true)));
-    result = result.concat(...data);
+    const clone = (levelSet: IGameLevel[]) => levelSet.slice().map((item) => Object.assign({}, item));
+    const newBaseLevel = clone(baseLevels);
+    let result: IGameLevel[] = newBaseLevel;
+    const otherNewSets = data.map((dataItem) => clone(dataItem));
+    otherNewSets.forEach((dataItem) => dataItem.forEach((level) => (level.isNew = true)));
+    result = result.concat(...otherNewSets);
 
     return result;
   }
@@ -765,25 +768,25 @@ export class TaskModel {
 
   private loadFromStorage() {
     const savedProgressString = localStorage.getItem(StorageKeys.PROGRESS);
-    if (savedProgressString) {
-      const savedProgress = JSON.parse(savedProgressString) as IStoredProgress[];
-      for (const levelRecord in savedProgress) {
-        const index = Number(levelRecord);
-        const progressData = savedProgress[index];
-        const mergedWithStorage: IGameLevel[] = [];
-        this.levels = mergedWithStorage.concat(
-          this.levels.slice(0, index),
-          [Object.assign({}, this.levels[index], progressData)],
-          this.levels.slice(index + 1)
-        );
+    if (!savedProgressString) {
+      return;
+    }
+
+    const savedProgress = JSON.parse(savedProgressString) as IStoredProgress[];
+    for (const levelRecord of savedProgress) {
+      const keys = Object.keys(levelRecord);
+      for (const key of keys) {
+        const index = Number(key);
+        const progressData = levelRecord[index];
+        Object.assign(this.levels[index], progressData);
       }
     }
   }
 
   public resetLevels() {
     localStorage.removeItem(StorageKeys.PROGRESS);
+    this.levels = this.mergeLevels(baseGameLevels, myGameLevels);
     StateService.cleanStorage();
     StateService.setLevel(0);
-    this.levels = this.mergeLevels(baseGameLevels, myGameLevels);
   }
 }

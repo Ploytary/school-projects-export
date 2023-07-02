@@ -34,6 +34,11 @@ export class TaskService {
     this.helpComponent = helpComponent;
     this.menuComponent = menuComponent;
     this.playgroundService = playgroundService;
+
+    window.addEventListener('beforeunload', () => {
+      StateService.saveToStorage();
+      this.taskModel.saveToStorage();
+    });
   }
 
   private OnChangeLevelHandler() {
@@ -44,6 +49,7 @@ export class TaskService {
   }
 
   private render(levelIndex: number) {
+    this.levels = this.taskModel.getLevels();
     const currentLevel = this.levels[levelIndex];
 
     const playgroundService = new PlaygroundService(this.taskComponent.getNode(), currentLevel, this.taskModel, {
