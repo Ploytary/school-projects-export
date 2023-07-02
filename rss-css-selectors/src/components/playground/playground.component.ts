@@ -20,6 +20,7 @@ const ChildrenClasses = {
   NOTE: `${componentBaseConfig.className}__note`,
   TABLE: `${componentBaseConfig.className}__table`,
   EDITOR: `${componentBaseConfig.className}__editor`,
+  EDITOR_SHAKE: `shake`,
   TOOLTIP: `${componentBaseConfig.className}__tooltip`,
   TOOLTIP_VISIBILITY: `${componentBaseConfig.className}__tooltip--visible`,
   DISHES_SIZE: `small`,
@@ -66,7 +67,48 @@ export class PlaygroundComponent extends BaseComponent<HTMLElement> {
     this.editor.setElementsHoverHandler(handler);
   }
 
-  public setTooltip(element: Element) {
+  public setSelectorKeydownHandler(handler: unknown) {
+    this.editor.setSelectorKeydownHandler(handler);
+  }
+
+  public setSelectorEnterButtonClickHandler(handler: unknown) {
+    this.editor.setSelectorEnterButtonClickHandler(handler);
+  }
+
+  public setSelectorHelpButtonClickHandler(handler: unknown) {
+    this.editor.setSelectorHelpButtonClickHandler(handler);
+  }
+
+  public setWinText() {
+    this.table.setWinText();
+  }
+
+  public animateUserSelectorInput(selector: string) {
+    this.table.animateUserSelectorInput(selector);
+  }
+
+  public animateWrongInput() {
+    this.editor.addClass(ChildrenClasses.EDITOR_SHAKE);
+    this.editor.getNode().addEventListener('animationend', () => this.editor.removeClass(ChildrenClasses.EDITOR_SHAKE));
+  }
+
+  public getQueryElements(selector: string) {
+    return this.table.getNode().querySelectorAll(selector);
+  }
+
+  public getSelectorInput() {
+    return this.editor.getSelectorInput();
+  }
+
+  public getSelectorEnterButton() {
+    return this.editor.getSelectorEnterButton();
+  }
+
+  public getSelectorHelpButton() {
+    return this.editor.getSelectorHelpButton();
+  }
+
+  public setTooltip(element: Element, ...linkedElements: Element[]) {
     const tagName = element.tagName.toLocaleLowerCase();
     const idText = element.id ? ` id="${element.id}"` : '';
     const classText = element.className
@@ -91,8 +133,10 @@ export class PlaygroundComponent extends BaseComponent<HTMLElement> {
     }
 
     this.tooltip.addClass(ChildrenClasses.TOOLTIP_VISIBILITY);
-    element.addEventListener('mouseout', () => {
-      this.tooltip.removeClass(ChildrenClasses.TOOLTIP_VISIBILITY);
+    [element, ...linkedElements].forEach((element) => {
+      element.addEventListener('mouseout', () => {
+        this.tooltip.removeClass(ChildrenClasses.TOOLTIP_VISIBILITY);
+      });
     });
   }
 }

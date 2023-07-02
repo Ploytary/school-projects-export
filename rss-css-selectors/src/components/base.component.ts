@@ -25,7 +25,7 @@ export class BaseComponent<T extends HTMLElement> {
     }
   }
 
-  public getNode(): HTMLElement {
+  public getNode(): T {
     return this.node;
   }
 

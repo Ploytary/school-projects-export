@@ -13,5 +13,14 @@ export class InputComponent extends BaseComponent<HTMLInputElement> {
     super(resultConfig);
     this.node.type = resultConfig.type || 'text';
     this.node.placeholder = resultConfig.placeholder || '';
+    this.node.autofocus = resultConfig.autofocus || false;
+  }
+
+  public setKeydownHandler(handler: unknown) {
+    if (typeof handler !== 'function') {
+      return;
+    }
+
+    this.node.addEventListener('keydown', (evt) => handler(evt));
   }
 }

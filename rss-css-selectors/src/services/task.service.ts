@@ -46,7 +46,7 @@ export class TaskService {
   private render(levelIndex: number) {
     const currentLevel = this.levels[levelIndex];
 
-    const playgroundService = new PlaygroundService(this.taskComponent.getNode(), currentLevel, {
+    const playgroundService = new PlaygroundService(this.taskComponent.getNode(), currentLevel, this.taskModel, {
       className: ChildrenClasses.PLAYGROUND,
     });
 

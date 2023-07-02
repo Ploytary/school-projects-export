@@ -47,8 +47,9 @@ export const ChildrenClasses = {
 };
 
 export class EditorComponent extends BaseComponent<HTMLElement> {
-  selectorEnterButton: BaseComponent<HTMLButtonElement>;
-  selectorHelpButton: BaseComponent<HTMLButtonElement>;
+  selectorInput: InputComponent;
+  selectorEnterButton: ButtonComponent;
+  selectorHelpButton: ButtonComponent;
 
   constructor(level: IGameLevel, constructorConfig?: IBaseConfig) {
     const resultConfig = mergeConfigs<IBaseConfig>(componentBaseConfig, constructorConfig);
@@ -61,7 +62,8 @@ export class EditorComponent extends BaseComponent<HTMLElement> {
       parentComponent: this,
     });
 
-    const { selectorEnterButton, selectorHelpButton } = this.setCssCodeView();
+    const { selectorInput, selectorEnterButton, selectorHelpButton } = this.setCssCodeView();
+    this.selectorInput = selectorInput;
     this.selectorEnterButton = selectorEnterButton;
     this.selectorHelpButton = selectorHelpButton;
 
@@ -70,9 +72,10 @@ export class EditorComponent extends BaseComponent<HTMLElement> {
 
   private setCssCodeView() {
     const selectorFiled = new BaseComponent({ tagName: 'p', className: ChildrenClasses.SELECTOR_INPUT_FIELD });
-    new InputComponent({
+    const selectorInput = new InputComponent({
       placeholder: ChildrenClasses.SELECTOR_INPUT_PLACEHOLDER,
       parentComponent: selectorFiled,
+      autofocus: true,
     });
     const buttonContainer = new BaseComponent({
       tagName: 'span',
@@ -103,7 +106,7 @@ export class EditorComponent extends BaseComponent<HTMLElement> {
     };
 
     new CodeViewComponent(options, { className: ChildrenClasses.CSS_EDITOR, parentComponent: this });
-    return { selectorEnterButton, selectorHelpButton };
+    return { selectorInput, selectorEnterButton, selectorHelpButton };
   }
 
   private setHtmlCodeView(level: IGameLevel) {
@@ -159,5 +162,29 @@ export class EditorComponent extends BaseComponent<HTMLElement> {
     this.getNode().addEventListener('mouseover', (evt) => {
       handler(evt);
     });
+  }
+
+  public getSelectorInput() {
+    return this.selectorInput.getNode();
+  }
+
+  public getSelectorEnterButton() {
+    return this.selectorEnterButton.getNode();
+  }
+
+  public getSelectorHelpButton() {
+    return this.selectorHelpButton.getNode();
+  }
+
+  public setSelectorKeydownHandler(handler: unknown) {
+    this.selectorInput.setKeydownHandler(handler);
+  }
+
+  public setSelectorEnterButtonClickHandler(handler: unknown) {
+    this.selectorEnterButton.setClickHandler(handler);
+  }
+
+  public setSelectorHelpButtonClickHandler(handler: unknown) {
+    this.selectorHelpButton.setClickHandler(handler);
   }
 }
