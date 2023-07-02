@@ -67,7 +67,7 @@
     }
 
     .lightup {
-      color: var(--main-color-2);
+      background-color: var(--main-color-6);
     }
   }
 
@@ -130,4 +130,19 @@
       font-size: 15px;
     }
   }
+}
+
+.attribute, .string, .section {
+  pointer-events: none;
+}
+
+.string {
+  color: #d2917a;
+}
+.attribute {
+  color: #76dbfc;
+}
+
+.section {
+  color: #4c9bd3;
 }

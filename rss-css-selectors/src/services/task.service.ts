@@ -71,7 +71,6 @@ export class TaskService {
     this.taskComponent.append(helpComponent, menuComponent);
 
     this.setChildComponentsHandlers();
-
     return { playgroundService, helpComponent, menuComponent };
   }
 

@@ -22,7 +22,7 @@ export class PlaygroundService {
     this.container.append(this.playgroundComponent.getNode());
 
     this.tableElements = Array.from(document.querySelectorAll(`.${TableClasses.DISHES_PLACE} *`));
-    this.markupElements = Array.from(document.querySelectorAll(`.${EditorClasses.HTML_VIEWER_CONTENT} *`));
+    this.markupElements = Array.from(document.querySelectorAll(`.${EditorClasses.HTML_VIEWER_CONTENT} div`));
 
     this.playgroundComponent.setCsssHoverHandler(
       this.onElementHover.bind(this, this.tableElements, this.markupElements)

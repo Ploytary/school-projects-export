@@ -7,6 +7,7 @@ import { BaseComponent } from '../base.component';
 import { CodeViewComponent } from './code-view.component';
 import { InputComponent } from '../input.component';
 import { ButtonComponent } from '../button/button.component';
+import { getElementFromTemplate } from '../../utils/get-element-from-template';
 
 const componentBaseConfig: IBaseConfig = {
   tagName: 'section',
@@ -118,9 +119,8 @@ export class EditorComponent extends BaseComponent<HTMLElement> {
     elements.unshift(document.createTextNode('<div class="table">'));
     elements.push(document.createTextNode('</div>'));
 
-    const htmlViewContent = new BaseComponent({ className: ChildrenClasses.HTML_VIEWER_CONTENT });
+    const htmlViewContent = new BaseComponent({ className: [ChildrenClasses.HTML_VIEWER_CONTENT, 'code'] });
     htmlViewContent.getNode().append(...elements);
-
     const options: ICodeViewConfig = {
       title: ElementsText.HTML_VIEWER_TITLE,
       filename: ElementsText.HTML_VIEWER_FILENAME,
@@ -133,20 +133,27 @@ export class EditorComponent extends BaseComponent<HTMLElement> {
       for (const element of elements) {
         const wrapper = document.createElement('div');
         wrapper.classList.add('children-wrapper');
-        const idText = element.id ? ` id="${element.id}"` : '';
-        const classText = element.className ? ` class="${element.className}"` : '';
-        const getAttributeText = element.getAttribute('for') ? ` for="${element.getAttribute('for')}"` : ``;
+        const idText = element.id
+          ? ` <span class="attribute">id</span>=<span class="string">"${element.id}"</span>`
+          : '';
+        const classText = element.className
+          ? ` <span class="attribute">class</span>=<span class="string">"${element.className}"</span>`
+          : '';
+        const getAttributeText = element.getAttribute('for')
+          ? ` <span class="attribute">for</span>=<span class="string">"${element.getAttribute('for')}"</span>`
+          : ``;
         const endTagText = element.children.length > 0 ? '' : '/';
-        const text = `<${element.tagName.toLocaleLowerCase()}${idText}${classText}${getAttributeText}${endTagText}>`;
-        const textNode = document.createTextNode(text);
-        wrapper.append(textNode);
+        const text = `<<span class="section">${element.tagName.toLocaleLowerCase()}</span>${idText}${classText}${getAttributeText}${endTagText}>`;
+        wrapper.innerHTML = text;
 
         if (element.children.length > 0) {
           const wrappedElements = elementsWrapper(Array.from(element.children) as HTMLElement[]);
           wrapper.append(...wrappedElements);
-          const endText = `</${element.tagName.toLowerCase()}>`;
-          const endTextNode = document.createTextNode(endText);
-          wrapper.append(endTextNode);
+          const openSymb = document.createTextNode('</');
+          const closeSymb = document.createTextNode('>');
+          const endText = `<span class="section">${element.tagName.toLowerCase()}</span>`;
+          const elem = getElementFromTemplate(endText);
+          wrapper.append(openSymb, elem, closeSymb);
         }
 
         wrappedElementsArray.push(wrapper);
