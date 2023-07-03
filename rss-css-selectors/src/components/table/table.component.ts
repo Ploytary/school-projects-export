@@ -42,6 +42,7 @@ const AnimationClasses = {
 export class TableComponent extends BaseComponent<HTMLElement> {
   levelElements: Element[];
   targetElements: Element[];
+  tableSurface: BaseComponent<HTMLElement>;
   dishesPlace: BaseComponent<HTMLElement>;
 
   constructor(level: IGameLevel, constructorConfig?: IBaseConfig) {
@@ -56,9 +57,11 @@ export class TableComponent extends BaseComponent<HTMLElement> {
     });
 
     const { boardMarkup, selector } = level;
-    const tableSurface = new BaseComponent({ className: ChildrenClasses.SURFACE, parentComponent: this });
-    new BaseComponent({ className: ChildrenClasses.NAMETAG_PLACE, parentComponent: tableSurface });
-    this.dishesPlace = new BaseComponent({ className: ChildrenClasses.DISHES_PLACE, parentComponent: tableSurface });
+    this.tableSurface = new BaseComponent({ className: ChildrenClasses.SURFACE, parentComponent: this });
+    this.dishesPlace = new BaseComponent({
+      className: ChildrenClasses.DISHES_PLACE,
+      parentComponent: this.tableSurface,
+    });
 
     const tableEdge = new BaseComponent({ className: ChildrenClasses.EDGE, parentComponent: this });
     const legsCount = 2;
@@ -67,6 +70,7 @@ export class TableComponent extends BaseComponent<HTMLElement> {
       .forEach(() => new BaseComponent({ className: ChildrenClasses.LEG, parentComponent: tableEdge }));
 
     this.dishesPlace.getNode().innerHTML = boardMarkup;
+    this.setNametagPlace();
     this.levelElements = Array.from(this.dishesPlace.getNode().children);
     this.targetElements = Array.from(this.dishesPlace.getNode().querySelectorAll(selector));
     this.setInitAnimation();
@@ -77,6 +81,38 @@ export class TableComponent extends BaseComponent<HTMLElement> {
       element.classList.add(AnimationClasses.START);
     }
     this.animateTargetSelectorElements();
+  }
+
+  private setNametagPlace() {
+    const nametagPlace = new BaseComponent({
+      className: ChildrenClasses.NAMETAG_PLACE,
+      parentComponent: this.tableSurface,
+    });
+    const elementsWithTags = Array.from(this.dishesPlace.getNode().querySelectorAll('[for]')) as HTMLElement[];
+    if (elementsWithTags.length > 0) {
+      elementsWithTags.forEach((element) => {
+        const nametag = new BaseComponent({
+          tagName: 'div',
+          className: ChildrenClasses.NAMETAG,
+          textContent: element.getAttribute('for') ?? '',
+        });
+        nametagPlace.append(nametag);
+        const setNametagPosition = () => {
+          const left = element.offsetLeft;
+          const elementWidth = element.clientWidth;
+          const elementHeight = this.dishesPlace.getNode().clientHeight;
+          nametag.getNode().style.translate = '-50% 0%';
+          nametag.getNode().style.left = `${left + elementWidth / 2}px`;
+          nametag.getNode().style.top = `${-20}px`;
+          nametag.getNode().style.width = `${elementHeight * 0.8}px`;
+          nametag.getNode().style.fontSize = `${elementHeight * 0.25}px`;
+        };
+        setTimeout(() => {
+          setNametagPosition();
+        }, 0);
+        window.addEventListener('resize', setNametagPosition);
+      });
+    }
   }
 
   private animateTargetSelectorElements() {

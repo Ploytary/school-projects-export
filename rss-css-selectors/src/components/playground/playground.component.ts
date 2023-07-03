@@ -50,10 +50,10 @@ export class PlaygroundComponent extends BaseComponent<HTMLElement> {
       parentComponent: this,
     });
 
-    new NoteComponent({
-      className: ChildrenClasses.NOTE,
-      parentComponent: this,
-    });
+    // new NoteComponent({
+    //   className: ChildrenClasses.NOTE,
+    //   parentComponent: this,
+    // });
 
     this.table = new TableComponent(level, { className: ChildrenClasses.TABLE, parentComponent: this });
     this.editor = new EditorComponent(level, { className: ChildrenClasses.EDITOR, parentComponent: this });

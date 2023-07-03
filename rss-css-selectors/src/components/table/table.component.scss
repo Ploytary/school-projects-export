@@ -13,6 +13,7 @@ $size: 12vw;
   }
 
   &__surface {
+    position: relative;
     padding: 20px 35px 20px;
     background: var(--accent-color-1);
     box-shadow: 0px 40px 10px rgba($shadow, 0.2);
@@ -21,6 +22,8 @@ $size: 12vw;
   }
 
   &__dishes {
+    z-index: 1;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,7 +31,7 @@ $size: 12vw;
   }
 
   &__nametag-place {
-    position: absolute;
+    position: relative;
     bottom: 0;
     left: 0;
     right: 0;
@@ -56,17 +59,17 @@ $size: 12vw;
   }
 
   &__nametag {
+    position: absolute;
     display: inline-block;
-    padding: 30px 10px 2px 10px;
+    padding-top: 30px;
+    padding-bottom: 2px;
     color: var(--accent-color-3);
     font-family: "Satisfy", sans-serif;
-    font-size: 1.32vw;
     text-align: center;
     background-image: url("../../assets/images/line.gif");
     background-color: #c5d6dd;
     box-shadow: -3px 4px 0 rgba($shadow, 0.1);
-    left: 50%;
-    transform: rotate(-4deg) translateX(-50%) translateY(10%);
+    transform: rotate(-4deg);
   }
 
   &__win-text {
