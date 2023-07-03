@@ -45,12 +45,13 @@ const ElementsText = {
 export class NoteComponent extends BaseComponent<HTMLElement> {
   submitButton: ButtonComponent;
   toggleButton: ButtonComponent;
+  description: BaseComponent<HTMLElement>;
 
   constructor(constructorConfig?: IBaseConfig) {
     const resultConfig = mergeConfigs<IBaseConfig>(componentBaseConfig, constructorConfig);
     super(resultConfig);
 
-    const description = new BaseComponent({
+    this.description = new BaseComponent({
       tagName: 'div',
       className: ChildrenClasses.DESCRIPTION,
       parentComponent: this,
@@ -60,15 +61,15 @@ export class NoteComponent extends BaseComponent<HTMLElement> {
       tagName: 'p',
       className: ChildrenClasses.TITLE,
       textContent: ElementsText.TITLE,
-      parentComponent: description,
+      parentComponent: this.description,
     });
 
-    description.getNode().innerHTML = ElementsText.TEXT_MARKUP;
+    this.description.getNode().innerHTML = ElementsText.TEXT_MARKUP;
 
     this.submitButton = new ButtonComponent({
       className: ChildrenClasses.SUBMIT_BUTTON,
       textContent: ElementsText.SUBMIT_BUTTON,
-      parentComponent: description,
+      parentComponent: this.description,
     });
 
     this.toggleButton = new ButtonComponent({
@@ -76,5 +77,33 @@ export class NoteComponent extends BaseComponent<HTMLElement> {
       textContent: ElementsText.TOGGLE_BUTTON,
       parentComponent: this,
     });
+
+    this.setToggleButtonClickHandler(this.showDescription.bind(this));
+    this.setSubmitButtonClickHandler(this.hideDescription.bind(this));
+  }
+
+  private showDescription() {
+    const descriptionElement = this.description.getNode();
+    descriptionElement.style.paddingTop = '20px';
+    descriptionElement.style.paddingBottom = '20px';
+    const scrollHeight = descriptionElement.scrollHeight;
+    descriptionElement.style.height = scrollHeight + 'px';
+    this.toggleButton.addClass('button--hidden');
+  }
+
+  private hideDescription() {
+    const descriptionElement = this.description.getNode();
+    descriptionElement.style.paddingTop = '0px';
+    descriptionElement.style.paddingBottom = '0px';
+    descriptionElement.style.height = 0 + 'px';
+    this.toggleButton.removeClass('button--hidden');
+  }
+
+  public setToggleButtonClickHandler(handler: unknown) {
+    this.toggleButton.setClickHandler(handler);
+  }
+
+  public setSubmitButtonClickHandler(handler: unknown) {
+    this.submitButton.setClickHandler(handler);
   }
 }

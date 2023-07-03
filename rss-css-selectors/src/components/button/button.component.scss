@@ -39,6 +39,10 @@
     rotate: -180deg;
   }
 
+  &--hidden {
+    display: none;
+  }
+
   &--code {
     padding: 1px 3px;
     background-color: var(--main-color-1);

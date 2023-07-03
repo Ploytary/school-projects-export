@@ -31,6 +31,7 @@ export class PlaygroundComponent extends BaseComponent<HTMLElement> {
   table: TableComponent;
   editor: EditorComponent;
   tooltip: BaseComponent<HTMLElement>;
+  note: NoteComponent;
 
   constructor(level: IGameLevel, constructorConfig?: IBaseConfig) {
     const resultConfig = mergeConfigs<IBaseConfig>(componentBaseConfig, constructorConfig);
@@ -50,14 +51,22 @@ export class PlaygroundComponent extends BaseComponent<HTMLElement> {
       parentComponent: this,
     });
 
-    // new NoteComponent({
-    //   className: ChildrenClasses.NOTE,
-    //   parentComponent: this,
-    // });
+    this.note = new NoteComponent({
+      className: ChildrenClasses.NOTE,
+      parentComponent: this,
+    });
 
     this.table = new TableComponent(level, { className: ChildrenClasses.TABLE, parentComponent: this });
     this.editor = new EditorComponent(level, { className: ChildrenClasses.EDITOR, parentComponent: this });
     this.tooltip = new BaseComponent({ className: ChildrenClasses.TOOLTIP, parentComponent: this.table });
+  }
+
+  public setNoteToggleButtonClickHandler(handler: unknown) {
+    this.note.setToggleButtonClickHandler(handler);
+  }
+
+  public setNoteSubmitButtonClickHandler(handler: unknown) {
+    this.note.setSubmitButtonClickHandler(handler);
   }
 
   public setCsssHoverHandler(handler: (evt: MouseEvent) => void) {
