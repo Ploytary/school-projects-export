@@ -102,7 +102,11 @@ export class PlaygroundComponent extends BaseComponent<HTMLElement> {
   }
 
   public getQueryElements(selector: string) {
-    return this.table.getNode().querySelectorAll(selector);
+    try {
+      return this.table.getNode().querySelectorAll(selector);
+    } catch {
+      return [];
+    }
   }
 
   public getSelectorInput() {

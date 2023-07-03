@@ -127,7 +127,12 @@ export class TableComponent extends BaseComponent<HTMLElement> {
   }
 
   public animateUserSelectorInput(selector: string) {
-    const userSelectElements = Array.from(this.dishesPlace.getNode().querySelectorAll(selector));
+    let userSelectElements: Element[] = [];
+    try {
+      userSelectElements = Array.from(this.dishesPlace.getNode().querySelectorAll(selector));
+    } catch {
+      return;
+    }
     if (userSelectElements.length === 0) {
       return;
     }
