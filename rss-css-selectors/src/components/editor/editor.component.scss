@@ -23,7 +23,7 @@
     display: flex;
     justify-content: space-between;
     padding: 10px 15px;
-    border: 1px solid rgba(255,255,255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   &__title,
@@ -39,22 +39,26 @@
     display: flex;
     flex-grow: 1;
     font-size: 12px;
+
+    @media (min-width: 1025px) {
+      font-size: 15px;
+    }
   }
 
   &__field-stroke-numbers-column {
     display: flex;
     flex-direction: column;
     padding: 10px;
-    line-height: 150%;
+    line-height: 115%;
     text-align: right;
-    border: 1px solid rgba(255,255,255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   &__field-strokes-column {
     flex-grow: 1;
     padding: 10px;
     line-height: 150%;
-    border: 1px solid rgba(255,255,255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     overflow-x: hidden;
     cursor: default;
 
@@ -74,7 +78,6 @@
   &__css-note {
     white-space: pre-wrap;
   }
-
 
   &__selector-field {
     position: relative;
@@ -124,15 +127,11 @@
       background-color: var(--main-color-10);
     }
   }
-
-  @media (min-width: 1024px) {
-    &__field {
-      font-size: 15px;
-    }
-  }
 }
 
-.attribute, .string, .section {
+.attribute,
+.string,
+.section {
   pointer-events: none;
 }
 
