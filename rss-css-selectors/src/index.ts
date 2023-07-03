@@ -1,2 +1,5 @@
 import './index.scss';
-import './components/app';
+import { App } from './app';
+
+const app = new App(document.body);
+app.start();

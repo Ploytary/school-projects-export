@@ -1,3 +1,4 @@
+import { BaseComponent } from '../components/base.component';
 import { HelpComponent } from '../components/help/help.component';
 import { MenuComponent } from '../components/menu/menu.component';
 import { TaskComponent, componentBaseConfig } from '../components/task/task.component';
@@ -23,8 +24,8 @@ export class TaskService {
   playgroundService: PlaygroundService;
   container: HTMLElement;
 
-  constructor(container: HTMLElement) {
-    this.container = container;
+  constructor(container: BaseComponent<HTMLElement>) {
+    this.container = container.getNode();
     this.container.append(this.taskComponent.getNode());
     this.setComponentHandlers();
     StateService.setChangeLevelHandler(this.OnChangeLevelHandler.bind(this));
