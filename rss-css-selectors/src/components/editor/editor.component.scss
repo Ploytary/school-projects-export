@@ -83,15 +83,20 @@
     position: relative;
     display: flex;
     justify-content: space-between;
-    height: calc(1em * 1.5);
+    height: calc(1em * 1.15);
+    
+
     input {
       border-style: none;
       padding: 0;
       flex-grow: 1;
       width: 1px;
       font-size: inherit;
+      line-height: inherit;
       color: inherit;
-      background-color: inherit;
+      background: rgba(62,203,255,.3);
+      animation: input .5s infinite;
+      margin-right: 7em;
 
       &::placeholder {
         font-family: Consolas, monospace;
