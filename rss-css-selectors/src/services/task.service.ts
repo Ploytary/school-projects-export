@@ -28,7 +28,7 @@ export class TaskService {
     this.container = container.getNode();
     this.container.append(this.taskComponent.getNode());
     this.setComponentHandlers();
-    StateService.setChangeLevelHandler(this.OnChangeLevelHandler.bind(this));
+    StateService.setChangeLevelHandler(this.onChangeLevelHandler.bind(this));
     const currentLevelIndex = StateService.getCurrentLevel();
 
     const { helpComponent, menuComponent, playgroundService } = this.render(currentLevelIndex);
@@ -42,7 +42,7 @@ export class TaskService {
     });
   }
 
-  private OnChangeLevelHandler() {
+  private onChangeLevelHandler() {
     this.helpComponent.destroy();
     this.menuComponent.destroy();
     this.playgroundService.destroy();
@@ -76,60 +76,60 @@ export class TaskService {
   }
 
   private setComponentHandlers() {
-    this.taskComponent.setPanelHelpButtonClickHandler(this.OnPanelHelpButtonClickHandler.bind(this));
-    this.taskComponent.setPanelMenuButtonClickHandler(this.OnPanelMenuButtonClickHandler.bind(this));
-    this.taskComponent.setAreaClickHandler(this.OnTaskAreaClickHandler.bind(this));
+    this.taskComponent.setPanelHelpButtonClickHandler(this.onPanelHelpButtonClickHandler.bind(this));
+    this.taskComponent.setPanelMenuButtonClickHandler(this.onPanelMenuButtonClickHandler.bind(this));
+    this.taskComponent.setAreaClickHandler(this.onTaskAreaClickHandler.bind(this));
   }
 
   private setChildComponentsHandlers() {
-    this.menuComponent.setCloseButtonClickHandler(this.OnMenuCloseButtonClickHandler.bind(this));
-    this.menuComponent.setResetButtonClickHandler(this.OnMenuResetButtonClickHandler.bind(this));
-    this.menuComponent.setListItemClickHandler(this.OnMenuListItemClickHandler);
+    this.menuComponent.setCloseButtonClickHandler(this.onMenuCloseButtonClickHandler.bind(this));
+    this.menuComponent.setResetButtonClickHandler(this.onMenuResetButtonClickHandler.bind(this));
+    this.menuComponent.setListItemClickHandler(this.onMenuListItemClickHandler);
 
-    this.helpComponent.setPrevLevelButtonClickHandler(this.OnHelpPrevLevelButtonClickHandler.bind(this));
-    this.helpComponent.setNextLevelButtonClickHandler(this.OnHelpNextLevelButtonClickHandler.bind(this));
-    this.helpComponent.setMenuButtonClickHandler(this.OnHelpMenuButtonClickHandler.bind(this));
+    this.helpComponent.setPrevLevelButtonClickHandler(this.onHelpPrevLevelButtonClickHandler.bind(this));
+    this.helpComponent.setNextLevelButtonClickHandler(this.onHelpNextLevelButtonClickHandler.bind(this));
+    this.helpComponent.setMenuButtonClickHandler(this.onHelpMenuButtonClickHandler.bind(this));
   }
 
-  private OnPanelMenuButtonClickHandler() {
+  private onPanelMenuButtonClickHandler() {
     this.menuComponent.addClass(ChildrenClasses.MENU_SELECTED_STATUS);
   }
 
-  private OnPanelHelpButtonClickHandler() {
+  private onPanelHelpButtonClickHandler() {
     this.helpComponent.addClass(ChildrenClasses.HELP_SELECTED_STATUS);
   }
 
-  private OnMenuCloseButtonClickHandler() {
+  private onMenuCloseButtonClickHandler() {
     this.menuComponent.removeClass(ChildrenClasses.MENU_SELECTED_STATUS);
   }
 
-  private OnMenuResetButtonClickHandler() {
+  private onMenuResetButtonClickHandler() {
     this.taskModel.resetLevels();
   }
 
-  private OnMenuListItemClickHandler(itemIndex: number) {
+  private onMenuListItemClickHandler(itemIndex: number) {
     StateService.setLevel(itemIndex);
   }
 
-  private OnHelpPrevLevelButtonClickHandler() {
+  private onHelpPrevLevelButtonClickHandler() {
     if (StateService.getCurrentLevel() === 0) {
       return;
     }
     StateService.setPrevLevel();
   }
 
-  private OnHelpNextLevelButtonClickHandler() {
+  private onHelpNextLevelButtonClickHandler() {
     if (StateService.getCurrentLevel() >= this.levels.length - 1) {
       return;
     }
     StateService.setNextLevel();
   }
 
-  private OnHelpMenuButtonClickHandler() {
+  private onHelpMenuButtonClickHandler() {
     this.menuComponent.addClass(ChildrenClasses.MENU_SELECTED_STATUS);
   }
 
-  private OnTaskAreaClickHandler(evt: MouseEvent) {
+  private onTaskAreaClickHandler(evt: MouseEvent) {
     if (!(evt.target instanceof Element)) {
       return;
     }
