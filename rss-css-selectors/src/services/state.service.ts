@@ -40,7 +40,7 @@ export abstract class StateService {
     this.onLevelChangeHandlers.push(handler);
   }
 
-  private static levelChangeNotify() {
+  public static levelChangeNotify() {
     this.onLevelChangeHandlers.forEach((handler) => handler());
   }
 }
