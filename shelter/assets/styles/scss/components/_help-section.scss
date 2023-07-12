@@ -1,0 +1,33 @@
+/*help-section*/
+
+.help {
+  padding: 80px 0 100px; 
+  .page__wrapper {
+    @include flex-vertical(60px);
+    align-items: center;
+  }
+
+  &__title {
+    @include title-font-style-desktop();
+    text-align: center;
+  }
+}
+
+@include for-phone-portrait-down {
+  .help {
+    padding-top: 42px;
+    padding-bottom: 42px;
+    .page__wrapper {
+      gap: 42px;
+    }
+  }
+  .help__title {
+    @include title-font-style-mobile;
+    color: var(--main-font-color-3rd);
+  }
+
+  .help .help__donation-shop {
+    width: calc(30px + 130px * 2);
+    margin: 0 auto;
+  }
+}

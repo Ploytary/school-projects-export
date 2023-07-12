@@ -1,0 +1,51 @@
+/*link*/
+
+.link {
+  @include unstyled-link();
+  cursor: pointer;
+  transition-property: background-color, border-color, color;
+  transition-duration: 0.3s;
+
+  &--navigation {
+    @include body-font-style-desktop();
+  }
+
+  &--button-format {
+    display: inline-block;
+    padding: 13px 43px;
+    border-radius: 27px;
+    border: 2px solid var(--accent-color-1st);
+    @include button-font-style-desktop();
+
+    &:hover {
+      background-color: var(--accent-color-2nd);
+      border-color: var(--accent-color-2nd);
+    }
+  }
+
+  &--button-format-accent {
+    background-color: var(--accent-color-1st);
+  }
+
+  &--footer {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    @include label-font-style-desktop;
+    color: var(--accent-font-color-1st);
+  
+    &:hover {
+      color: var(--accent-font-color-2nd);
+    }
+  
+    svg {
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+  }
+}
+
+
+
+
+

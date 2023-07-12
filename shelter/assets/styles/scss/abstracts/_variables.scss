@@ -1,0 +1,218 @@
+@use "sass:list";
+
+/*variables*/
+
+//colors
+:root {
+  --accent-font-color-1st: #F1CDB3;
+  --accent-font-color-2nd: #FDDCC4;
+  --main-font-color-1st: #000000;
+  --main-font-color-2nd: #292929;
+  --main-font-color-3rd: #545454;
+  --main-font-color-4th: #B2B2B2;
+  --main-font-color-5th: #FFFFFF;
+  --main-font-color-6th: #4C4C4C;
+  --main-font-color-7th: #CDCDCD;
+  --main-font-color-8th: #FAFAFA;
+  
+  --accent-color-1st: #F1CDB3;
+  --accent-color-2nd: #FDDCC4;
+  --main-color-1st: #FFFFFF;
+  --main-color-2nd: #F6F6F6;
+  --main-color-3rd: #FAFAFA;
+  --main-color-4th: #CDCDCD;
+  --main-color-5th: #292929;
+}
+
+//font-sizes
+$display-font-size-desktop: list.slash(44px,1.3);
+$title-font-size-desktop: list.slash(35px,1.3);
+$label-font-size-desktop: list.slash(20px,1.15);
+$body-font-size-desktop: list.slash(15px,1.6);
+$body-compact-font-size-desktop: list.slash(15px,1.1);
+$button-font-size-desktop: list.slash(17px,1.3);
+$side-comment-font-size-desktop: list.slash(12px,18px);
+$body-modal-font-size-desktop: list.slash(15px,1.15);
+
+$body-compact-font-style-tablet: list.slash(13px,1.1);
+
+$title-font-size-mobile: list.slash(25px,1.3);
+$label-font-size-mobile: list.slash(15px,1.1);
+$body-compact-font-style-mobile: list.slash(15px,1.6);
+$menu-font-size-mobile: list.slash(32px,1.6);
+$display-font-size-mobile: list.slash(25px,1.3);
+
+//font-faces
+$font-family-georgia: 'Georgia', serif;
+$font-family-arial: Arial, sans-serif;
+
+//font-styles
+@mixin font-set($font-style, $font-size, $font-family, $color, $letter-spacing: normal) {
+  font: $font-style $font-size $font-family;
+  color: $color;
+  letter-spacing: $letter-spacing;
+}
+
+@mixin display-font-style-desktop {
+  @include font-set(
+    normal,
+    $display-font-size-desktop,
+    $font-family-georgia,
+    var(--main-font-color-5th)
+  )
+}
+
+@mixin title-font-style-desktop {
+  @include font-set(
+    normal,
+    $title-font-size-desktop,
+    $font-family-georgia,
+    var(--main-font-color-3rd),
+    0.06em
+  )
+}
+
+@mixin label-font-style-desktop {
+  @include font-set(
+    normal,
+    $label-font-size-desktop,
+    $font-family-georgia,
+    var(--main-font-color-3rd),
+    0.06em
+  )
+}
+
+@mixin body-font-style-desktop {
+  @include font-set(
+    normal,
+    $body-font-size-desktop,
+    $font-family-arial,
+    var(--main-font-color-6th)
+  )
+}
+
+@mixin body-compact-font-style-desktop {
+  @include font-set(
+    normal,
+    $body-compact-font-size-desktop,
+    $font-family-georgia,
+    var(--main-font-color-1st),
+    0.06em
+  )
+}
+
+@mixin body-term-compact-font-style-desktop {
+  @include font-set(
+    bold,
+    $body-compact-font-size-desktop,
+    $font-family-georgia,
+    var(--main-font-color-1st)
+  )
+}
+
+@mixin side-comment-font-style-desktop {
+  @include font-set(
+    italic,
+    $side-comment-font-size-desktop,
+    $font-family-arial,
+    var(--main-font-color-4th)
+  )
+}
+
+@mixin button-font-style-desktop {
+  @include font-set(
+    normal,
+    $button-font-size-desktop,
+    $font-family-georgia,
+    var(--main-font-color-2nd),
+    0.06em
+  )
+}
+
+@mixin title-font-style-mobile {
+  @include font-set(
+    normal,
+    $title-font-size-mobile,
+    $font-family-georgia,
+    var(--main-font-color-2nd),
+    0.06em
+  )
+}
+
+@mixin label-font-style-mobile {
+  @include font-set(
+    normal,
+    $label-font-size-mobile,
+    $font-family-georgia,
+    var(--main-font-color-3rd),
+    0.06em
+  )
+}
+
+@mixin body-compact-font-style-mobile {
+  @include font-set(
+    normal,
+    $label-font-size-mobile,
+    $font-family-georgia,
+    var(--main-font-color-1st),
+    0
+  )
+}
+
+@mixin display-font-style-mobile {
+  @include font-set(
+    normal,
+    $display-font-size-mobile,
+    $font-family-georgia,
+    var(--main-font-color-5th),
+    0.06em
+  )
+}
+
+@mixin body-compact-font-style-mobile {
+  @include font-set(
+    normal,
+    $body-compact-font-style-tablet,
+    $font-family-georgia,
+    var(--main-font-color-1st),
+    0.06em
+  )
+}
+
+@mixin body-modal-font-style-desktop {
+  @include font-set(
+    normal,
+    $body-modal-font-size-desktop,
+    $font-family-georgia,
+    var(--main-font-color-1st),
+    0.06em
+  )
+}
+
+//sizes
+
+$size-page-box-width-display: 1280px;
+$size-page-box-width-tablet: 768px;
+$size-page-box-width-mobile: 320px;
+
+$horizontal-padding-desktop: 40px;
+$horizontal-padding-tablet: 30px;
+$horizontal-padding-mobile: 10px;
+
+:root {
+  @include for-desktop-only {
+    --page-box-horizontal-padding: #{$horizontal-padding-desktop};
+  }
+
+  @include for-tablet-portrait-down {
+    --page-box-horizontal-padding: #{$horizontal-padding-tablet};
+  }
+
+  @include for-phone-portrait-down {
+    --page-box-horizontal-padding: #{$horizontal-padding-mobile};
+  }
+  
+  --size-page-box-width-display: #{$size-page-box-width-display};
+  --size-page-box-width-tablet: #{$size-page-box-width-tablet};
+  --size-page-box-width-mobile: #{$size-page-box-width-mobile};
+}

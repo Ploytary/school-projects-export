@@ -1,0 +1,44 @@
+/*logo*/
+
+.logo {
+  .logo__title,
+  .logo__description {
+    transition: color 0.2s;
+  }
+
+  &--home-page {
+    pointer-events: none;
+  }
+
+  &__title {
+    width: max-content;
+    font: normal 32px/1.1 Georgia, serif;
+    letter-spacing: 0.06em;
+    color: var(--accent-font-color-1st);
+    user-select: none;
+  }
+
+  &__description {
+    width: max-content;
+    margin-top: 8px;
+    margin-left: 5px;
+    font: normal 13px Arial, sans-serif;
+    letter-spacing: 0.1em;
+    color: var(--main-font-color-5th);
+    user-select: none;
+  }
+
+  &--monochrome {
+    .logo__title,
+    .logo__description {
+      color: var(--main-font-color-3rd);
+    }
+  }
+
+  &:hover {
+    .logo__title,
+    .logo__description {
+      color: var(--accent-color-1st);
+    }
+  }
+}

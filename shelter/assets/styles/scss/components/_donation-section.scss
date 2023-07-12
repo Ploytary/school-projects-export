@@ -1,0 +1,134 @@
+/*donation*/
+
+$column-shift: 65px;
+
+.donation {
+  padding: 80px 0 99px;
+  background-color: var(--main-color-2nd);
+
+  .page__wrapper {
+    display: flex;
+    gap: 30px;
+  }
+
+  &__text-column {
+    @include flex-vertical(20px);
+    align-items: flex-start;
+    order: 1;
+    flex-basis: calc(50% - $column-shift);
+  }
+
+  &__text {
+    @include title-font-style-desktop;
+  }
+
+  &__bank-info {
+    @include body-compact-font-style-desktop;
+  }
+
+  &__card-number {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 15px;
+    @include label-font-style-desktop;
+    background-color: var(--accent-color-1st);
+    border-radius: 9px;
+
+    svg {
+      flex-shrink: 0;
+    }
+  }
+
+  &__legal-info {
+    @include side-comment-font-style-desktop;
+    max-width: 380px;
+  }
+
+  &__decorative-image-container {
+    order: 0;
+    flex-basis: calc(50% + $column-shift);
+    min-height: 261px;
+    min-width: 505px;
+    background: {
+      image: url("../../images/donation-dog-desktop.png");
+      repeat: no-repeat;
+      position: bottom 11px right;
+    }
+  }
+}
+
+@include for-tablet-portrait-down {
+  .donation {
+    .page__wrapper {
+      flex-wrap: wrap-reverse;
+      justify-content: center;
+      row-gap: 60px;
+    }
+
+    &__decorative-image-container {
+      flex-basis: auto;
+      // order: 1;
+      background-position: bottom center;
+      background-size: contain;
+      min-width: auto;
+      aspect-ratio: 505 / 261;
+      width: 100%;
+      max-width: 505px;
+      min-height: auto;
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+
+    &__text-column {
+      flex-basis: auto;
+      padding: 0 164px;
+    }
+
+    &__legal-info {
+      max-width: none;
+    }
+  }
+}
+
+@include for-phone-portrait-down {
+  .donation {
+    padding-top: 40px;
+    padding-bottom: 42px;
+    .page__wrapper {
+      row-gap: 42px;
+    }
+
+    &__text-column {
+      margin-left: 9px;
+      margin-right: 9px;
+      align-items: center;
+    }
+    &__text {
+      text-align: center;
+      @include title-font-style-mobile;
+      color: var(--main-font-color-3rd);
+    }
+
+    &__bank-info {
+      text-align: center;
+      @include body-compact-font-style-mobile;
+      line-height: 1.45;
+      color: var(--main-font-color-1st);
+    }
+
+    &__legal-info {
+      text-align: justify;
+    }
+
+    &__card-number {
+      @include label-font-style-mobile;
+      color: var(--main-font-color-3rd);
+      align-self: center;
+    }
+
+    &__text-column {
+      padding: 0
+    }
+  }
+}

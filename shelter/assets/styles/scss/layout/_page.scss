@@ -1,0 +1,55 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
+}
+
+html,body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  @include flex-vertical();
+  align-items: stretch;
+}
+
+main {
+  flex-grow: 1;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  clip: rect(0 0 0 0);
+}
+
+.page__wrapper {
+  margin: auto;
+  @include for-desktop-only {
+    max-width: var(--size-page-box-width-display);
+    padding-left: var(--page-box-horizontal-padding);
+    padding-right: var(--page-box-horizontal-padding);
+  }
+
+  @include for-tablet-portrait-down {
+    min-width: var(--size-page-box-width-mobile);
+    padding-left: var(--page-box-horizontal-padding);
+    padding-right: var(--page-box-horizontal-padding);
+  }
+}
+

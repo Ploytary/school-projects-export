@@ -1,0 +1,37 @@
+.pet-slider {
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pet-slider__viewport {
+  padding-bottom: 60px;
+}
+
+.pet-slider--short {
+  @include flex-vertical(0);
+  align-items: center;
+  justify-content: flex-end;
+  min-height: 435px;
+
+  .pet-slider__viewport {
+    padding-bottom: 0;
+  }
+}
+
+.pet-slider--expanded {
+  min-height: 435px;
+}
+
+@include for-tablet-portrait-down {
+  .pet-slider__viewport {
+    padding-bottom: 40px;
+  }
+}
+
+@include for-phone-portrait-down {
+  .pet-slider--short {
+    gap: 20px;
+  }
+}
+

@@ -1,0 +1,110 @@
+/*page-footer*/
+
+.page-footer {
+  background-image:
+  url("../../images/noise_transparent@2x.png"),
+  radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%);
+
+  .page__wrapper {
+    padding-top: 56px;
+    height: 100%;
+    background: {
+      image: url("../../images/footer-puppy-desktop.png");
+      repeat: no-repeat;
+      position: right var(--page-box-horizontal-padding) bottom;
+    }
+  }
+
+  &__shelter-address {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 116px;
+    padding-bottom: 53px;
+  }
+
+  &__address-column {
+    font-style: normal;
+    flex-shrink: 0;
+  }
+
+  &__address-label {
+    @include title-font-style-desktop;
+    color: var(--main-font-color-5th);
+  }
+
+  &__address-points-list {
+    @include normallized-list;
+  }
+
+  &__column {
+    @include flex-vertical(40px);
+    flex-basis: 1px;
+    flex-grow: 1;
+    flex-shrink: 0;
+  }
+
+  &__address-points-list {
+    @include flex-vertical(32px);
+    transform: translateY(-7px);
+  }
+}
+
+@include for-tablet-portrait-down {
+  .page-footer {
+    .page__wrapper {
+      padding-top: 30px;
+      padding-bottom: 315px;
+      background-position: center bottom;
+    }
+
+    .page-footer__column:last-of-type {
+      display: none;
+    }
+
+    &__shelter-address {
+      padding-left: 34px;
+      padding-right: 34px;
+      gap: 36px;
+    }
+  }
+}
+
+@include for-phone-portrait-down {
+  .page-footer {
+    &__address-label {
+      @include title-font-style-mobile;
+      color: var(--main-font-color-5th);
+      padding-left: 15px;
+      padding-right: 15px;
+      text-align: center;
+    }
+
+    &__shelter-address {
+      padding-left: 0;
+      padding-right: 0;
+      gap: 40px;
+    }
+
+    &__column {
+      min-width: 300px;
+      align-items: center;
+      & br {
+        display: none;
+      }
+    }
+
+    .page__wrapper {
+      background: {
+        image: url("../../images/footer-puppy-mobile.png");
+        repeat: no-repeat;
+        position: center bottom;
+      }
+      padding-bottom: 255px;
+    }
+
+    &__address-points-list {
+      transform: translate(0);
+      gap: 40px;
+    }
+  }
+}
